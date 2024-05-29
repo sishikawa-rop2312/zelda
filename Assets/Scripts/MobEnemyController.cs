@@ -5,19 +5,19 @@ using UnityEngine;
 public class MobEnemyController : MonoBehaviour
 {
     //仮設定フレーム数 & 仮設定Public
-    public float moveDistance = 32f;    //移動距離
-    public float moveInterval = 2f;     //移動間隔（非敵対時）
-    public float detectRange = 5f;      //敵対範囲
-    public float attackRange = 1f;      //攻撃範囲
-    public float moveSpeed = 2f;        //移動速度
-    public Transform player;            //プレイヤーのtransform(変数名仮称)
+    float moveDistance = 32f;    //移動距離
+    float moveInterval = 2f;     //移動間隔（非敵対時）
+    float detectRange = 5f;      //敵対範囲
+    float attackRange = 1f;      //攻撃範囲
+    float moveSpeed = 2f;        //移動速度
+    Transform player;            //プレイヤーのtransform(変数名仮称)
 
 
     Vector2 initialPosition;    //初期位置
     Vector2 targetPosition;     //ターゲット(プレイヤー)位置
     bool isHostile = false;     //敵対状態かどうか
     float moveTimer;            //非敵対時ランダム移動(仮)
-    private Animator animator;
+    Animator animator;
 
 
 
