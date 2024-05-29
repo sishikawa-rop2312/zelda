@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Move());
             }
         }
+        transform.Translate(Input.GetAxis("Horizontal") * 5.0f * Time.deltaTime, 0, 0);
+        transform.Translate(0, Input.GetAxis("Vertical") * 5.0f * Time.deltaTime, 0);
     }
 
     public IEnumerator Move()
