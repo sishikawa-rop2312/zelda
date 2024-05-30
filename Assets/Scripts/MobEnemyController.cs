@@ -10,22 +10,21 @@ public class MobEnemyController : MonoBehaviour
     public float attackRange = 1f;  // 攻撃範囲
     public float moveSpeed = 2f;  // 移動速度
     public Transform player;  // プレイヤーのTransform
+    public GameObject fireballPrefab;  // 火の玉のプレハブ
 
-    private Vector2 initialPosition;  // 初期位置
-    private Vector2 targetPosition;  // 目標位置
+    private Vector2 targetPosition;  // ターゲット位置
     private bool isHostile = false;  // 敵対状態かどうか
     private float moveTimer;  // 移動タイマー
-
+    private float attackTimer;  // 攻撃タイマー
     private Animator animator;  // Animatorコンポーネント
 
     void Start()
     {
-        // 初期位置を保存
-        initialPosition = transform.position;
-        // 初期位置は現在位置
+        // 初期のタゲポジは現在位置
         targetPosition = transform.position;
-        // タイマー初期化(２秒)
+        // タイマーを初期化
         moveTimer = moveInterval;
+        attackTimer = 0f;
         // Animatorコンポーネントを取得
         animator = GetComponent<Animator>();
     }
@@ -53,8 +52,15 @@ public class MobEnemyController : MonoBehaviour
 
             if (distanceToPlayer <= attackRange)
             {
-                // 攻撃アクション実行
-                AttackPlayer();
+                // 攻撃時間をカウントダウン
+                attackTimer -= Time.deltaTime;
+                if (attackTimer <= 0f)
+                {
+                    // 攻撃を実行
+                    AttackPlayer();
+                    // 攻撃時間をリセット
+                    attackTimer = 5f;  // 次の攻撃までの待機時間（仮設定で５秒）
+                }
             }
         }
         else
@@ -63,7 +69,7 @@ public class MobEnemyController : MonoBehaviour
             RandomMovement();
         }
 
-        // Animatorパラメータを更新
+        // Animatorパラメータ更新
         animator.SetBool("isWalking", isHostile || (Vector2.Distance(transform.position, targetPosition) > 0.1f));
         animator.SetBool("isAttacking", isHostile && distanceToPlayer <= attackRange);
     }
@@ -72,26 +78,31 @@ public class MobEnemyController : MonoBehaviour
     {
         // プレイヤーの方向を計算
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
-        // プレイヤーの方向に32ピクセル移動する目標位置を設定
+        // プレイヤーの方向に32ピクセルで移動設定
         targetPosition = (Vector2)transform.position + directionToPlayer * moveDistance;
-        // 目標位置に移動
+        // ターゲット位置に移動
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
     void AttackPlayer()
     {
-        // 攻撃デバッグ用
-        //Debug.Log("敵の攻撃！");
-        // 攻撃ロジックをここに実装する
+        // 火の玉を生成し、プレイヤーの方向に発射
+        GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
+        Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
+        Vector2 directionToPlayer = (player.position - transform.position).normalized;
+        rb.velocity = directionToPlayer * moveSpeed;  // 火の玉の速度を設定（仮）
+
+        // 攻撃のデバッグログ
+        Debug.Log("敵の攻撃！");
     }
 
     void RandomMovement()
     {
-        // タイマーが0になったら再度標的位置を設定
+        // タイマーが0になったら再度索敵設定
         moveTimer -= Time.deltaTime;
         if (moveTimer <= 0f)
         {
-            // ランダムな方向を選択
+            // ランダムな方向を向く
             Vector2 direction = Vector2.zero;
             int randomDir = Random.Range(0, 4);
             switch (randomDir)
@@ -109,25 +120,26 @@ public class MobEnemyController : MonoBehaviour
                     direction = Vector2.right;
                     break;
             }
-            // 新しい標的位置を計算
-            targetPosition = (Vector2)initialPosition + direction * moveDistance;
+            // 新しくターゲット位置計算
+            targetPosition = (Vector2)transform.position + direction * moveDistance;
             // タイマーリセット
             moveTimer = moveInterval;
         }
 
-        // 目標位置に移動
+        // ターゲット位置に移動
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
-    //デバッグ用（索敵範囲表示）
+    //デバッグ用索敵可視化
     void OnDrawGizmosSelected()
     {
-        // 敵対範囲を描画
+        // 敵対範囲のギズモを描画
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectRange);
 
-        // 攻撃範囲を描画
+        // 攻撃範囲のギズモを描画
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }
+
