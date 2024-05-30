@@ -5159,11 +5159,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.47
+      value: 2.76
       objectReference: {fileID: 0}
     - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.22
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5288,7 +5288,7 @@ Transform:
   m_GameObject: {fileID: 1956741050}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.06, z: -10}
+  m_LocalPosition: {x: 0, y: -0.19, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5304,11 +5304,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.03
+      value: 0.89
       objectReference: {fileID: 0}
     - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.78
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5345,6 +5345,22 @@ PrefabInstance:
     - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_Name
       value: FoodMagician
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388659929448199726, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8388659929448199726, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792863427895804572, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: moveSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8792863427895804572, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: fireballPrefab
