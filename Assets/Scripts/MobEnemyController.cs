@@ -90,7 +90,7 @@ public class MobEnemyController : MonoBehaviour
         GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
         Rigidbody2D rb = fireball.GetComponent<Rigidbody2D>();
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
-        rb.velocity = directionToPlayer * moveSpeed;  // 火の玉の速度を設定（仮）
+        rb.velocity = directionToPlayer * moveSpeed;  // (仮）火の玉の速度を設定
 
         // 攻撃のデバッグログ
         Debug.Log("敵の攻撃！");
