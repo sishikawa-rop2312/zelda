@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour
     // 向き
     public Vector3 currentDirection = Vector3.down;
 
+    SpriteRenderer spriteRenderer;
+
+    // 向きごとのスプライト
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+
     //Animator animator;
 
     // 当たり判定用のレイヤーを取得
@@ -27,6 +35,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -61,6 +70,28 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Attack呼び出し");
                 StartCoroutine(Attack());
             }
+        }
+
+        SpriteDirection();
+    }
+
+    void SpriteDirection()
+    {
+        if (currentDirection == Vector3.up)
+        {
+            spriteRenderer.sprite = up;
+        }
+        else if (currentDirection == Vector3.down)
+        {
+            spriteRenderer.sprite = down;
+        }
+        else if (currentDirection == Vector3.left)
+        {
+            spriteRenderer.sprite = left;
+        }
+        else if (currentDirection == Vector3.right)
+        {
+            spriteRenderer.sprite = right;
         }
     }
 
