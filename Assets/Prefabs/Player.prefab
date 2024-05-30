@@ -101,6 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.2
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &-3597852927960515310
 BoxCollider2D:
   m_ObjectHideFlags: 0
