@@ -5,12 +5,18 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
+    // HP
+    public int hp = 5;
+
     // 移動中かどうか
     bool isMoving = false;
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
-    // 向き
+    // 移動先
     Vector3 targetDirection;
+
+    // 向き
+    public Vector3 currentDirection = Vector3.down;
 
     //Animator animator;
 
@@ -32,18 +38,28 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey("up"))
             {
                 MoveDirection(Vector3.up, "WalkUp");
+                currentDirection = Vector3.up;
             }
             else if (Input.GetKey("down"))
             {
                 MoveDirection(Vector3.down, "WalkDown");
+                currentDirection = Vector3.down;
             }
             else if (Input.GetKey("left"))
             {
                 MoveDirection(Vector3.left, "WalkLeft");
+                currentDirection = Vector3.left;
             }
             else if (Input.GetKey("right"))
             {
                 MoveDirection(Vector3.right, "WalkRight");
+                currentDirection = Vector3.right;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Attack呼び出し");
+                StartCoroutine(Attack());
             }
         }
     }
@@ -98,22 +114,52 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("up"))
         {
             MoveDirection(Vector3.up, "WalkUp");
+            currentDirection = Vector3.up;
         }
         else if (Input.GetKey("down"))
         {
             MoveDirection(Vector3.down, "WalkDown");
+            currentDirection = Vector3.down;
         }
         else if (Input.GetKey("left"))
         {
             MoveDirection(Vector3.left, "WalkLeft");
+            currentDirection = Vector3.left;
         }
         else if (Input.GetKey("right"))
         {
             MoveDirection(Vector3.right, "WalkRight");
+            currentDirection = Vector3.right;
+        }
+    }
+
+    public ParticleSystem attackEffect;
+
+    public IEnumerator Attack()
+    {
+        Debug.Log("Attackが呼び出されました");
+        Collider2D hit = Physics2D.Raycast(transform.position, currentDirection, 1f, detectionMask).collider;
+        if (hit != null)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                Debug.Log(hit.gameObject.name + "に攻撃");
+
+                // エフェクトを再生
+                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
+                attackParticle.Play();
+
+                // エフェクトが再生し終わるまで待機する
+                yield return new WaitForSeconds(attackParticle.main.duration);
+
+                // エフェクトオブジェクトを削除
+                Destroy(attackParticle.gameObject);
+            }
+            yield return null;
         }
         else
         {
-            ResetAnimation();
+            Debug.Log("攻撃対象が見つかりませんでした");
         }
     }
 }
