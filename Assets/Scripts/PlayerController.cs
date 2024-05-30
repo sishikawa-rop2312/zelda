@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //animator = GetComponent<Animator>();
+
+        // スプライト処理用にコンポーネントを取得
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -174,6 +176,9 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
+                // 行動中かどうか
+                isMoving = true;
+
                 Debug.Log(hit.gameObject.name + "に攻撃");
 
                 // エフェクトを再生
@@ -182,6 +187,9 @@ public class PlayerController : MonoBehaviour
 
                 // エフェクトが再生し終わるまで待機する
                 yield return new WaitForSeconds(attackParticle.main.duration);
+
+                // 行動中フラグを戻す
+                isMoving = false;
 
                 // エフェクトオブジェクトを削除
                 Destroy(attackParticle.gameObject);
