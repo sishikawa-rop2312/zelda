@@ -13,15 +13,14 @@ public class PlayerController : MonoBehaviour
     Vector3 targetDirection;
 
     //Animator animator;
-    Collider2D selfCollider;
 
+    // 当たり判定用のレイヤーを取得
     public LayerMask detectionMask;
 
     // Start is called before the first frame update
     void Start()
     {
         //animator = GetComponent<Animator>();
-        selfCollider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
