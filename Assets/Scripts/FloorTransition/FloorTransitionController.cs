@@ -25,8 +25,8 @@ public class FloorTransitionController : MonoBehaviour
 
     IEnumerator Transition(Collider2D player)
     {
-        // トリガーを無効化
-        triggerCollider.enabled = false;
+        // // トリガーを無効化
+        // triggerCollider.enabled = false;
 
         // カメラを移動
         cameraController.MoveCamera(newCameraPosition);
@@ -35,15 +35,15 @@ public class FloorTransitionController : MonoBehaviour
         yield return new WaitForSeconds(cameraController.transitionTime);
 
         // プレイヤーを新しい位置に移動
-        player.transform.position = newPlayerPosition;
+        // player.transform.position = newPlayerPosition;
 
-        // プレイヤーがトリガーの範囲外に出るまで待つ
-        while (triggerCollider.bounds.Contains(player.transform.position))
-        {
-            yield return null;
-        }
+        // // プレイヤーがトリガーの範囲外に出るまで待つ
+        // while (triggerCollider.bounds.Contains(player.transform.position))
+        // {
+        //     yield return null;
+        // }
 
-        // トリガーを再度有効化
-        triggerCollider.enabled = true;
+        // // トリガーを再度有効化
+        // triggerCollider.enabled = true;
     }
 }
