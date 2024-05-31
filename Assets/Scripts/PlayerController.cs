@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetSptite();
+
         // 動ける状態だったら
         if (!isMoving)
         {
@@ -71,11 +73,39 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+
+    void SetSptite()
+    {
+        if (currentDirection == Vector3.up)
+        {
+            spriteRenderer.sprite = up;
+        }
+        else if (currentDirection == Vector3.down)
+        {
+            spriteRenderer.sprite = down;
+        }
+        else if (currentDirection == Vector3.left)
+        {
+            spriteRenderer.sprite = left;
+        }
+        else if (currentDirection == Vector3.right)
+        {
+            spriteRenderer.sprite = right;
+        }
+    }
+
+    void ResetAnimation()
+    {
+
+    }
+
     void MoveDirection(Vector3 direction, string animation)
     {
         targetDirection = direction;
-
-        animator.SetBool(animation, true);
 
         // 進行方向に障害物がないかチェック
         if (Physics2D.Raycast(transform.position, targetDirection, 1f, detectionMask).collider != null)
@@ -163,7 +193,7 @@ public class PlayerController : MonoBehaviour
                 attackParticle.Play();
 
                 // エフェクトが再生し終わるまで待機する
-                yield return new WaitForSeconds(attackParticle.main.duration);
+                yield return new WaitForSeconds(attackParticle.main.duration / 2);
 
                 // 行動中フラグを戻す
                 isMoving = false;
@@ -181,6 +211,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("主人公が" + damage + "ダメージを受けました");
         hp -= damage;
 
         if (hp <= 0)
