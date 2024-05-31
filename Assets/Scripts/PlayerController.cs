@@ -20,13 +20,7 @@ public class PlayerController : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    // 向きごとのスプライト
-    public Sprite up;
-    public Sprite down;
-    public Sprite left;
-    public Sprite right;
-
-    //Animator animator;
+    Animator animator;
 
     // 当たり判定用のレイヤーを取得
     public LayerMask detectionMask;
@@ -34,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         // スプライト処理用にコンポーネントを取得
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -48,23 +42,23 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey("up"))
             {
-                MoveDirection(Vector3.up, "WalkUp");
                 currentDirection = Vector3.up;
+                MoveDirection(Vector3.up, "WalkUp");
             }
             else if (Input.GetKey("down"))
             {
-                MoveDirection(Vector3.down, "WalkDown");
                 currentDirection = Vector3.down;
+                MoveDirection(Vector3.down, "WalkDown");
             }
             else if (Input.GetKey("left"))
             {
-                MoveDirection(Vector3.left, "WalkLeft");
                 currentDirection = Vector3.left;
+                MoveDirection(Vector3.left, "WalkLeft");
             }
             else if (Input.GetKey("right"))
             {
-                MoveDirection(Vector3.right, "WalkRight");
                 currentDirection = Vector3.right;
+                MoveDirection(Vector3.right, "WalkRight");
             }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -74,34 +68,14 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        SpriteDirection();
-    }
 
-    void SpriteDirection()
-    {
-        if (currentDirection == Vector3.up)
-        {
-            spriteRenderer.sprite = up;
-        }
-        else if (currentDirection == Vector3.down)
-        {
-            spriteRenderer.sprite = down;
-        }
-        else if (currentDirection == Vector3.left)
-        {
-            spriteRenderer.sprite = left;
-        }
-        else if (currentDirection == Vector3.right)
-        {
-            spriteRenderer.sprite = right;
-        }
     }
 
     void MoveDirection(Vector3 direction, string animation)
     {
-        //ResetAnimation();
         targetDirection = direction;
-        //animator.SetBool(animation, true);
+
+        animator.SetBool(animation, true);
 
         // 進行方向に障害物がないかチェック
         if (Physics2D.Raycast(transform.position, targetDirection, 1f, detectionMask).collider != null)
@@ -114,8 +88,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Move());
         }
     }
-
-    void ResetAnimation() { }
 
     public IEnumerator Move()
     {
@@ -142,6 +114,11 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPosition;
         // 移動中フラグを戻す
         isMoving = false;
+
+        // アニメーションの速度を一時的に保存
+        float savedAnimationSpeed = animator.speed;
+        // アニメーションの速度を0に設定
+        animator.speed = 0f;
 
         // 移動が入力され続けてれば引き続き移動する
         if (Input.GetKey("up"))
@@ -199,6 +176,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.Log("攻撃対象が見つかりませんでした");
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+
+        if (hp <= 0)
+        {
+            Debug.Log("GAME OVER");
         }
     }
 }
