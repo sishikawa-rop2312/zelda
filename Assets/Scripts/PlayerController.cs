@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Attack());
             }
         }
+        transform.Translate(Input.GetAxis("Horizontal") * 5.0f * Time.deltaTime, 0, 0);
+        transform.Translate(0, Input.GetAxis("Vertical") * 5.0f * Time.deltaTime, 0);
     }
 
     void MoveDirection(Vector3 direction, string animation)
