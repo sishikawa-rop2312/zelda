@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 2042621040, guid: fb34c87795420a94fb31512315fd1bb9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,13 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66a07a00ce166e4389fcf6becacc796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 32
-  moveInterval: 2
-  detectRange: 5
+  moveSpeed: 1
   attackRange: 1
-  moveSpeed: 2
-  player: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
   fireballPrefab: {fileID: 3440556465925047896, guid: 850ea050b21e028499e979f77d9ab192, type: 3}
+  fireballSpeed: 1
+  attackCooldown: 5
 --- !u!95 &4439929832093299650
 Animator:
   serializedVersion: 5

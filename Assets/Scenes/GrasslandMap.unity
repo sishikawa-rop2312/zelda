@@ -5344,7 +5344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_Name
-      value: FoodMagician
+      value: Magician
       objectReference: {fileID: 0}
     - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_TagString
