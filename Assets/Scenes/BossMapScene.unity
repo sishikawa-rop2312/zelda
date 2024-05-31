@@ -3940,7 +3940,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionTime: 1
-  cameraMoveDistance: 10
+  cameraMoveYDistance: 10
+  cameraMoveXDistance: 18
 --- !u!1 &1690796724
 GameObject:
   m_ObjectHideFlags: 0

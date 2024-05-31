@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     // 向き
     public Vector3 currentDirection = Vector3.down;
 
-    //Animator animator;
+    SpriteRenderer spriteRenderer;
+
+    Animator animator;
 
     // 当たり判定用のレイヤーを取得
     public LayerMask detectionMask;
@@ -26,34 +28,39 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+
+        // スプライト処理用にコンポーネントを取得
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        SetSptite();
+
         // 動ける状態だったら
         if (!isMoving)
         {
             if (Input.GetKey("up"))
             {
-                MoveDirection(Vector3.up, "WalkUp");
                 currentDirection = Vector3.up;
+                MoveDirection(Vector3.up, "WalkUp");
             }
             else if (Input.GetKey("down"))
             {
-                MoveDirection(Vector3.down, "WalkDown");
                 currentDirection = Vector3.down;
+                MoveDirection(Vector3.down, "WalkDown");
             }
             else if (Input.GetKey("left"))
             {
-                MoveDirection(Vector3.left, "WalkLeft");
                 currentDirection = Vector3.left;
+                MoveDirection(Vector3.left, "WalkLeft");
             }
             else if (Input.GetKey("right"))
             {
-                MoveDirection(Vector3.right, "WalkRight");
                 currentDirection = Vector3.right;
+                MoveDirection(Vector3.right, "WalkRight");
             }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -62,15 +69,43 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Attack());
             }
         }
-        transform.Translate(Input.GetAxis("Horizontal") * 5.0f * Time.deltaTime, 0, 0);
-        transform.Translate(0, Input.GetAxis("Vertical") * 5.0f * Time.deltaTime, 0);
+
+
+    }
+
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+
+    void SetSptite()
+    {
+        if (currentDirection == Vector3.up)
+        {
+            spriteRenderer.sprite = up;
+        }
+        else if (currentDirection == Vector3.down)
+        {
+            spriteRenderer.sprite = down;
+        }
+        else if (currentDirection == Vector3.left)
+        {
+            spriteRenderer.sprite = left;
+        }
+        else if (currentDirection == Vector3.right)
+        {
+            spriteRenderer.sprite = right;
+        }
+    }
+
+    void ResetAnimation()
+    {
+
     }
 
     void MoveDirection(Vector3 direction, string animation)
     {
-        //ResetAnimation();
         targetDirection = direction;
-        //animator.SetBool(animation, true);
 
         // 進行方向に障害物がないかチェック
         if (Physics2D.Raycast(transform.position, targetDirection, 1f, detectionMask).collider != null)
@@ -83,8 +118,6 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Move());
         }
     }
-
-    void ResetAnimation() { }
 
     public IEnumerator Move()
     {
@@ -111,6 +144,11 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPosition;
         // 移動中フラグを戻す
         isMoving = false;
+
+        // アニメーションの速度を一時的に保存
+        float savedAnimationSpeed = animator.speed;
+        // アニメーションの速度を0に設定
+        animator.speed = 0f;
 
         // 移動が入力され続けてれば引き続き移動する
         if (Input.GetKey("up"))
@@ -145,6 +183,9 @@ public class PlayerController : MonoBehaviour
         {
             if (hit.CompareTag("Enemy"))
             {
+                // 行動中かどうか
+                isMoving = true;
+
                 Debug.Log(hit.gameObject.name + "に攻撃");
 
                 // エフェクトを再生
@@ -152,7 +193,10 @@ public class PlayerController : MonoBehaviour
                 attackParticle.Play();
 
                 // エフェクトが再生し終わるまで待機する
-                yield return new WaitForSeconds(attackParticle.main.duration);
+                yield return new WaitForSeconds(attackParticle.main.duration / 2);
+
+                // 行動中フラグを戻す
+                isMoving = false;
 
                 // エフェクトオブジェクトを削除
                 Destroy(attackParticle.gameObject);
@@ -162,6 +206,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.Log("攻撃対象が見つかりませんでした");
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("主人公が" + damage + "ダメージを受けました");
+        hp -= damage;
+
+        if (hp <= 0)
+        {
+            Debug.Log("GAME OVER");
         }
     }
 }
