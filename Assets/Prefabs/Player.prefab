@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3597852927960515310}
   - component: {fileID: 8996653749343430572}
   - component: {fileID: -710068363096152523}
+  - component: {fileID: 3368626697466816281}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -103,13 +104,13 @@ MonoBehaviour:
   hp: 5
   moveSpeed: 0.2
   currentDirection: {x: 0, y: -1, z: 0}
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 64
   up: {fileID: 21300000, guid: 34010127e5d5d91438ef6850a168bee8, type: 3}
   down: {fileID: 21300000, guid: 80699e2ed6279a148a77fd3d5fa6aa9d, type: 3}
   left: {fileID: 21300000, guid: 2e82805fd6c742d4daaf497b340aa68b, type: 3}
   right: {fileID: 21300000, guid: d5d716240b683154896a04ceb03589c7, type: 3}
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 64
   attackEffect: {fileID: 3521153888432770879, guid: 2cab9369e5ac2ab4b9946f01997b0c5b, type: 3}
 --- !u!61 &-3597852927960515310
 BoxCollider2D:
@@ -204,3 +205,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3368626697466816281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4525528411359297077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  defense: 1

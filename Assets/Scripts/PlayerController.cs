@@ -5,8 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    // HP
-    public int hp = 5;
+    public int attackPower = 1;
 
     // 移動中かどうか
     bool isMoving = false;
@@ -188,6 +187,14 @@ public class PlayerController : MonoBehaviour
 
                 Debug.Log(hit.gameObject.name + "に攻撃");
 
+                // 相手の被ダメージメソッドを取得
+                DealDamage dealDamage = hit.GetComponent<DealDamage>();
+
+                if (dealDamage != null)
+                {
+                    dealDamage.Damage(attackPower);
+                }
+
                 // エフェクトを再生
                 ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
                 attackParticle.Play();
@@ -209,14 +216,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        Debug.Log("主人公が" + damage + "ダメージを受けました");
-        hp -= damage;
-
-        if (hp <= 0)
-        {
-            Debug.Log("GAME OVER");
-        }
-    }
 }
