@@ -5,7 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float transitionTime = 1.0f; // カメラの移動にかける時間
-    public float cameraMoveDistance = 10.0f; // カメラが移動する距離
+    public float cameraMoveYDistance = 10.0f; // カメラがY軸に移動する距離
+    public float cameraMoveXDistance = 18.0f; // カメラがX軸に移動する距離
     PlayerController playerController; // プレイヤーコントローラーへの参照
     Camera mainCamera; // メインカメラへの参照
 
@@ -47,19 +48,19 @@ public class CameraController : MonoBehaviour
         // プレイヤーの移動方向に応じてカメラの新しい位置を設定
         if (moveDirection == Vector3.right) // 右移動
         {
-            newCameraPosition.x += cameraMoveDistance;
+            newCameraPosition.x += cameraMoveXDistance;
         }
         else if (moveDirection == Vector3.left) // 左移動
         {
-            newCameraPosition.x -= cameraMoveDistance;
+            newCameraPosition.x -= cameraMoveXDistance;
         }
         else if (moveDirection == Vector3.up) // 上移動
         {
-            newCameraPosition.y += cameraMoveDistance;
+            newCameraPosition.y += cameraMoveYDistance;
         }
         else if (moveDirection == Vector3.down) // 下移動
         {
-            newCameraPosition.y -= cameraMoveDistance;
+            newCameraPosition.y -= cameraMoveYDistance;
         }
 
         return newCameraPosition;
