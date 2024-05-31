@@ -18,6 +18,7 @@ public class Fireball : MonoBehaviour
         // プレイヤーに当たったときの処理
         if (other.CompareTag("Player"))
         {
+
             // プレイヤーへのダメージ未実装のためここに追加予定
             Debug.Log("火の玉がプレイヤーに当たった！");
             Destroy(gameObject);
