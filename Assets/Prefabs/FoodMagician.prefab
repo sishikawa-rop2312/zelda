@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6622979610655187230}
   - component: {fileID: 8388659929448199726}
   - component: {fileID: -2469785631570956893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FoodMagician
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -213,3 +213,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 2
+  defense: 1
