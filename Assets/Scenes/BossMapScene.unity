@@ -3940,7 +3940,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionTime: 1
-  cameraMoveDistance: 10
+  cameraMoveYDistance: 10
+  cameraMoveXDistance: 18
 --- !u!1 &1690796724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3999,6 +4000,8 @@ GameObject:
   - component: {fileID: 2043624498}
   - component: {fileID: 2043624500}
   - component: {fileID: 2043624499}
+  - component: {fileID: 2043624502}
+  - component: {fileID: 2043624501}
   m_Layer: 0
   m_Name: Move
   m_TagString: Untagged
@@ -4092,10 +4095,10 @@ Tilemap:
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: df2e298ca31d49e49bb6a167b9a547d1, type: 2}
+    m_Data: {fileID: 11400000, guid: e27d5da3d2b01a844b7b860e0eeba5b0, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 3376f9bcc625d0d4e8245691793dcbcf, type: 3}
+    m_Data: {fileID: 21300000, guid: eaf906215cc0a4b46a70e1781786f398, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 1
     m_Data:
@@ -4142,6 +4145,65 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &2043624501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043624497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f04cd3400142c04a8e62063dacfdc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: Scenes/BoneyardMap
+  spawnPosition: {x: 0.5, y: 0, z: 0}
+--- !u!61 &2043624502
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043624497}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5, y: -3.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

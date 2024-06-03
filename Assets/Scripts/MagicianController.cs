@@ -32,8 +32,34 @@ public class MagicianController : MonoBehaviour
     {
         if (player != null)
         {
-            // プレイヤーの方向を向く（正面のみで実装）
-            Vector3 direction = (player.position - transform.position).normalized;
+            Vector3 direction = player.position - transform.position;
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                // 横方向の距離が縦方向より大きい場合、横方向に移動
+                direction = new Vector3(Mathf.Sign(direction.x), 0, 0);
+                if (direction.x > 0)
+                {
+                    animator.SetTrigger("WalkRight");
+                }
+                else
+                {
+                    animator.SetTrigger("WalkLeft");
+                }
+            }
+            else
+            {
+                // 縦方向の距離が横方向より大きい場合、縦方向に移動
+                direction = new Vector3(0, Mathf.Sign(direction.y), 0);
+                if (direction.y > 0)
+                {
+                    animator.SetTrigger("WalkUp");
+                }
+                else
+                {
+                    animator.SetTrigger("WalkDown");
+                }
+            }
+
             transform.position += direction * moveSpeed * Time.deltaTime;
         }
     }
