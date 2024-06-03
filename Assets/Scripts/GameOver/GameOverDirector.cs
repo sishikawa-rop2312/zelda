@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleDirector : MonoBehaviour
+public class GameOverDirector : MonoBehaviour
 {
     // 移動先のシーン名
     public string targetScene;
