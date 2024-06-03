@@ -15,32 +15,25 @@ public class SlimeController : MonoBehaviour
     //敵を索敵
     private bool seach = false;
     //攻撃
-    private bool isPlayerInAttackRange = false;
+    // private bool isPlayerInAttackRange = false;
 
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        // プレイヤーを探す
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        //範囲内に敵がいるかいないか
+
         if (seach)
         {
             MoveTowardsPlayer();
         }
 
-        if (isPlayerInAttackRange)
-        {
-            AttackPlayer();
-        }
+
 
     }
 
@@ -48,44 +41,32 @@ public class SlimeController : MonoBehaviour
     {
 
         // プレイヤーの方向を向く（正面のみで実装）
-        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 direction = player.position - transform.position;
+        direction.Normalize();
         transform.position += direction * moveSpeed * Time.deltaTime;
 
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (other.isTrigger)
-            {
-                seach = true;
-            }
-            else
-            {
-                isPlayerInAttackRange = true;
-            }
-        }
+        Debug.Log("勇者見つけた");
+        seach = true;
+
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            if (other.isTrigger)
-            {
-                seach = false;
-            }
-            else
-            {
-                isPlayerInAttackRange = false;
-            }
+            Debug.Log("いなくなった");
+            seach = false;
         }
+
     }
 
     void AttackPlayer()
     {
-        Debug.Log("攻撃した");
+        Debug.Log("攻撃dekitayo");
 
     }
 
