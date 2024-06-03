@@ -5,8 +5,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    // HP
-    public int hp = 5;
+    public int attackPower = 1;
 
     // 移動中かどうか
     public bool isMoving = false;
@@ -17,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     // 向き
     public Vector3 currentDirection = Vector3.down;
+    // ひとつ前の向き
+    public Vector3 previousDirection = Vector3.zero;
 
     SpriteRenderer spriteRenderer;
 
@@ -63,22 +64,27 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey("up"))
             {
                 currentDirection = Vector3.up;
-                MoveDirection(Vector3.up, "WalkUp");
             }
             else if (Input.GetKey("down"))
             {
                 currentDirection = Vector3.down;
-                MoveDirection(Vector3.down, "WalkDown");
             }
             else if (Input.GetKey("left"))
             {
                 currentDirection = Vector3.left;
-                MoveDirection(Vector3.left, "WalkLeft");
             }
             else if (Input.GetKey("right"))
             {
                 currentDirection = Vector3.right;
-                MoveDirection(Vector3.right, "WalkRight");
+            }
+
+            // もし方向転換してたらアニメーションを変更
+            if (currentDirection != previousDirection && currentDirection != Vector3.zero)
+            {
+                previousDirection = currentDirection;
+                int hoge = 0;
+                Debug.Log("方向転換を検知" + hoge);
+                MoveDirection(currentDirection);
             }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -116,12 +122,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ResetAnimation()
+    void SetSpriteAnimaton(Vector3 direction)
     {
+        string walkAnimationTrigger = "";
 
+        // 進行方向に応じてアニメーションを変更
+        if (direction == Vector3.up)
+        {
+            walkAnimationTrigger = "WalkUp";
+        }
+        else if (direction == Vector3.down)
+        {
+            walkAnimationTrigger = "WalkDown";
+        }
+        else if (direction == Vector3.left)
+        {
+            walkAnimationTrigger = "WalkLeft";
+        }
+        else if (direction == Vector3.right)
+        {
+            walkAnimationTrigger = "WalkRight";
+        }
+
+        animator.SetTrigger(walkAnimationTrigger);
     }
 
-    void MoveDirection(Vector3 direction, string animation)
+    void ResetAnimation()
+    {
+    }
+
+    void MoveDirection(Vector3 direction)
     {
         targetDirection = direction;
 
@@ -171,22 +201,22 @@ public class PlayerController : MonoBehaviour
         // 移動が入力され続けてれば引き続き移動する
         if (Input.GetKey("up"))
         {
-            MoveDirection(Vector3.up, "WalkUp");
+            MoveDirection(Vector3.up);
             currentDirection = Vector3.up;
         }
         else if (Input.GetKey("down"))
         {
-            MoveDirection(Vector3.down, "WalkDown");
+            MoveDirection(Vector3.down);
             currentDirection = Vector3.down;
         }
         else if (Input.GetKey("left"))
         {
-            MoveDirection(Vector3.left, "WalkLeft");
+            MoveDirection(Vector3.left);
             currentDirection = Vector3.left;
         }
         else if (Input.GetKey("right"))
         {
-            MoveDirection(Vector3.right, "WalkRight");
+            MoveDirection(Vector3.right);
             currentDirection = Vector3.right;
         }
     }
@@ -205,6 +235,14 @@ public class PlayerController : MonoBehaviour
                 isMoving = true;
 
                 Debug.Log(hit.gameObject.name + "に攻撃");
+
+                // 相手の被ダメージメソッドを取得
+                DealDamage dealDamage = hit.GetComponent<DealDamage>();
+
+                if (dealDamage != null)
+                {
+                    dealDamage.Damage(attackPower);
+                }
 
                 // エフェクトを再生
                 ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
@@ -227,14 +265,4 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        Debug.Log("主人公が" + damage + "ダメージを受けました");
-        hp -= damage;
-
-        if (hp <= 0)
-        {
-            Debug.Log("GAME OVER");
-        }
-    }
 }
