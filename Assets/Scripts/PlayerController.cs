@@ -15,9 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 targetDirection;
 
     // 向き
-    public Vector3 currentDirection = Vector3.down;
-    // ひとつ前の向き
-    public Vector3 previousDirection = Vector3.zero;
+    public Vector3 currentDirection = Vector3.zero;
 
     SpriteRenderer spriteRenderer;
 
@@ -64,31 +62,31 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey("up"))
             {
                 currentDirection = Vector3.up;
+                MoveDirection(Vector3.up, "WalkUp");
             }
             else if (Input.GetKey("down"))
             {
                 currentDirection = Vector3.down;
+                MoveDirection(Vector3.down, "WalkDown");
             }
             else if (Input.GetKey("left"))
             {
                 currentDirection = Vector3.left;
+                MoveDirection(Vector3.left, "WalkLeft");
             }
             else if (Input.GetKey("right"))
             {
                 currentDirection = Vector3.right;
+                MoveDirection(Vector3.right, "WalkRight");
             }
-
-            // もし方向転換してたらアニメーションを変更
-            if (currentDirection != previousDirection && currentDirection != Vector3.zero)
+            else if (!Input.GetKey("up") && !Input.GetKey("down") && !Input.GetKey("left") && !Input.GetKey("right"))
             {
-                previousDirection = currentDirection;
-                int hoge = 0;
-                Debug.Log("方向転換を検知" + hoge);
-                MoveDirection(currentDirection);
+                ResetAnimation();
             }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
+                animator.SetTrigger("WalkStop");
                 Debug.Log("Attack呼び出し");
                 StartCoroutine(Attack());
             }
@@ -122,36 +120,59 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetSpriteAnimaton(Vector3 direction)
-    {
-        string walkAnimationTrigger = "";
-
-        // 進行方向に応じてアニメーションを変更
-        if (direction == Vector3.up)
-        {
-            walkAnimationTrigger = "WalkUp";
-        }
-        else if (direction == Vector3.down)
-        {
-            walkAnimationTrigger = "WalkDown";
-        }
-        else if (direction == Vector3.left)
-        {
-            walkAnimationTrigger = "WalkLeft";
-        }
-        else if (direction == Vector3.right)
-        {
-            walkAnimationTrigger = "WalkRight";
-        }
-
-        animator.SetTrigger(walkAnimationTrigger);
-    }
-
     void ResetAnimation()
     {
+        animator.SetBool("WalkDown", false);
+        animator.SetBool("WalkUp", false);
+        animator.SetBool("WalkLeft", false);
+        animator.SetBool("WalkRight", false);
     }
 
-    void MoveDirection(Vector3 direction)
+    void WalkAnimation(string animation)
+    {
+        if (animation == "WalkDown")
+        {
+            if (!animator.GetBool("WalkDown"))
+            {
+                animator.SetBool("WalkDown", true);
+            }
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkUp")
+        {
+            if (!animator.GetBool("WalkUp"))
+            {
+                animator.SetBool("WalkUp", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkLeft")
+        {
+            if (!animator.GetBool("WalkLeft"))
+            {
+                animator.SetBool("WalkLeft", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkRight")
+        {
+            if (!animator.GetBool("WalkRight"))
+            {
+                animator.SetBool("WalkRight", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+        }
+    }
+
+    void MoveDirection(Vector3 direction, string animation)
     {
         targetDirection = direction;
 
@@ -163,11 +184,11 @@ public class PlayerController : MonoBehaviour
         }
         else // なければMove呼び出し
         {
-            StartCoroutine(Move());
+            StartCoroutine(Move(animation));
         }
     }
 
-    public IEnumerator Move()
+    public IEnumerator Move(string animation)
     {
         // 移動中かどうか
         isMoving = true;
@@ -176,9 +197,11 @@ public class PlayerController : MonoBehaviour
         // 目的地
         Vector3 targetPosition = nowPosition + targetDirection;
 
-
         // 移動にかかった時間
         float elapsedTime = 0f;
+
+        // アニメーション再生
+        WalkAnimation(animation);
 
         // 移動が完了するまでLerpでマス間の位置を補完
         while (elapsedTime < moveSpeed)
@@ -193,30 +216,25 @@ public class PlayerController : MonoBehaviour
         // 移動中フラグを戻す
         isMoving = false;
 
-        // アニメーションの速度を一時的に保存
-        float savedAnimationSpeed = animator.speed;
-        // アニメーションの速度を0に設定
-        animator.speed = 0f;
-
         // 移動が入力され続けてれば引き続き移動する
         if (Input.GetKey("up"))
         {
-            MoveDirection(Vector3.up);
+            MoveDirection(Vector3.up, "WalkUp");
             currentDirection = Vector3.up;
         }
         else if (Input.GetKey("down"))
         {
-            MoveDirection(Vector3.down);
+            MoveDirection(Vector3.down, "WalkDown");
             currentDirection = Vector3.down;
         }
         else if (Input.GetKey("left"))
         {
-            MoveDirection(Vector3.left);
+            MoveDirection(Vector3.left, "WalkLeft");
             currentDirection = Vector3.left;
         }
         else if (Input.GetKey("right"))
         {
-            MoveDirection(Vector3.right);
+            MoveDirection(Vector3.right, "WalkRight");
             currentDirection = Vector3.right;
         }
     }
