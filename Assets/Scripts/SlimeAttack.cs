@@ -20,12 +20,17 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SlimeController slimeController = collision.GetComponent<SlimeController>();
-        if (slimeController != null)
-        {
 
-            slimeController.AttackPlayer();
-        }
+
+        AttackPlayer();
+
+
+
+    }
+
+    public void AttackPlayer()
+    {
+        Debug.Log("スライムはプレイヤーに攻撃した！");
 
     }
 }
