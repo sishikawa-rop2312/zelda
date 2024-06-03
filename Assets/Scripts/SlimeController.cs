@@ -64,31 +64,4 @@ public class SlimeController : MonoBehaviour
 
     }
 
-    void AttackPlayer()
-    {
-        Debug.Log("攻撃dekitayo");
-
-    }
-
-    //ダメージを受けた時
-    public void TakeDamage(int damage)
-    {
-        enemyHp -= damage;
-        Debug.Log("敵の体力: " + enemyHp);
-
-        if (enemyHp <= 0)
-        {
-            Die();
-        }
-    }
-
-    //死んだとき
-    void Die()
-    {
-        Debug.Log("スライムが倒された！");
-        Destroy(gameObject); // 敵キャラクターを消滅させる
-    }
-
-
-
 }
