@@ -9,17 +9,19 @@ public class MagicianController : MonoBehaviour
     public GameObject fireballPrefab; // ファイアボールのプレハブ
     public float fireballSpeed = 1f; // ファイアボールの速度
     public float attackCooldown = 5f; // 攻撃のクールダウンタイム（5秒）
-    public int enemyHp = 1; // 敵の体力
+    public int fireballDamage = 1; // ファイアボールのダメージ量
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
     private Animator animator;
+    private DealDamage dealDamage;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform; // プレイヤーを探す
         animator = GetComponent<Animator>();
         animator.Play("MagicianWalk");
+        dealDamage = GetComponent<DealDamage>();
     }
 
     void Update()
@@ -79,9 +81,13 @@ public class MagicianController : MonoBehaviour
                 GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
                 fireball.GetComponent<Rigidbody2D>().velocity = direction * fireballSpeed;
 
-                Debug.Log("敵のファイアボール攻撃！");
-
-                // 次の攻撃可能時間を設定
+                // ファイアボールのダメージ量を設定
+                Fireball fireballScript = fireball.GetComponent<Fireball>();
+                if (fireballScript != null)
+                {
+                    fireballScript.damage = fireballDamage;
+                }
+                //次の攻撃可能時間を設定
                 nextAttackTime = Time.time + attackCooldown;
             }
         }
@@ -98,13 +104,7 @@ public class MagicianController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        enemyHp -= damage;
-        Debug.Log("敵の体力: " + enemyHp);
-
-        if (enemyHp <= 0)
-        {
-            Die();
-        }
+        dealDamage.Damage(damage);
     }
 
     void Die()
@@ -112,5 +112,4 @@ public class MagicianController : MonoBehaviour
         Debug.Log("魔術師が倒された！");
         Destroy(gameObject); // 敵キャラクターを消滅させる
     }
-
 }
