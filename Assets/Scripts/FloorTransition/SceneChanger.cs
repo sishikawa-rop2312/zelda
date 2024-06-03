@@ -17,30 +17,33 @@ public class SceneChanger : MonoBehaviour
         // キャラクターがトリガーゾーンに入ったかを確認
         if (other.CompareTag("Player"))
         {
-            // シーン変更イベントを登録
-            SceneManager.sceneLoaded += OnSceneLoaded;
-
-            Debug.Log("Loading Scene: " + targetScene);
-            // シーンを変更
-            SceneManager.LoadScene(targetScene);
+            StartCoroutine(CheckPlayerMoving(other));
         }
+    }
+
+    IEnumerator CheckPlayerMoving(Collider2D player)
+    {
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        while (playerController.isMoving)
+        {
+            yield return null; // 次のフレームまで待機
+        }
+
+        // シーン変更イベントを登録
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // シーンを変更
+        SceneManager.LoadScene(targetScene);
     }
 
     // シーンがロードされた後に呼び出される関数
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Scene Loaded: " + scene.name);
-
         // Playerオブジェクトを探して位置を更新
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
-            Debug.Log("Player found. Moving to position: " + spawnPosition);
             player.transform.position = spawnPosition;
-        }
-        else
-        {
-            Debug.Log("Player not found");
         }
 
         // イベントからこの関数を削除

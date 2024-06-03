@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public int hp = 5;
 
     // 移動中かどうか
-    bool isMoving = false;
+    public bool isMoving = false;
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
     // 移動先
@@ -24,6 +24,24 @@ public class PlayerController : MonoBehaviour
 
     // 当たり判定用のレイヤーを取得
     public LayerMask detectionMask;
+
+    // PlayerController型のインスタンスを保持
+    public static PlayerController instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            //このインスタンスをinstanceに登録
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // 2回目以降重複して作成してしまったgameObjectを削除
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
