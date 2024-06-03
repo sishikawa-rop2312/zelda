@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector3 targetDirection;
 
     // 向き
-    public Vector3 currentDirection = Vector3.down;
+    public Vector3 currentDirection = Vector3.zero;
 
     SpriteRenderer spriteRenderer;
 
@@ -79,9 +79,14 @@ public class PlayerController : MonoBehaviour
                 currentDirection = Vector3.right;
                 MoveDirection(Vector3.right, "WalkRight");
             }
+            else if (!Input.GetKey("up") && !Input.GetKey("down") && !Input.GetKey("left") && !Input.GetKey("right"))
+            {
+                ResetAnimation();
+            }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
+                animator.SetTrigger("WalkStop");
                 Debug.Log("Attack呼び出し");
                 StartCoroutine(Attack());
             }
@@ -117,7 +122,54 @@ public class PlayerController : MonoBehaviour
 
     void ResetAnimation()
     {
+        animator.SetBool("WalkDown", false);
+        animator.SetBool("WalkUp", false);
+        animator.SetBool("WalkLeft", false);
+        animator.SetBool("WalkRight", false);
+    }
 
+    void WalkAnimation(string animation)
+    {
+        if (animation == "WalkDown")
+        {
+            if (!animator.GetBool("WalkDown"))
+            {
+                animator.SetBool("WalkDown", true);
+            }
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkUp")
+        {
+            if (!animator.GetBool("WalkUp"))
+            {
+                animator.SetBool("WalkUp", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkLeft")
+        {
+            if (!animator.GetBool("WalkLeft"))
+            {
+                animator.SetBool("WalkLeft", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkRight")
+        {
+            if (!animator.GetBool("WalkRight"))
+            {
+                animator.SetBool("WalkRight", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+        }
     }
 
     void MoveDirection(Vector3 direction, string animation)
@@ -132,11 +184,11 @@ public class PlayerController : MonoBehaviour
         }
         else // なければMove呼び出し
         {
-            StartCoroutine(Move());
+            StartCoroutine(Move(animation));
         }
     }
 
-    public IEnumerator Move()
+    public IEnumerator Move(string animation)
     {
         // 移動中かどうか
         isMoving = true;
@@ -145,9 +197,11 @@ public class PlayerController : MonoBehaviour
         // 目的地
         Vector3 targetPosition = nowPosition + targetDirection;
 
-
         // 移動にかかった時間
         float elapsedTime = 0f;
+
+        // アニメーション再生
+        WalkAnimation(animation);
 
         // 移動が完了するまでLerpでマス間の位置を補完
         while (elapsedTime < moveSpeed)
@@ -161,11 +215,6 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPosition;
         // 移動中フラグを戻す
         isMoving = false;
-
-        // アニメーションの速度を一時的に保存
-        float savedAnimationSpeed = animator.speed;
-        // アニメーションの速度を0に設定
-        animator.speed = 0f;
 
         // 移動が入力され続けてれば引き続き移動する
         if (Input.GetKey("up"))
