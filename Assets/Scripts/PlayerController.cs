@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour
 
     // 向き
     public Vector3 currentDirection = Vector3.down;
-    // ひとつ前の向き
-    public Vector3 previousDirection = Vector3.zero;
 
     SpriteRenderer spriteRenderer;
 
@@ -46,27 +44,22 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey("up"))
             {
                 currentDirection = Vector3.up;
+                MoveDirection(Vector3.up, "WalkUp");
             }
             else if (Input.GetKey("down"))
             {
                 currentDirection = Vector3.down;
+                MoveDirection(Vector3.down, "WalkDown");
             }
             else if (Input.GetKey("left"))
             {
                 currentDirection = Vector3.left;
+                MoveDirection(Vector3.left, "WalkLeft");
             }
             else if (Input.GetKey("right"))
             {
                 currentDirection = Vector3.right;
-            }
-
-            // もし方向転換してたらアニメーションを変更
-            if (currentDirection != previousDirection && currentDirection != Vector3.zero)
-            {
-                previousDirection = currentDirection;
-                int hoge = 0;
-                Debug.Log("方向転換を検知" + hoge);
-                MoveDirection(currentDirection);
+                MoveDirection(Vector3.right, "WalkRight");
             }
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
@@ -104,36 +97,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetSpriteAnimaton(Vector3 direction)
-    {
-        string walkAnimationTrigger = "";
-
-        // 進行方向に応じてアニメーションを変更
-        if (direction == Vector3.up)
-        {
-            walkAnimationTrigger = "WalkUp";
-        }
-        else if (direction == Vector3.down)
-        {
-            walkAnimationTrigger = "WalkDown";
-        }
-        else if (direction == Vector3.left)
-        {
-            walkAnimationTrigger = "WalkLeft";
-        }
-        else if (direction == Vector3.right)
-        {
-            walkAnimationTrigger = "WalkRight";
-        }
-
-        animator.SetTrigger(walkAnimationTrigger);
-    }
-
     void ResetAnimation()
     {
+
     }
 
-    void MoveDirection(Vector3 direction)
+    void MoveDirection(Vector3 direction, string animation)
     {
         targetDirection = direction;
 
@@ -183,22 +152,22 @@ public class PlayerController : MonoBehaviour
         // 移動が入力され続けてれば引き続き移動する
         if (Input.GetKey("up"))
         {
-            MoveDirection(Vector3.up);
+            MoveDirection(Vector3.up, "WalkUp");
             currentDirection = Vector3.up;
         }
         else if (Input.GetKey("down"))
         {
-            MoveDirection(Vector3.down);
+            MoveDirection(Vector3.down, "WalkDown");
             currentDirection = Vector3.down;
         }
         else if (Input.GetKey("left"))
         {
-            MoveDirection(Vector3.left);
+            MoveDirection(Vector3.left, "WalkLeft");
             currentDirection = Vector3.left;
         }
         else if (Input.GetKey("right"))
         {
-            MoveDirection(Vector3.right);
+            MoveDirection(Vector3.right, "WalkRight");
             currentDirection = Vector3.right;
         }
     }
