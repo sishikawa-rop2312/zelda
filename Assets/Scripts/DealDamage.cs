@@ -22,5 +22,21 @@ public class DealDamage : MonoBehaviour
     public void Damage(int damage)
     {
         Debug.Log(this.gameObject.name + "のHPが減った");
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        if (this.gameObject.name == "Player")
+        {
+            Debug.Log("ゲームオーバー！");
+        }
+        else
+        {
+            Debug.Log(this.gameObject.name + "は倒れた");
+        }
     }
 }
