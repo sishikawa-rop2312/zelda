@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     // 当たり判定用のレイヤーを取得
     public LayerMask detectionMask;
 
+    // ステータスパネル判定用のレイヤーを取得
+    public LayerMask statusPanelLayerMask;
+
     // PlayerController型のインスタンスを保持
     public static PlayerController instance;
 
@@ -182,13 +185,26 @@ public class PlayerController : MonoBehaviour
             Debug.Log(targetDirection + "に障害物検知");
             isMoving = false;
         }
+        // ステータスバーの一つ下のマス
+        else if ((transform.position.y + 6.5f) % 10 == 0)
+        {
+            if (Physics2D.Raycast(transform.position, targetDirection, 2f, detectionMask).collider != null)
+            {
+                Debug.Log(targetDirection + "ステータスバーの上に障害物検知");
+                isMoving = false;
+            }
+            else
+            {
+                StartCoroutine(Move(animation, true));
+            }
+        }
         else // なければMove呼び出し
         {
             StartCoroutine(Move(animation));
         }
     }
 
-    public IEnumerator Move(string animation)
+    public IEnumerator Move(string animation, bool isTwiceMove = false)
     {
         // 移動中かどうか
         isMoving = true;
@@ -196,6 +212,11 @@ public class PlayerController : MonoBehaviour
         Vector3 nowPosition = transform.position;
         // 目的地
         Vector3 targetPosition = nowPosition + targetDirection;
+
+        if (isTwiceMove)
+        {
+            targetPosition += targetDirection;
+        }
 
         // 移動にかかった時間
         float elapsedTime = 0f;
