@@ -172,12 +172,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void MoveDirection(Vector3 direction, string animation)
+    public void MoveDirection(Vector3 direction, string animation)
     {
         targetDirection = direction;
 
+        // アニメーション再生
+        WalkAnimation(animation);
+
         // 進行方向に障害物がないかチェック
-        if (Physics2D.Raycast(transform.position, targetDirection, 1f, detectionMask).collider != null)
+        if (Physics2D.OverlapPoint(transform.position + targetDirection, detectionMask) != null)
         {
             Debug.Log(targetDirection + "に障害物検知");
             isMoving = false;
@@ -199,9 +202,6 @@ public class PlayerController : MonoBehaviour
 
         // 移動にかかった時間
         float elapsedTime = 0f;
-
-        // アニメーション再生
-        WalkAnimation(animation);
 
         // 移動が完了するまでLerpでマス間の位置を補完
         while (elapsedTime < moveSpeed)
