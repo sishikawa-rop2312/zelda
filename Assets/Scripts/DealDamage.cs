@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class DealDamage : MonoBehaviour
 {
     public int hp = 1;
@@ -31,7 +32,9 @@ public class DealDamage : MonoBehaviour
 
     public void Damage(int damage)
     {
-        Debug.Log(this.gameObject.name + "のHPが減った");
+        int actualDamage = Mathf.RoundToInt(damage * defense);
+        hp -= actualDamage;
+        Debug.Log(this.gameObject.name + "のHPが" + actualDamage + "減った");
         if (hp <= 0)
         {
             Die();
@@ -53,6 +56,7 @@ public class DealDamage : MonoBehaviour
         }
         else
         {
+            Destroy(this.gameObject);
             Debug.Log(this.gameObject.name + "は倒れた");
         }
     }
