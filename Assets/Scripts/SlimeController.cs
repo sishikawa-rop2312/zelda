@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class SlimeController : MonoBehaviour
@@ -14,13 +15,16 @@ public class SlimeController : MonoBehaviour
     private Transform player;
     //敵を索敵
     private bool seach = false;
-    //攻撃
-    // private bool isPlayerInAttackRange = false;
+
+    Animator animator;
+
+    bool RunActive = false;
 
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        this.animator = GetComponent<Animator>();
 
     }
 
@@ -32,10 +36,66 @@ public class SlimeController : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
+        else if (RunActive == false)
+        {
+            StartCoroutine(RandomRun());
+        }
 
 
 
     }
+
+    IEnumerator RandomRun()
+    {
+        while (!seach)
+        {
+            RunActive = true;
+
+            Run();
+            yield return new WaitForSeconds(5);
+            Debug.Log("止まってるよ");
+
+        }
+
+    }
+
+
+
+    //プレイヤーが索敵範囲にいない時
+    void Run()
+    {
+
+        //これから記載
+
+        // this.animator.speed =
+
+        //ランダムに動くようにする
+        int randomRun = Random.Range(0, 4);
+        switch (randomRun)
+        {
+            case 0:
+                // 上
+                Debug.Log("上");
+                break;
+            case 1:
+                // 下
+                Debug.Log("下");
+                break;
+            case 2:
+                // 右
+                Debug.Log("右");
+                break;
+            case 3:
+                // 左
+                Debug.Log(" 左");
+                break;
+        }
+
+
+
+
+    }
+
 
     void MoveTowardsPlayer()
     {
@@ -47,18 +107,21 @@ public class SlimeController : MonoBehaviour
 
     }
 
+    //プレイヤーが索敵範囲に入ったとき
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("勇者見つけた");
+        Debug.Log("プレイヤー見つけた");
         seach = true;
+        RunActive = false;
 
     }
 
+    //プレイヤーが索敵範囲に抜けた時
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("いなくなった");
+            Debug.Log("プレイヤーいなくなった");
             seach = false;
         }
 
