@@ -17447,6 +17447,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 515097652770074424, guid: 56852254c101dd042aefa967a81aaf92, type: 3}
+      propertyPath: fireballDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 515097652770074424, guid: 56852254c101dd042aefa967a81aaf92, type: 3}
       propertyPath: meleeAttackCooldown
       value: 3
       objectReference: {fileID: 0}

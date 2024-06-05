@@ -146,37 +146,5 @@ public class DemonController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         dealDamage.Damage(damage);
-        if (dealDamage.hp <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        Debug.Log("デーモンが倒された！");
-        StartCoroutine(FadeOutAndDestroy()); // フェードアウトしてから消滅
-    }
-
-    IEnumerator FadeOutAndDestroy()
-    {
-        float fadeDuration = 3f; // フェードアウトにかかる時間
-        float fadeSpeed = 1f / fadeDuration;
-        Color color = spriteRenderer.color;
-
-        Debug.Log("フェードアウト開始");
-
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
-        {
-            color.a = Mathf.Lerp(1, 0, t / fadeDuration);
-            spriteRenderer.color = color;
-            Debug.Log($"フェードアウト中: t={t}, alpha={color.a}");
-            yield return null;
-        }
-
-        color.a = 0;
-        spriteRenderer.color = color;
-        Debug.Log("フェードアウト完了");
-        Destroy(gameObject); // 完全にフェードアウトしたらオブジェクトを消滅させる
     }
 }
