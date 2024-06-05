@@ -63,6 +63,9 @@ public class CameraController : MonoBehaviour
             newCameraPosition.y -= cameraMoveYDistance;
         }
 
+        // y座標を10の倍数に調整
+        newCameraPosition.y = Mathf.Round(newCameraPosition.y / 10) * 10;
+
         return newCameraPosition;
     }
 
