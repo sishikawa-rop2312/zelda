@@ -52,7 +52,7 @@ public class DealDamage : MonoBehaviour
     {
         if (!isNoDamage) // 無敵じゃないとき
         {
-            int actualDamage = Mathf.RoundToInt(damage * defense);
+            float actualDamage = damage * defense;
             hp -= actualDamage;
             Debug.Log(this.gameObject.name + "のHPが" + actualDamage + "減った");
             if (hp <= 0)

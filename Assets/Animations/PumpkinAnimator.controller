@@ -262,7 +262,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player
+  m_Name: PumpkinAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: WalkDown
@@ -436,7 +436,7 @@ AnimatorStateMachine:
     m_Position: {x: 566.159, y: 2.0843048, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7189572609397176038}
-    m_Position: {x: 570, y: 110, z: 0}
+    m_Position: {x: 570.6087, y: 122.22481, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4792442146881399063}
     m_Position: {x: 740, y: 180, z: 0}
