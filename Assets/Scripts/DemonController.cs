@@ -164,15 +164,19 @@ public class DemonController : MonoBehaviour
         float fadeSpeed = 1f / fadeDuration;
         Color color = spriteRenderer.color;
 
-        for (float t = 0; t < 1; t += Time.deltaTime * fadeSpeed)
+        Debug.Log("フェードアウト開始");
+
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
-            color.a = Mathf.Lerp(1, 0, t);
+            color.a = Mathf.Lerp(1, 0, t / fadeDuration);
             spriteRenderer.color = color;
+            Debug.Log($"フェードアウト中: t={t}, alpha={color.a}");
             yield return null;
         }
 
         color.a = 0;
         spriteRenderer.color = color;
+        Debug.Log("フェードアウト完了");
         Destroy(gameObject); // 完全にフェードアウトしたらオブジェクトを消滅させる
     }
 }

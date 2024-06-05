@@ -17869,6 +17869,7 @@ MonoBehaviour:
   hp: 1
   maxHp: 3
   defense: 1
+  stunTime: 1
 --- !u!1 &1956741050
 GameObject:
   m_ObjectHideFlags: 0
