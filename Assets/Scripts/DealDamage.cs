@@ -79,6 +79,7 @@ public class DealDamage : MonoBehaviour
         }
         else
         {
+            StartCoroutine(DamageFlash());
             Destroy(this.gameObject);
             Debug.Log(this.gameObject.name + "は倒れた");
         }
