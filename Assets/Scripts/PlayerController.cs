@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     // PlayerController型のインスタンスを保持
     public static PlayerController instance;
 
+    // 2マス分進むかどうか
+    bool isTwiceMove = false;
+
     void Awake()
     {
         if (instance == null)
@@ -177,6 +180,7 @@ public class PlayerController : MonoBehaviour
     public void MoveDirection(Vector3 direction, string animation)
     {
         targetDirection = direction;
+        isTwiceMove = false;
 
         // アニメーション再生
         WalkAnimation(animation);
@@ -186,6 +190,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(targetDirection + "に障害物検知");
             isMoving = false;
+        }
+        // ステータスバーの一つ下のマスかつ上に移動 or フロアの一番下のマスかつ下に移動
+        else if (((transform.position.y + 6.5f) % 10 == 0 && targetDirection == Vector3.up) ||
+        ((transform.position.y + 4.5f) % 10 == 0 && targetDirection == Vector3.down))
+        {
+            isTwiceMove = true;
+            StartCoroutine(Move(animation));
         }
         else // なければMove呼び出し
         {
@@ -201,6 +212,12 @@ public class PlayerController : MonoBehaviour
         Vector3 nowPosition = transform.position;
         // 目的地
         Vector3 targetPosition = nowPosition + targetDirection;
+
+        // ステータスバーを考慮し2マス分移動
+        if (isTwiceMove)
+        {
+            targetPosition += targetDirection;
+        }
 
         // 移動にかかった時間
         float elapsedTime = 0f;

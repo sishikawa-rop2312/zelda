@@ -101,12 +101,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101511b975b96804a89438a144d7e01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  attackPower: 1
+  isMoving: 0
   moveSpeed: 0.2
   currentDirection: {x: 0, y: -1, z: 0}
   detectionMask:
     serializedVersion: 2
     m_Bits: 64
+  statusPanelLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   up: {fileID: 21300000, guid: 34010127e5d5d91438ef6850a168bee8, type: 3}
   down: {fileID: 21300000, guid: 80699e2ed6279a148a77fd3d5fa6aa9d, type: 3}
   left: {fileID: 21300000, guid: 2e82805fd6c742d4daaf497b340aa68b, type: 3}
@@ -218,4 +222,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  maxHp: 3
   defense: 1
