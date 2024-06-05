@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class DealDamage : MonoBehaviour
 {
-    public int hp = 1;
-    public int maxHp = 3;
+    public float hp = 1;
+    public float maxHp = 3;
     public float defense = 1f;
 
     // HealthDisplay（HPのGUI）
