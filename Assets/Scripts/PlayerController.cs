@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public bool isMoving = false;
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
+    // 攻撃時クールタイム
+    public int attackCoolTime = 1;
     // 移動先
     Vector3 targetDirection;
 
@@ -175,13 +177,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void MoveDirection(Vector3 direction, string animation)
+    public void MoveDirection(Vector3 direction, string animation)
     {
         targetDirection = direction;
         isTwiceMove = false;
 
+        // アニメーション再生
+        WalkAnimation(animation);
+
         // 進行方向に障害物がないかチェック
-        if (Physics2D.Raycast(transform.position, targetDirection, 1f, detectionMask).collider != null)
+        if (Physics2D.OverlapPoint(transform.position + targetDirection, detectionMask) != null)
         {
             Debug.Log(targetDirection + "に障害物検知");
             isMoving = false;
@@ -216,9 +221,6 @@ public class PlayerController : MonoBehaviour
 
         // 移動にかかった時間
         float elapsedTime = 0f;
-
-        // アニメーション再生
-        WalkAnimation(animation);
 
         // 移動が完了するまでLerpでマス間の位置を補完
         while (elapsedTime < moveSpeed)
@@ -283,8 +285,8 @@ public class PlayerController : MonoBehaviour
                 ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
                 attackParticle.Play();
 
-                // エフェクトが再生し終わるまで待機する
-                yield return new WaitForSeconds(attackParticle.main.duration / 2);
+                // クールタイム
+                yield return new WaitForSeconds(attackCoolTime);
 
                 // 行動中フラグを戻す
                 isMoving = false;
