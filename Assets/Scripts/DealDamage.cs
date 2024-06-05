@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class DealDamage : MonoBehaviour
 {
     public float hp = 1;
@@ -21,7 +20,6 @@ public class DealDamage : MonoBehaviour
     // ダメージを受けた時のスタン時間
     public float stunTime = 1.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         // プレイヤーのHP GUI表示
@@ -34,7 +32,7 @@ public class DealDamage : MonoBehaviour
             }
         }
 
-        // ダメージ演出用のSpriteRenderを取得
+        // ダメージ演出用のSpriteRendererを取得
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -42,7 +40,6 @@ public class DealDamage : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -79,9 +76,30 @@ public class DealDamage : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            StartCoroutine(FadeOutAndDestroy());
             Debug.Log(this.gameObject.name + "は倒れた");
         }
+    }
+
+    IEnumerator FadeOutAndDestroy()
+    {
+        float fadeDuration = 1f; // フェードアウトにかかる時間
+        Color color = spriteRenderer.color;
+
+        Debug.Log("フェードアウト開始");
+
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        {
+            color.a = Mathf.Lerp(1, 0, t / fadeDuration);
+            spriteRenderer.color = color;
+            Debug.Log($"フェードアウト中: t={t}, alpha={color.a}");
+            yield return null;
+        }
+
+        color.a = 0;
+        spriteRenderer.color = color;
+        Debug.Log("フェードアウト完了");
+        Destroy(gameObject); // 完全にフェードアウトしたらオブジェクトを消滅させる
     }
 
     IEnumerator DamageFlash()
