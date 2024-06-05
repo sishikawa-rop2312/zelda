@@ -119,7 +119,7 @@ public class SlimeController : MonoBehaviour
             seachrun = true;
             MoveTowardsPlayer();
             yield return new WaitForSeconds(interval);
-            Debug.Log("停止中");
+
 
         }
     }
@@ -172,9 +172,13 @@ public class SlimeController : MonoBehaviour
     //プレイヤーが索敵範囲に入ったとき
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("プレイヤー見つけた");
-        seach = true;
-        runActive = false;
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("プレイヤー見つけた");
+            seach = true;
+            runActive = false;
+        }
+
 
     }
 
@@ -195,6 +199,11 @@ public class SlimeController : MonoBehaviour
         dealDamage.Damage(damage);
     }
 
+    void Die()
+    {
+        Debug.Log("スライムが倒された！");
+        Destroy(gameObject); // 敵キャラクターを消滅させる
+    }
 
 
 }
