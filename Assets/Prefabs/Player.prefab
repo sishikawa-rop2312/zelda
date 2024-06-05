@@ -101,8 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101511b975b96804a89438a144d7e01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  attackPower: 1
+  isMoving: 0
   moveSpeed: 0.2
+  attackCoolTime: 1
   currentDirection: {x: 0, y: -1, z: 0}
   detectionMask:
     serializedVersion: 2
@@ -217,5 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 3
+  maxHp: 3
   defense: 1
