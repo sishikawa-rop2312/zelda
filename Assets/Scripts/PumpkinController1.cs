@@ -150,7 +150,6 @@ public class EnemyController : MonoBehaviour
         Vector3 nowPosition = transform.position;
         // 目的地を取得
         Vector3 targetPosition = nowPosition + currentDirection;
-
         float elapsedTime = 0f;
 
         // 移動速度に合わせて移動
@@ -158,6 +157,7 @@ public class EnemyController : MonoBehaviour
         {
             transform.position = Vector3.Lerp(nowPosition, targetPosition, (elapsedTime / moveSpeed));
             elapsedTime += Time.deltaTime;
+
             yield return null;
         }
 

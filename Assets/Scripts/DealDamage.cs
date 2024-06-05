@@ -20,7 +20,10 @@ public class DealDamage : MonoBehaviour
         if (this.gameObject.name == "Player")
         {
             healthDisplay = FindObjectOfType<HealthDisplay>();
-            healthDisplay.SetHealth(hp, maxHp);
+            if (healthDisplay != null)
+            {
+                healthDisplay.SetHealth(hp, maxHp);
+            }
         }
     }
 
@@ -41,7 +44,7 @@ public class DealDamage : MonoBehaviour
         }
 
         // 主人公のHP GUI更新
-        if (this.gameObject.name == "Player")
+        if (healthDisplay != null && this.gameObject.name == "Player")
         {
             healthDisplay.SetHealth(hp, maxHp);
         }

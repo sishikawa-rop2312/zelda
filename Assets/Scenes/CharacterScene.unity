@@ -358,7 +358,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
---- !u!1001 &1740322490703763848
+--- !u!1001 &1726445879
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -368,11 +368,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 324312819523576011, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 324312819523576011, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 324312819523576011, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -410,42 +410,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pumpkin_0
       objectReference: {fileID: 0}
-    - target: {fileID: 606640420913972726, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: moveSpeed
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: attackEffect
-      value: 
-      objectReference: {fileID: 3521153888432770879, guid: 2cab9369e5ac2ab4b9946f01997b0c5b, type: 3}
-    - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: PlayerTransform
-      value: 
-      objectReference: {fileID: 824446536}
     - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 824446536}
-    - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: PlayerMask.m_Bits
-      value: 128
-      objectReference: {fileID: 0}
-    - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: detectionMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923810543542231752, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5923810543542231752, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 363323707
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -520,4 +488,4 @@ SceneRoots:
   - {fileID: 4705486535418912596}
   - {fileID: 1250513841}
   - {fileID: 1378055957}
-  - {fileID: 1740322490703763848}
+  - {fileID: 1726445879}

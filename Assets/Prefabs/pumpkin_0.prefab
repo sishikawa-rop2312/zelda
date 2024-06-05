@@ -194,12 +194,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a303fbfba11352a4482610f414a46ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPower: 1
   moveSpeed: 0.2
+  searchRange: 10
+  attackCoolTime: 3
   detectionMask:
     serializedVersion: 2
     m_Bits: 64
-  attackPower: 1
-  PlayerTransform: {fileID: 0}
+  PlayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  attackEffect: {fileID: 3521153888432770879, guid: 2cab9369e5ac2ab4b9946f01997b0c5b, type: 3}
+  playerTransform: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
 --- !u!114 &6258523358339751753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,5 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 3
+  maxHp: 3
   defense: 1
