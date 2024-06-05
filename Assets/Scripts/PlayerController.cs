@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public bool isMoving = false;
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
+    // 攻撃時クールタイム
+    public int attackCoolTime = 1;
     // 移動先
     Vector3 targetDirection;
 
@@ -266,8 +268,8 @@ public class PlayerController : MonoBehaviour
                 ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
                 attackParticle.Play();
 
-                // エフェクトが再生し終わるまで待機する
-                yield return new WaitForSeconds(attackParticle.main.duration / 2);
+                // クールタイム
+                yield return new WaitForSeconds(attackCoolTime);
 
                 // 行動中フラグを戻す
                 isMoving = false;
