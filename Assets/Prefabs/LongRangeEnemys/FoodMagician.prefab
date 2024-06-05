@@ -68,7 +68,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  defense: 0
+  maxHp: 3
+  defense: 1
+  stunTime: 1
 --- !u!212 &5620812736405293456
 SpriteRenderer:
   m_ObjectHideFlags: 0
