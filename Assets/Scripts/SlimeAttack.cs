@@ -5,6 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
 
+    public int attackDamage = 1;
 
     // Start is called before the first frame update
     void Start()
