@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
     // 攻撃時クールタイム
-    public int attackCoolTime = 1;
+    public float attackCoolTime = 1;
     // 移動先
     Vector3 targetDirection;
 

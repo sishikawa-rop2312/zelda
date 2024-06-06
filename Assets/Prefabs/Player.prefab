@@ -219,6 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
-  maxHp: 3
+  hp: 5
+  maxHp: 5
   defense: 1
+  isDead: 0
+  stunTime: 1

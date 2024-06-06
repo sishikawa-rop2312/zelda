@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     // 索敵範囲
     public float searchRange = 10f;
     // 攻撃時クールタイム
-    public int attackCoolTime = 3;
+    public float attackCoolTime = 3;
     // 障害物レイヤー
     public LayerMask detectionMask;
     // 敵レイヤー
@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     // 攻撃エフェクト
     public ParticleSystem attackEffect;
 
-    //Animator animator;
+    Animator animator;
     SpriteRenderer spriteRenderer;
     DealDamage dealDamage;
     Vector3 currentDirection = Vector3.zero;
@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         dealDamage = GetComponent<DealDamage>();
     }
@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
             //　距離が1マス以内(隣マス)なら攻撃
             if (distanceToPlayer <= 1f && !isMoving)
             {
-                //animator.SetTrigger("WalkStop");
+                ResetAnimation();
                 Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
                 StartCoroutine(Attack());
             }
@@ -64,7 +64,7 @@ public class EnemyController : MonoBehaviour
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
                 Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
-                MoveDirection(directionToPlayer, "Walk");
+                MoveDirection(directionToPlayer);
             }
             // 索敵範囲内に見つからなければランダム
             else if (!isMoving)
@@ -72,7 +72,7 @@ public class EnemyController : MonoBehaviour
                 // ランダムな方向に移動
                 Vector3 randomDirection = Random.insideUnitCircle.normalized;
                 Debug.Log(gameObject.name + "はランダムに移動します");
-                MoveDirection(randomDirection, "Walk");
+                MoveDirection(randomDirection);
 
                 isMoving = false;
             }
@@ -105,7 +105,51 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void MoveDirection(Vector3 direction, string animation)
+    void WalkAnimation(string animation)
+    {
+        if (animation == "WalkDown")
+        {
+            if (!animator.GetBool("WalkDown"))
+            {
+                animator.SetBool("WalkDown", true);
+            }
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkUp")
+        {
+            if (!animator.GetBool("WalkUp"))
+            {
+                animator.SetBool("WalkUp", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkLeft")
+        {
+            if (!animator.GetBool("WalkLeft"))
+            {
+                animator.SetBool("WalkLeft", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkRight")
+        {
+            if (!animator.GetBool("WalkRight"))
+            {
+                animator.SetBool("WalkRight", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+        }
+    }
+
+    void MoveDirection(Vector3 direction)
     {
         // 斜め移動を制限し、進行方向を変える
         if (direction.x != 0 && direction.y != 0)
@@ -142,7 +186,12 @@ public class EnemyController : MonoBehaviour
         currentDirection = direction;
 
         // アニメーション再生
-        //animator.SetBool(animation, true);
+        string animation;
+        if (currentDirection == Vector3.up) { animation = "WalkUp"; }
+        else if (currentDirection == Vector3.left) { animation = "WalkLeft"; }
+        else if (currentDirection == Vector3.right) { animation = "WalkRight"; }
+        else { animation = "WalkDown"; }
+        WalkAnimation(animation);
 
         // 進行方向に障害物がないかチェック
         if (Physics2D.OverlapPoint(transform.position + currentDirection, detectionMask) != null || Physics2D.OverlapPoint(transform.position + currentDirection, PlayerMask) != null)
@@ -179,8 +228,6 @@ public class EnemyController : MonoBehaviour
 
         // 移動中フラグオフ
         isMoving = false;
-
-        //animator.SetBool(animation, false);
     }
 
     IEnumerator Attack()
@@ -259,6 +306,14 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("攻撃対象が見つかりませんでした");
         }
+    }
+
+    void ResetAnimation()
+    {
+        animator.SetBool("WalkDown", false);
+        animator.SetBool("WalkUp", false);
+        animator.SetBool("WalkLeft", false);
+        animator.SetBool("WalkRight", false);
     }
 
 }
