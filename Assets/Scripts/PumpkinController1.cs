@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     // 索敵範囲
     public float searchRange = 10f;
     // 攻撃時クールタイム
-    public int attackCoolTime = 3;
+    public float attackCoolTime = 3;
     // 障害物レイヤー
     public LayerMask detectionMask;
     // 敵レイヤー
@@ -19,57 +19,80 @@ public class EnemyController : MonoBehaviour
     // 攻撃エフェクト
     public ParticleSystem attackEffect;
 
-    //Animator animator;
+    // プレイヤーとの距離
+    float distanceToPlayer;
+
+    // プレイヤーが索敵範囲内にいるか
+    bool isPlayerNearby = false;
+
+    Animator animator;
     SpriteRenderer spriteRenderer;
+    DealDamage dealDamage;
     Vector3 currentDirection = Vector3.zero;
     bool isMoving = false;
     public Transform playerTransform;
-    bool isPlayerNearby = false;
 
     void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        dealDamage = GetComponent<DealDamage>();
     }
 
     void Update()
     {
         SetSprite();
 
-        // プレイヤーとの距離を計測
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        // プレイヤーが索敵範囲内にいるかチェック
-        isPlayerNearby = distanceToPlayer <= searchRange;
-
-        //　距離が1マス以内(隣マス)なら攻撃
-        if (distanceToPlayer <= 1f && !isMoving)
+        if (dealDamage.isDead)
         {
-            //animator.SetTrigger("WalkStop");
-            StartCoroutine(Attack());
+            // 何も行動しない
         }
-        // 索敵範囲内だが2マス以上離れている場合は追跡
-        else if (isPlayerNearby && !isMoving)
-        {
-            // プレイヤーに向かって移動
-            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-            MoveDirection(directionToPlayer, "Walk");
-        }
-        // 索敵範囲内に見つからなければランダム
-        else if (!isMoving)
-        {
-            // ランダムな方向に移動
-            Vector3 randomDirection = Random.insideUnitCircle.normalized;
-            MoveDirection(randomDirection, "Walk");
-
-            isMoving = false;
-        }
-        // 万が一、何にも当てはまらなければ何もしない
         else
         {
-            Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
+            StartCoroutine(SearchPlayer(moveSpeed));
+            Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
+
+            //　距離が1マス以内(隣マス)なら攻撃
+            if (distanceToPlayer <= 1f && !isMoving)
+            {
+                ResetAnimation();
+                Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
+                StartCoroutine(Attack());
+            }
+            // 索敵範囲内だが2マス以上離れている場合は追跡
+            else if (isPlayerNearby && !isMoving)
+            {
+                // プレイヤーに向かって移動
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
+                MoveDirection(directionToPlayer);
+            }
+            // 索敵範囲内に見つからなければランダム
+            else if (!isMoving)
+            {
+                // ランダムな方向に移動
+                Vector3 randomDirection = Random.insideUnitCircle.normalized;
+                Debug.Log(gameObject.name + "はランダムに移動します");
+                MoveDirection(randomDirection);
+
+                isMoving = false;
+            }
+            // 万が一、何にも当てはまらなければ何もしない
+            else
+            {
+                Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
+            }
         }
 
+    }
 
+    IEnumerator SearchPlayer(float interval)
+    {
+        // プレイヤーとの距離を計測
+        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        // プレイヤーが索敵範囲内にいるかチェック
+        isPlayerNearby = distanceToPlayer <= searchRange;
+        yield return new WaitForSeconds(interval);
     }
 
     void SetSprite()
@@ -92,7 +115,51 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void MoveDirection(Vector3 direction, string animation)
+    void WalkAnimation(string animation)
+    {
+        if (animation == "WalkDown")
+        {
+            if (!animator.GetBool("WalkDown"))
+            {
+                animator.SetBool("WalkDown", true);
+            }
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkUp")
+        {
+            if (!animator.GetBool("WalkUp"))
+            {
+                animator.SetBool("WalkUp", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkLeft", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkLeft")
+        {
+            if (!animator.GetBool("WalkLeft"))
+            {
+                animator.SetBool("WalkLeft", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkRight", false);
+        }
+        if (animation == "WalkRight")
+        {
+            if (!animator.GetBool("WalkRight"))
+            {
+                animator.SetBool("WalkRight", true);
+            }
+            animator.SetBool("WalkDown", false);
+            animator.SetBool("WalkUp", false);
+            animator.SetBool("WalkLeft", false);
+        }
+    }
+
+    void MoveDirection(Vector3 direction)
     {
         // 斜め移動を制限し、進行方向を変える
         if (direction.x != 0 && direction.y != 0)
@@ -129,7 +196,12 @@ public class EnemyController : MonoBehaviour
         currentDirection = direction;
 
         // アニメーション再生
-        //animator.SetBool(animation, true);
+        string animation;
+        if (currentDirection == Vector3.up) { animation = "WalkUp"; }
+        else if (currentDirection == Vector3.left) { animation = "WalkLeft"; }
+        else if (currentDirection == Vector3.right) { animation = "WalkRight"; }
+        else { animation = "WalkDown"; }
+        WalkAnimation(animation);
 
         // 進行方向に障害物がないかチェック
         if (Physics2D.OverlapPoint(transform.position + currentDirection, detectionMask) != null || Physics2D.OverlapPoint(transform.position + currentDirection, PlayerMask) != null)
@@ -166,8 +238,6 @@ public class EnemyController : MonoBehaviour
 
         // 移動中フラグオフ
         isMoving = false;
-
-        //animator.SetBool(animation, false);
     }
 
     IEnumerator Attack()
@@ -226,10 +296,12 @@ public class EnemyController : MonoBehaviour
                 if (dealDamage != null)
                 {
                     dealDamage.Damage(attackPower);
+                    Debug.Log("dealDamage呼び出し");
                 }
 
                 // エフェクトを再生
-                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
+                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + (currentDirection * 2 / 3), Quaternion.identity);
+                Debug.Log("エフェクト再生");
                 attackParticle.Play();
 
                 // クールタイム終了まで待機する
@@ -246,6 +318,14 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("攻撃対象が見つかりませんでした");
         }
+    }
+
+    void ResetAnimation()
+    {
+        animator.SetBool("WalkDown", false);
+        animator.SetBool("WalkUp", false);
+        animator.SetBool("WalkLeft", false);
+        animator.SetBool("WalkRight", false);
     }
 
 }

@@ -74,7 +74,7 @@ public class DealDamage : MonoBehaviour
         if (this.gameObject.name == "Player")
         {
             Debug.Log("ゲームオーバー！");
-            SceneManager.LoadScene("Scenes/GameOverScene");
+            StartCoroutine(PlayerDie());
         }
         else
         {
@@ -130,5 +130,11 @@ public class DealDamage : MonoBehaviour
 
         // 無敵フラグオフ
         isNoDamage = false;
+    }
+
+    IEnumerator PlayerDie()
+    {
+        yield return StartCoroutine(FadeOutAndDestroy());
+        SceneManager.LoadScene("Scenes/GameOverScene");
     }
 }
