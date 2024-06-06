@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1977475266187740272}
   - component: {fileID: 6258523358339751753}
   m_Layer: 6
-  m_Name: pumpkin_0
+  m_Name: pumpkin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 1
-  moveSpeed: 0.3
+  moveSpeed: 0.4
   searchRange: 10
   attackCoolTime: 5
   detectionMask:
@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
-  maxHp: 3
+  hp: 2
+  maxHp: 2
   defense: 1
   isDead: 0
   stunTime: 1

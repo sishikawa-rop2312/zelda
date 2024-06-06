@@ -19,13 +19,18 @@ public class EnemyController : MonoBehaviour
     // 攻撃エフェクト
     public ParticleSystem attackEffect;
 
+    // プレイヤーとの距離
+    float distanceToPlayer;
+
+    // プレイヤーが索敵範囲内にいるか
+    bool isPlayerNearby = false;
+
     Animator animator;
     SpriteRenderer spriteRenderer;
     DealDamage dealDamage;
     Vector3 currentDirection = Vector3.zero;
     bool isMoving = false;
     public Transform playerTransform;
-    bool isPlayerNearby = false;
 
     void Start()
     {
@@ -44,11 +49,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            // プレイヤーとの距離を計測
-            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-            // プレイヤーが索敵範囲内にいるかチェック
-            isPlayerNearby = distanceToPlayer <= searchRange;
-
+            StartCoroutine(SearchPlayer(moveSpeed));
             Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
 
             //　距離が1マス以内(隣マス)なら攻撃
@@ -83,6 +84,15 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+    }
+
+    IEnumerator SearchPlayer(float interval)
+    {
+        // プレイヤーとの距離を計測
+        distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+        // プレイヤーが索敵範囲内にいるかチェック
+        isPlayerNearby = distanceToPlayer <= searchRange;
+        yield return new WaitForSeconds(interval);
     }
 
     void SetSprite()
@@ -286,10 +296,12 @@ public class EnemyController : MonoBehaviour
                 if (dealDamage != null)
                 {
                     dealDamage.Damage(attackPower);
+                    Debug.Log("dealDamage呼び出し");
                 }
 
                 // エフェクトを再生
-                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
+                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + (currentDirection * 2 / 3), Quaternion.identity);
+                Debug.Log("エフェクト再生");
                 attackParticle.Play();
 
                 // クールタイム終了まで待機する

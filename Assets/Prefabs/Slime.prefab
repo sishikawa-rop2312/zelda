@@ -80,6 +80,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107fe8f28aa044247803f2258d141fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 1
+  currentDirection: {x: 0, y: 0, z: 0}
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4301628473936532842
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +96,6 @@ GameObject:
   - component: {fileID: 5517569899421004364}
   - component: {fileID: 4528480245880220798}
   - component: {fileID: 3609872094008914326}
-  - component: {fileID: 7105149008579572582}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -182,38 +186,4 @@ MonoBehaviour:
   enemyHp: 1
   moveSpeed: 1
   attackRange: 1
---- !u!58 &7105149008579572582
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4301628473936532842}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.98
+  interval: 1.1

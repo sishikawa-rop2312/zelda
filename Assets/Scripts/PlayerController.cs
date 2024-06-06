@@ -106,6 +106,21 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Attack呼び出し");
                     StartCoroutine(Attack());
                 }
+
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    // 進行方向にオブジェクトがないかチェック
+                    GameObject search = Physics2D.OverlapPoint(transform.position + targetDirection, detectionMask).gameObject;
+
+                    if (search != null)
+                    {
+                        Debug.Log(search.name + "を見つけた！");
+                    }
+                    else
+                    {
+                        Debug.Log("そこには何もない");
+                    }
+                }
             }
         }
 
@@ -294,7 +309,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // エフェクトを再生
-                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
+                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + (currentDirection * 2 / 3), Quaternion.identity);
                 attackParticle.Play();
 
                 // クールタイム
