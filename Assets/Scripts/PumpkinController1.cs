@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
 
     //Animator animator;
     SpriteRenderer spriteRenderer;
+    DealDamage dealDamage;
     Vector3 currentDirection = Vector3.zero;
     bool isMoving = false;
     public Transform playerTransform;
@@ -30,50 +31,57 @@ public class EnemyController : MonoBehaviour
     {
         //animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        dealDamage = GetComponent<DealDamage>();
     }
 
     void Update()
     {
         SetSprite();
 
-        // プレイヤーとの距離を計測
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
-        // プレイヤーが索敵範囲内にいるかチェック
-        isPlayerNearby = distanceToPlayer <= searchRange;
-
-        Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
-
-        //　距離が1マス以内(隣マス)なら攻撃
-        if (distanceToPlayer <= 1f && !isMoving)
+        if (dealDamage.isDead)
         {
-            //animator.SetTrigger("WalkStop");
-            Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
-            StartCoroutine(Attack());
+            // 何も行動しない
         }
-        // 索敵範囲内だが2マス以上離れている場合は追跡
-        else if (isPlayerNearby && !isMoving)
-        {
-            // プレイヤーに向かって移動
-            Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-            Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
-            MoveDirection(directionToPlayer, "Walk");
-        }
-        // 索敵範囲内に見つからなければランダム
-        else if (!isMoving)
-        {
-            // ランダムな方向に移動
-            Vector3 randomDirection = Random.insideUnitCircle.normalized;
-            Debug.Log(gameObject.name + "はランダムに移動します");
-            MoveDirection(randomDirection, "Walk");
-
-            isMoving = false;
-        }
-        // 万が一、何にも当てはまらなければ何もしない
         else
         {
-            Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
-        }
+            // プレイヤーとの距離を計測
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+            // プレイヤーが索敵範囲内にいるかチェック
+            isPlayerNearby = distanceToPlayer <= searchRange;
 
+            Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
+
+            //　距離が1マス以内(隣マス)なら攻撃
+            if (distanceToPlayer <= 1f && !isMoving)
+            {
+                //animator.SetTrigger("WalkStop");
+                Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
+                StartCoroutine(Attack());
+            }
+            // 索敵範囲内だが2マス以上離れている場合は追跡
+            else if (isPlayerNearby && !isMoving)
+            {
+                // プレイヤーに向かって移動
+                Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
+                MoveDirection(directionToPlayer, "Walk");
+            }
+            // 索敵範囲内に見つからなければランダム
+            else if (!isMoving)
+            {
+                // ランダムな方向に移動
+                Vector3 randomDirection = Random.insideUnitCircle.normalized;
+                Debug.Log(gameObject.name + "はランダムに移動します");
+                MoveDirection(randomDirection, "Walk");
+
+                isMoving = false;
+            }
+            // 万が一、何にも当てはまらなければ何もしない
+            else
+            {
+                Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
+            }
+        }
 
     }
 
