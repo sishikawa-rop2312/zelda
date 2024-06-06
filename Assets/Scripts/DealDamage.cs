@@ -131,4 +131,18 @@ public class DealDamage : MonoBehaviour
         // 無敵フラグオフ
         isNoDamage = false;
     }
+
+    public void Heal(float amount)
+    {
+        hp = Mathf.Min(hp + amount, maxHp);
+
+        healthDisplay.SetHealth(hp, maxHp);
+    }
+
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHp += amount;
+
+        healthDisplay.SetHealth(hp, maxHp);
+    }
 }
