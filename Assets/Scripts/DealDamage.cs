@@ -8,6 +8,7 @@ public class DealDamage : MonoBehaviour
     public float hp = 1;
     public float maxHp = 3;
     public float defense = 1f;
+    public bool isDead = false; // 行動停止フラグ
 
     // 詰み防止用無敵フラグ
     bool isNoDamage = false;
@@ -47,7 +48,7 @@ public class DealDamage : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if (!isNoDamage) // 無敵じゃないとき
+        if (!isNoDamage && !isDead) // 無敵じゃないときかつ死亡していないとき
         {
             int actualDamage = Mathf.RoundToInt(damage * defense);
             hp -= actualDamage;
@@ -69,6 +70,7 @@ public class DealDamage : MonoBehaviour
 
     void Die()
     {
+        isDead = true; // 行動停止フラグを設定
         if (this.gameObject.name == "Player")
         {
             Debug.Log("ゲームオーバー！");
@@ -86,19 +88,15 @@ public class DealDamage : MonoBehaviour
         float fadeDuration = 1f; // フェードアウトにかかる時間
         Color color = spriteRenderer.color;
 
-        Debug.Log("フェードアウト開始");
-
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
             color.a = Mathf.Lerp(1, 0, t / fadeDuration);
             spriteRenderer.color = color;
-            Debug.Log($"フェードアウト中: t={t}, alpha={color.a}");
             yield return null;
         }
 
         color.a = 0;
         spriteRenderer.color = color;
-        Debug.Log("フェードアウト完了");
         Destroy(gameObject); // 完全にフェードアウトしたらオブジェクトを消滅させる
     }
 
