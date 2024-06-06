@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1977475266187740272}
   - component: {fileID: 6258523358339751753}
   m_Layer: 6
-  m_Name: pumpkin
+  m_Name: Samplepumpkin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
