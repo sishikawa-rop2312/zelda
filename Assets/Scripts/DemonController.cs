@@ -13,6 +13,7 @@ public class DemonController : MonoBehaviour
     public int fireballDamage = 1; // ファイアボールのダメージ量
     public int meleeDamage = 2; // 近接攻撃のダメージ量
     public float meleeAttackCooldown = 2f; // 近接攻撃のクールダウンタイム（2秒）
+    public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
@@ -20,6 +21,7 @@ public class DemonController : MonoBehaviour
     private Animator animator;
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
+    private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理するフラグ
 
     void Start()
     {
@@ -42,38 +44,56 @@ public class DemonController : MonoBehaviour
 
     void MoveTowardsPlayer()
     {
-        if (player != null)
+        if (player != null && !isPlayerInContact)
         {
             // プレイヤーの位置に向かって方向を計算
             Vector3 direction = player.position - transform.position;
-            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            if (distanceToPlayer > 1.5f) // 1.5タイル（48ピクセル）以上離れている場合のみ移動
             {
-                // 横方向の距離が縦方向より大きい場合、横方向に移動
-                direction = new Vector3(Mathf.Sign(direction.x), 0, 0);
-                if (direction.x > 0)
+                if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
                 {
-                    animator.SetTrigger("WalkRight");
+                    // 横方向の距離が縦方向より大きい場合、横方向に移動
+                    direction = new Vector3(Mathf.Sign(direction.x), 0, 0);
+                    if (direction.x > 0)
+                    {
+                        animator.SetTrigger("WalkRight");
+                    }
+                    else
+                    {
+                        animator.SetTrigger("WalkLeft");
+                    }
                 }
                 else
                 {
-                    animator.SetTrigger("WalkLeft");
+                    // 縦方向の距離が横方向より大きい場合、縦方向に移動
+                    direction = new Vector3(0, Mathf.Sign(direction.y), 0);
+                    if (direction.y > 0)
+                    {
+                        animator.SetTrigger("WalkUp");
+                    }
+                    else
+                    {
+                        animator.SetTrigger("WalkDown");
+                    }
+                }
+
+                // 障害物のチェック（プレイヤーも障害物として扱う）
+                if (!IsObstacleInDirection(direction))
+                {
+                    // 障害物がない場合に移動
+                    transform.position += direction * moveSpeed * Time.deltaTime;
                 }
             }
-            else
-            {
-                // 縦方向の距離が横方向より大きい場合、縦方向に移動
-                direction = new Vector3(0, Mathf.Sign(direction.y), 0);
-                if (direction.y > 0)
-                {
-                    animator.SetTrigger("WalkUp");
-                }
-                else
-                {
-                    animator.SetTrigger("WalkDown");
-                }
-            }
-            transform.position += direction * moveSpeed * Time.deltaTime;
         }
+    }
+
+    bool IsObstacleInDirection(Vector3 direction)
+    {
+        // 障害物がないかチェックする（プレイヤーも含む）
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, obstacleLayerMask | LayerMask.GetMask("Player"));
+        return hit.collider != null;
     }
 
     void AttackPlayer()
@@ -96,12 +116,25 @@ public class DemonController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // プレイヤーと接触し、近接攻撃のクールダウンが終了している場合、攻撃
-        if (other.CompareTag("Player") && Time.time >= nextMeleeAttackTime)
+        // プレイヤーと接触した場合、進行を停止し、近接攻撃のクールダウンが終了している場合、攻撃
+        if (other.CompareTag("Player"))
         {
-            MeleeAttack(other.gameObject);
-            // 次の近接攻撃可能時間を設定
-            nextMeleeAttackTime = Time.time + meleeAttackCooldown;
+            isPlayerInContact = true;
+            if (Time.time >= nextMeleeAttackTime)
+            {
+                MeleeAttack(other.gameObject);
+                // 次の近接攻撃可能時間を設定
+                nextMeleeAttackTime = Time.time + meleeAttackCooldown;
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        // プレイヤーとの接触が離れた場合、進行を再開
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInContact = false;
         }
     }
 
@@ -141,15 +174,6 @@ public class DemonController : MonoBehaviour
             {
                 fireballScript.damage = fireballDamage;
             }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-
-        if (other.CompareTag("Player"))
-        {
-
         }
     }
 

@@ -49,15 +49,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc5c360efa9c2141b6d6a3bacc47355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.75
+  moveSpeed: 0.8
   attackRange: 15
   fireballPrefab: {fileID: 5041774989670566021, guid: 5880f05f5f6b52d42914cd08fb74da95, type: 3}
   meleeAttackPrefab: {fileID: 1799951992037777305, guid: 5e4f4d650ea90b4438c8c4e6f7aaef7b, type: 3}
   fireballSpeed: 1.5
   attackCooldown: 5
   fireballDamage: 1
-  meleeDamage: 1
+  meleeDamage: 2
   meleeAttackCooldown: 5
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!212 &1486685677309540854
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -156,7 +159,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &894666555660316527
 BoxCollider2D:

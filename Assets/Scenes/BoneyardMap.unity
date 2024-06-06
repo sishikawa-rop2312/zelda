@@ -17724,6 +17724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4525528411359297077, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5192020624068777353, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: statusPanelLayerMask.m_Bits
       value: 0
