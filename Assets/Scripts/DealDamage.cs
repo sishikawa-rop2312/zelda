@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class DealDamage : MonoBehaviour
 {
     public float hp = 1;
     public float maxHp = 3;
     public float defense = 1f;
+    public bool isDead = false; // 行動停止フラグ
 
     // 詰み防止用無敵フラグ
     bool isNoDamage = false;
@@ -21,7 +21,6 @@ public class DealDamage : MonoBehaviour
     // ダメージを受けた時のスタン時間
     public float stunTime = 1.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         // プレイヤーのHP GUI表示
@@ -34,7 +33,7 @@ public class DealDamage : MonoBehaviour
             }
         }
 
-        // ダメージ演出用のSpriteRenderを取得
+        // ダメージ演出用のSpriteRendererを取得
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
@@ -42,7 +41,6 @@ public class DealDamage : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -50,7 +48,7 @@ public class DealDamage : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if (!isNoDamage) // 無敵じゃないとき
+        if (!isNoDamage && !isDead) // 無敵じゃないときかつ死亡していないとき
         {
             int actualDamage = Mathf.RoundToInt(damage * defense);
             hp -= actualDamage;
@@ -72,16 +70,34 @@ public class DealDamage : MonoBehaviour
 
     void Die()
     {
+        isDead = true; // 行動停止フラグを設定
         if (this.gameObject.name == "Player")
         {
             Debug.Log("ゲームオーバー！");
-            SceneManager.LoadScene("Scenes/GameOverScene");
+            StartCoroutine(PlayerDie());
         }
         else
         {
-            Destroy(this.gameObject);
+            StartCoroutine(FadeOutAndDestroy());
             Debug.Log(this.gameObject.name + "は倒れた");
         }
+    }
+
+    IEnumerator FadeOutAndDestroy()
+    {
+        float fadeDuration = 1f; // フェードアウトにかかる時間
+        Color color = spriteRenderer.color;
+
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        {
+            color.a = Mathf.Lerp(1, 0, t / fadeDuration);
+            spriteRenderer.color = color;
+            yield return null;
+        }
+
+        color.a = 0;
+        spriteRenderer.color = color;
+        Destroy(gameObject); // 完全にフェードアウトしたらオブジェクトを消滅させる
     }
 
     IEnumerator DamageFlash()
@@ -114,5 +130,11 @@ public class DealDamage : MonoBehaviour
 
         // 無敵フラグオフ
         isNoDamage = false;
+    }
+
+    IEnumerator PlayerDie()
+    {
+        yield return StartCoroutine(FadeOutAndDestroy());
+        SceneManager.LoadScene("Scenes/GameOverScene");
     }
 }

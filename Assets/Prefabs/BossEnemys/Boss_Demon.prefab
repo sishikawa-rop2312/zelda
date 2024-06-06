@@ -48,13 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc5c360efa9c2141b6d6a3bacc47355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  searchRange: 10
+  moveSpeed: 0.75
   attackRange: 15
   fireballPrefab: {fileID: 5041774989670566021, guid: 5880f05f5f6b52d42914cd08fb74da95, type: 3}
-  fireballSpeed: 1
+  fireballSpeed: 1.5
   attackCooldown: 5
   fireballDamage: 1
+  meleeDamage: 2
+  meleeAttackCooldown: 1
 --- !u!212 &1486685677309540854
 SpriteRenderer:
   m_ObjectHideFlags: 0
