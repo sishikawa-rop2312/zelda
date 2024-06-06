@@ -16263,6 +16263,63 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1001 &551188321
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274163429657091426, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_Name
+      value: FoodMagician
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
 --- !u!1 &623218956
 GameObject:
   m_ObjectHideFlags: 0
@@ -17440,11 +17497,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 515097652770074424, guid: 56852254c101dd042aefa967a81aaf92, type: 3}
       propertyPath: meleeDamage
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 515097652770074424, guid: 56852254c101dd042aefa967a81aaf92, type: 3}
       propertyPath: fireballSpeed
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 515097652770074424, guid: 56852254c101dd042aefa967a81aaf92, type: 3}
+      propertyPath: attackCooldown
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 515097652770074424, guid: 56852254c101dd042aefa967a81aaf92, type: 3}
       propertyPath: fireballDamage
@@ -17873,6 +17934,7 @@ MonoBehaviour:
   hp: 1
   maxHp: 3
   defense: 1
+  isDead: 0
   stunTime: 1
 --- !u!1 &1956741050
 GameObject:
@@ -18088,3 +18150,4 @@ SceneRoots:
   - {fileID: 385834705}
   - {fileID: 1743495442}
   - {fileID: 1348383914}
+  - {fileID: 551188321}

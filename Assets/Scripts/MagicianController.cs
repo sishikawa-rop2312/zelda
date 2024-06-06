@@ -26,6 +26,7 @@ public class MagicianController : MonoBehaviour
 
     void Update()
     {
+        if (dealDamage.isDead) return;//死亡している場合、行動停止
         MoveTowardsPlayer();
         AttackPlayer();
     }
