@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 363323707
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -1743016730, guid: 9f1ed7077463e0c498223edad16ae6a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -204,7 +204,7 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 128
-  attackEffect: {fileID: 3521153888432770879, guid: 2cab9369e5ac2ab4b9946f01997b0c5b, type: 3}
+  attackEffect: {fileID: 6803925751511817757, guid: 15065a358fb2d6041bda3e01588959e4, type: 3}
   playerTransform: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
 --- !u!114 &6258523358339751753
 MonoBehaviour:
