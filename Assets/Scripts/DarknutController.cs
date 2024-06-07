@@ -50,7 +50,7 @@ public class DarknutController : MonoBehaviour
         else
         {
             // moveSpeedに合わせて索敵する
-            StartCoroutine(SearchPlayer(moveSpeed));
+            StartCoroutine(SearchPlayer(0.2f));
 
             Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
 
