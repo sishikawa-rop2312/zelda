@@ -11,11 +11,17 @@ public class GameOverDirector : MonoBehaviour
     void Start()
     {
         PlayerController player = FindObjectOfType<PlayerController>();
+        StatusController statusBar = FindObjectOfType<StatusController>();
         if (player != null)
         {
-            Debug.Break();
             // プレイヤーオブジェクトを削除
             Destroy(player.gameObject);
+        }
+
+        if (statusBar != null)
+        {
+            // ステータスバーオブジェクトを削除
+            Destroy(statusBar.gameObject);
         }
     }
 

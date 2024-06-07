@@ -9,7 +9,7 @@ public class HealthPotionDisplay : MonoBehaviour
     public Image healthPotionIcon;
     public TextMeshProUGUI healthPotionCountText;
 
-    private void Start()
+    void Start()
     {
         // 初期状態でアイテムを非表示
         healthPotionIcon.gameObject.SetActive(false);

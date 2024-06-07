@@ -7,7 +7,7 @@ public class ItemManager : MonoBehaviour
     public int healthPotionCount = 0;
     public HealthPotionDisplay healthPotionDisplay;
 
-    private DealDamage dealDamage;
+    DealDamage dealDamage;
 
     void Start()
     {
