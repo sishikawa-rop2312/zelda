@@ -137,4 +137,20 @@ public class DealDamage : MonoBehaviour
         yield return StartCoroutine(FadeOutAndDestroy());
         SceneManager.LoadScene("Scenes/GameOverScene");
     }
+
+    // HP回復
+    public void Heal(float amount)
+    {
+        hp = Mathf.Min(hp + amount, maxHp);
+
+        healthDisplay.SetHealth(hp, maxHp);
+    }
+
+    // HP上限アップ
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHp += amount;
+
+        healthDisplay.SetHealth(hp, maxHp);
+    }
 }
