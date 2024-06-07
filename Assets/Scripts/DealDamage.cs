@@ -46,11 +46,11 @@ public class DealDamage : MonoBehaviour
 
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         if (!isNoDamage && !isDead) // 無敵じゃないときかつ死亡していないとき
         {
-            int actualDamage = Mathf.RoundToInt(damage * defense);
+            float actualDamage = Mathf.RoundToInt(damage * defense);
             if (actualDamage <= 0)
             {
                 Debug.Log("0ダメージ");
