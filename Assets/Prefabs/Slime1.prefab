@@ -59,7 +59,7 @@ MonoBehaviour:
   PlayerMask:
     serializedVersion: 2
     m_Bits: 128
-  attackEffect: {fileID: 3521153888432770879, guid: 2cab9369e5ac2ab4b9946f01997b0c5b, type: 3}
+  attackEffect: {fileID: 1363004748024729867, guid: e43accb8a3b902749b137f808d6a93f8, type: 3}
   playerTransform: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
   up: {fileID: 21300000, guid: fedb4ab010fa68d4bb8a2bd331cf0766, type: 3}
   down: {fileID: 21300000, guid: 87475317add6afa4d97c1590ec597ecd, type: 3}
