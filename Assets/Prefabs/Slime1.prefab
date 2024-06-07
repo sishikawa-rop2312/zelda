@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5697291338271255219}
-  - component: {fileID: 124748744831474073}
+  - component: {fileID: 3397905382731717242}
   - component: {fileID: 4918013235259532338}
   - component: {fileID: 5197696888704541316}
   - component: {fileID: 6607524203598985969}
@@ -37,7 +37,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &124748744831474073
+--- !u!114 &3397905382731717242
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 1
-  moveSpeed: 1.01
+  moveSpeed: 1.14
   searchRange: 10
   attackCoolTime: 3
   detectionMask:

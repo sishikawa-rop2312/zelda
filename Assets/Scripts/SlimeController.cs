@@ -105,22 +105,22 @@ public class SlimeController : MonoBehaviour
         if (currentDirection == Vector3.up)
         {
             // 上向きのスプライトを設定
-            spriteRenderer.sprite = up;
+
         }
         else if (currentDirection == Vector3.down)
         {
             // 下向きのスプライトを設定
-            spriteRenderer.sprite = down;
+
         }
         else if (currentDirection == Vector3.left)
         {
             // 左向きのスプライトを設定
-            spriteRenderer.sprite = left;
+
         }
         else if (currentDirection == Vector3.right)
         {
             // 右向きのスプライトを設定
-            spriteRenderer.sprite = right;
+
         }
     }
 
@@ -310,12 +310,6 @@ public class SlimeController : MonoBehaviour
         }
     }
 
-    // void ResetAnimation()
-    // {
-    //     animator.SetBool("WalkDown", false);
-    //     animator.SetBool("WalkUp", false);
-    //     animator.SetBool("WalkLeft", false);
-    //     animator.SetBool("WalkRight", false);
-    // }
+
 
 }
