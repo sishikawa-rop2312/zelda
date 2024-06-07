@@ -49,7 +49,9 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            // moveSpeedに合わせて索敵する
             StartCoroutine(SearchPlayer(moveSpeed));
+
             Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
 
             //　距離が1マス以内(隣マス)なら攻撃

@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("そこには何もない");
+                        Debug.Log("何もない");
                     }
                 }
             }
