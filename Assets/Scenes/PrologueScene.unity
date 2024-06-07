@@ -257,7 +257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollingText: {fileID: 1005727449}
   pressSpaceText: {fileID: 1174919712}
-  scrollSpeed: 200
+  scrollSpeed: 80
+  targetScene: Scenes/GrasslandMap
 --- !u!4 &665556112
 Transform:
   m_ObjectHideFlags: 0
@@ -307,8 +308,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 600, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1200}
+  m_SizeDelta: {x: 600, y: 2000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005727449
 MonoBehaviour:
@@ -335,44 +336,44 @@ MonoBehaviour:
     appeared out of nowhere, and countless monsters were unleashed upon the world
     by his hand.
 
-    
 
-    
 
-    
 
-    
 
-    The monsters attacked people one
-    after another, and the once peaceful world was engulfed in fear and chaos, resulting
-    in the loss of many lives. As everyone stood on the brink of despair, a single
-    hope was born.
 
-    
 
-    
 
-    
 
-    
+    The monsters attacked people one after another, and
+    the once peaceful world was engulfed in fear and chaos, resulting in the loss
+    of many lives. As everyone stood on the brink of despair, a single hope was born.
 
-    That hope was named <color="blue">"Ring."</color>
-    A brave young man, <color="blue">Ring</color> stood up to defeat the Demon King
-    <color="red">Galen</color> and restore peace to the world. His journey is fraught
-    with difficulties and countless trials await him. Yet, <color="blue">Ring</color>
-    never gives up. His strong will and courage will pave the way to a world that
-    shines brightly once more.
 
-    
 
-    
 
-    
 
-    
 
-    This is a tale of
-    hope and courage. Now, the journey of the hero <color="blue">Ring</color> begins.'
+
+
+
+    That
+    hope was named <color="blue">"Ring."</color> A brave young man, <color="blue">Ring</color>
+    stood up to defeat the Demon King <color="red">Galen</color> and restore peace
+    to the world. His journey is fraught with difficulties and countless trials await
+    him. Yet, <color="blue">Ring</color> never gives up. His strong will and courage
+    will pave the way to a world that shines brightly once more.
+
+
+
+
+
+
+
+
+
+    This
+    is a tale of hope and courage. Now, the journey of the hero <color="blue">Ring</color>
+    begins.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
