@@ -25,9 +25,6 @@ public class BeeController : MonoBehaviour
     // プレイヤーが索敵範囲内にいるか
     bool isPlayerNearby = false;
 
-    // 停止フラグ
-    bool isStop = false;
-
     Animator animator;
     SpriteRenderer spriteRenderer;
     DealDamage dealDamage;
@@ -46,22 +43,18 @@ public class BeeController : MonoBehaviour
     {
         SetSprite();
 
+        StartCoroutine(SearchPlayer(moveSpeed));
+
         if (dealDamage.isDead)
         {
             // 何も行動しない
         }
         else
         {
-            // 3秒ごとに移動と停止を繰り返す
-            StartCoroutine(MoveStop());
-
-            StartCoroutine(SearchPlayer(moveSpeed));
-
             //　距離が1マス以内(隣マス)なら攻撃
             if (distanceToPlayer <= 1f && !isMoving)
             {
                 ResetAnimation();
-                Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
                 StartCoroutine(Attack());
             }
             // 索敵範囲内だが2マス以上離れている場合は追跡
@@ -69,7 +62,6 @@ public class BeeController : MonoBehaviour
             {
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-                Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
                 MoveDirection(directionToPlayer);
             }
             // 索敵範囲内に見つからなければランダム
@@ -77,33 +69,16 @@ public class BeeController : MonoBehaviour
             {
                 // ランダムな方向に移動
                 Vector3 randomDirection = Random.insideUnitCircle.normalized;
-                Debug.Log(gameObject.name + "はランダムに移動します");
                 MoveDirection(randomDirection);
             }
             // 万が一、何にも当てはまらなければ何もしない
             else
             {
-                Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
             }
 
 
         }
 
-    }
-
-    IEnumerator MoveStop()
-    {
-        if (isStop)
-        {
-            isStop = false;
-            dealDamage.defense = 0;
-        }
-        else
-        {
-            isStop = true;
-            dealDamage.defense = 1;
-        }
-        yield return new WaitForSeconds(3);
     }
 
     IEnumerator SearchPlayer(float interval)
@@ -316,12 +291,10 @@ public class BeeController : MonoBehaviour
                 if (dealDamage != null)
                 {
                     dealDamage.Damage(attackPower);
-                    Debug.Log("dealDamage呼び出し");
                 }
 
                 // エフェクトを再生
                 ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + (currentDirection * 2 / 3), Quaternion.identity);
-                Debug.Log("エフェクト再生");
                 attackParticle.Play();
 
                 // クールタイム終了まで待機する
@@ -336,7 +309,6 @@ public class BeeController : MonoBehaviour
         }
         else
         {
-            Debug.Log("攻撃対象が見つかりませんでした");
         }
     }
 
