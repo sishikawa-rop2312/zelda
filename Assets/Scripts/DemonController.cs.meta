@@ -3,7 +3,9 @@ guid: 3cc5c360efa9c2141b6d6a3bacc47355
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fireballPrefab: {fileID: 5041774989670566021, guid: 5880f05f5f6b52d42914cd08fb74da95, type: 3}
+  - meleeAttackPrefab: {fileID: 1799951992037777305, guid: 5e4f4d650ea90b4438c8c4e6f7aaef7b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
