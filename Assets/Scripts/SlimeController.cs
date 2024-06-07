@@ -75,7 +75,7 @@ public class SlimeController : MonoBehaviour
                 Debug.Log(gameObject.name + "はランダムに移動します");
                 MoveDirection(randomDirection);
 
-                isMoving = false;
+
             }
             // 万が一、何にも当てはまらなければ何もしない
             else
