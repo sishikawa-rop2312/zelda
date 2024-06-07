@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
     // 攻撃時クールタイム
-    public int attackCoolTime = 1;
+    public float attackCoolTime = 1;
     // 移動先
     Vector3 targetDirection;
 
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 currentDirection = Vector3.zero;
 
     SpriteRenderer spriteRenderer;
+    DealDamage dealDamage;
 
     Animator animator;
 
@@ -54,6 +55,9 @@ public class PlayerController : MonoBehaviour
 
         // スプライト処理用にコンポーネントを取得
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 戦闘処理用にコンポーネントを取得
+        dealDamage = GetComponent<DealDamage>();
     }
 
     // Update is called once per frame
@@ -61,39 +65,62 @@ public class PlayerController : MonoBehaviour
     {
         SetSptite();
 
-        // 動ける状態だったら
-        if (!isMoving)
+        if (dealDamage.isDead)
         {
-            if (Input.GetKey("up"))
-            {
-                currentDirection = Vector3.up;
-                MoveDirection(Vector3.up, "WalkUp");
-            }
-            else if (Input.GetKey("down"))
-            {
-                currentDirection = Vector3.down;
-                MoveDirection(Vector3.down, "WalkDown");
-            }
-            else if (Input.GetKey("left"))
-            {
-                currentDirection = Vector3.left;
-                MoveDirection(Vector3.left, "WalkLeft");
-            }
-            else if (Input.GetKey("right"))
-            {
-                currentDirection = Vector3.right;
-                MoveDirection(Vector3.right, "WalkRight");
-            }
-            else if (!Input.GetKey("up") && !Input.GetKey("down") && !Input.GetKey("left") && !Input.GetKey("right"))
-            {
-                ResetAnimation();
-            }
+            // 入力を受け付けない
+        }
+        else
+        {
 
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            // 動ける状態だったら
+            if (!isMoving)
             {
-                animator.SetTrigger("WalkStop");
-                Debug.Log("Attack呼び出し");
-                StartCoroutine(Attack());
+                if (Input.GetKey("up"))
+                {
+                    currentDirection = Vector3.up;
+                    MoveDirection(Vector3.up, "WalkUp");
+                }
+                else if (Input.GetKey("down"))
+                {
+                    currentDirection = Vector3.down;
+                    MoveDirection(Vector3.down, "WalkDown");
+                }
+                else if (Input.GetKey("left"))
+                {
+                    currentDirection = Vector3.left;
+                    MoveDirection(Vector3.left, "WalkLeft");
+                }
+                else if (Input.GetKey("right"))
+                {
+                    currentDirection = Vector3.right;
+                    MoveDirection(Vector3.right, "WalkRight");
+                }
+                else if (!Input.GetKey("up") && !Input.GetKey("down") && !Input.GetKey("left") && !Input.GetKey("right"))
+                {
+                    ResetAnimation();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                {
+                    animator.SetTrigger("WalkStop");
+                    Debug.Log("Attack呼び出し");
+                    StartCoroutine(Attack());
+                }
+
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    // 進行方向にオブジェクトがないかチェック
+                    GameObject search = Physics2D.OverlapPoint(transform.position + targetDirection, detectionMask).gameObject;
+
+                    if (search != null)
+                    {
+                        Debug.Log(search.name + "を見つけた！");
+                    }
+                    else
+                    {
+                        Debug.Log("何もない");
+                    }
+                }
             }
         }
 
@@ -282,7 +309,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // エフェクトを再生
-                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + currentDirection, Quaternion.identity);
+                ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + (currentDirection * 2 / 3), Quaternion.identity);
                 attackParticle.Play();
 
                 // クールタイム

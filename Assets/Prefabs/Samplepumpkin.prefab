@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1977475266187740272}
   - component: {fileID: 6258523358339751753}
   m_Layer: 6
-  m_Name: pumpkin_0
+  m_Name: Samplepumpkin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 363323707
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -1743016730, guid: 9f1ed7077463e0c498223edad16ae6a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 606640420913972726}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ee92e47c926468448ba48f231b98b23, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -195,16 +195,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 1
-  moveSpeed: 0.2
+  moveSpeed: 0.4
   searchRange: 10
-  attackCoolTime: 3
+  attackCoolTime: 5
   detectionMask:
     serializedVersion: 2
     m_Bits: 64
   PlayerMask:
     serializedVersion: 2
     m_Bits: 128
-  attackEffect: {fileID: 3521153888432770879, guid: 2cab9369e5ac2ab4b9946f01997b0c5b, type: 3}
+  attackEffect: {fileID: 6803925751511817757, guid: 15065a358fb2d6041bda3e01588959e4, type: 3}
   playerTransform: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
 --- !u!114 &6258523358339751753
 MonoBehaviour:
@@ -218,6 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
-  maxHp: 3
+  hp: 2
+  maxHp: 2
   defense: 1
+  isDead: 0
+  stunTime: 1

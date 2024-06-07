@@ -74,7 +74,7 @@ public class DealDamage : MonoBehaviour
         if (this.gameObject.name == "Player")
         {
             Debug.Log("ゲームオーバー！");
-            SceneManager.LoadScene("Scenes/GameOverScene");
+            StartCoroutine(PlayerDie());
         }
         else
         {
@@ -132,6 +132,13 @@ public class DealDamage : MonoBehaviour
         isNoDamage = false;
     }
 
+    IEnumerator PlayerDie()
+    {
+        yield return StartCoroutine(FadeOutAndDestroy());
+        SceneManager.LoadScene("Scenes/GameOverScene");
+    }
+
+    // HP回復
     public void Heal(float amount)
     {
         hp = Mathf.Min(hp + amount, maxHp);
@@ -139,6 +146,7 @@ public class DealDamage : MonoBehaviour
         healthDisplay.SetHealth(hp, maxHp);
     }
 
+    // HP上限アップ
     public void IncreaseMaxHealth(float amount)
     {
         maxHp += amount;
