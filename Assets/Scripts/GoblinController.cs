@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class GoblinController : MonoBehaviour
 {
     // 基本攻撃力
     public int attackPower = 1;
     // 1マス当たりの移動速度
-    public float moveSpeed = 0.2f;
+    public float moveSpeed = 0.4f;
     // 索敵範囲
     public float searchRange = 10f;
     // 攻撃時クールタイム

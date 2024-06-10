@@ -5,7 +5,7 @@ using UnityEngine;
 public class DarknutController : MonoBehaviour
 {
     // 基本攻撃力
-    public int attackPower = 1;
+    public float attackPower = 1.5f;
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
     // 索敵範囲
@@ -37,6 +37,7 @@ public class DarknutController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         dealDamage = GetComponent<DealDamage>();
+        playerTransform = GameObject.Find("Player").transform;
     }
 
     void Update()
