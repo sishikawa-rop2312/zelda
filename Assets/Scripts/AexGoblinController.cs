@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class AexGoblinController : MonoBehaviour
 {
     // 基本攻撃力
-    public int attackPower = 1;
+    public float attackPower = 2.5f;
     // 1マス当たりの移動速度
-    public float moveSpeed = 0.2f;
+    public float moveSpeed = 0.4f;
     // 索敵範囲
     public float searchRange = 10f;
     // 攻撃時クールタイム
-    public float attackCoolTime = 3;
+    public float attackCoolTime = 5;
     // 障害物レイヤー
     public LayerMask detectionMask;
     // 敵レイヤー

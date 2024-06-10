@@ -37,6 +37,7 @@ public class BeeController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         dealDamage = GetComponent<DealDamage>();
+        playerTransform = GameObject.Find("Player").transform;
     }
 
     void Update()
