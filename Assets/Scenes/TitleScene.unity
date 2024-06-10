@@ -832,7 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3561fa82ed41438e642b3c753a18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Scenes/GrasslandMap
+  targetScene: Scenes/PrologueScene
 --- !u!4 &1136633596
 Transform:
   m_ObjectHideFlags: 0
