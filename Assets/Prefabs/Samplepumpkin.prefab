@@ -52,7 +52,7 @@ MonoBehaviour:
   attackPower: 1
   moveSpeed: 0.4
   searchRange: 10
-  attackCoolTime: 3
+  attackCoolTime: 4
   detectionMask:
     serializedVersion: 2
     m_Bits: 64

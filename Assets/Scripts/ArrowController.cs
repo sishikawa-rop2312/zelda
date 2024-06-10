@@ -10,9 +10,9 @@ public class ArrowController : MonoBehaviour
     // 矢の攻撃力
     public int attackPower = 1;
     // 矢が飛んでいくスピード
-    public float speed;
+    public float speed = 3f;
     // 矢の向き
-    public Vector3 direction;
+    public Vector3 direction = Vector3.down;
 
     // Start is called before the first frame update
     void Start()
