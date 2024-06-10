@@ -19576,7 +19576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -19786,7 +19786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -19851,7 +19851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -19921,7 +19921,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -20143,7 +20143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -20258,7 +20258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -20323,7 +20323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -21801,7 +21801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1641852011044474795, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397905382731717242, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: playerTransform
@@ -23731,11 +23731,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.96
+      value: -17.5
       objectReference: {fileID: 0}
     - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.6
+      value: -8.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
