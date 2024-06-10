@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class DarknutController : MonoBehaviour
 {
     // 基本攻撃力
     public int attackPower = 1;
@@ -50,12 +50,22 @@ public class EnemyController : MonoBehaviour
         else
         {
             // moveSpeedに合わせて索敵する
-            StartCoroutine(SearchPlayer(moveSpeed));
+            StartCoroutine(SearchPlayer(0.2f));
 
             Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
 
+            // プレイヤーが自分の前方にいるならば、ダメージを無効にする
+            if (playerTransform.position == transform.position + currentDirection)
+            {
+                dealDamage.defense = 0;
+            }
+            else
+            {
+                dealDamage.defense = 1;
+            }
+
             //　距離が1マス以内(隣マス)なら攻撃
-            if (distanceToPlayer <= 1f && !isMoving)
+            if (distanceToPlayer <= 1.5f && !isMoving)
             {
                 ResetAnimation();
                 Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");

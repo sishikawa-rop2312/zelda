@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class BeeController : MonoBehaviour
 {
     // 基本攻撃力
-    public int attackPower = 1;
+    public float attackPower = 0.5f;
     // 1マス当たりの移動速度
     public float moveSpeed = 0.2f;
     // 索敵範囲
-    public float searchRange = 10f;
+    public float searchRange = 5f;
     // 攻撃時クールタイム
-    public float attackCoolTime = 3;
+    public float attackCoolTime = 1;
     // 障害物レイヤー
     public LayerMask detectionMask;
     // 敵レイヤー
@@ -43,22 +43,18 @@ public class EnemyController : MonoBehaviour
     {
         SetSprite();
 
+        StartCoroutine(SearchPlayer(moveSpeed));
+
         if (dealDamage.isDead)
         {
             // 何も行動しない
         }
         else
         {
-            // moveSpeedに合わせて索敵する
-            StartCoroutine(SearchPlayer(moveSpeed));
-
-            Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
-
             //　距離が1マス以内(隣マス)なら攻撃
             if (distanceToPlayer <= 1f && !isMoving)
             {
                 ResetAnimation();
-                Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
                 StartCoroutine(Attack());
             }
             // 索敵範囲内だが2マス以上離れている場合は追跡
@@ -66,7 +62,6 @@ public class EnemyController : MonoBehaviour
             {
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-                Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
                 MoveDirection(directionToPlayer);
             }
             // 索敵範囲内に見つからなければランダム
@@ -74,14 +69,14 @@ public class EnemyController : MonoBehaviour
             {
                 // ランダムな方向に移動
                 Vector3 randomDirection = Random.insideUnitCircle.normalized;
-                Debug.Log(gameObject.name + "はランダムに移動します");
                 MoveDirection(randomDirection);
             }
             // 万が一、何にも当てはまらなければ何もしない
             else
             {
-                Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
             }
+
+
         }
 
     }
@@ -296,12 +291,10 @@ public class EnemyController : MonoBehaviour
                 if (dealDamage != null)
                 {
                     dealDamage.Damage(attackPower);
-                    Debug.Log("dealDamage呼び出し");
                 }
 
                 // エフェクトを再生
                 ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + (currentDirection * 2 / 3), Quaternion.identity);
-                Debug.Log("エフェクト再生");
                 attackParticle.Play();
 
                 // クールタイム終了まで待機する
@@ -316,7 +309,6 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Debug.Log("攻撃対象が見つかりませんでした");
         }
     }
 
