@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 129271303}
-  - component: {fileID: 129271302}
+  - component: {fileID: 129271304}
   - component: {fileID: 129271301}
   - component: {fileID: 129271300}
   m_Layer: 0
@@ -239,19 +239,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &129271302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129271299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e47e82d55fb4cd4f8530bac4fc8341c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScene: Scenes/GrasslandMap
 --- !u!4 &129271303
 Transform:
   m_ObjectHideFlags: 0
@@ -260,13 +247,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129271299}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -15.5, y: -9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1174426153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &129271304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129271299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f04cd3400142c04a8e62063dacfdc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: Scenes/BossMapScene
+  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &192855756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,6 +319,10 @@ PrefabInstance:
     - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_Name
       value: FoodMagician (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12401,10 +12406,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Samplepumpkin (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 606640420913972726, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 699962125}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17634,11 +17643,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!4 &699962125 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-  m_PrefabInstance: {fileID: 1743495442}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &731583973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17690,6 +17694,10 @@ PrefabInstance:
     - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_Name
       value: FoodMagician (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17748,6 +17756,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodMagician (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17805,10 +17817,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Samplepumpkin
       objectReference: {fileID: 0}
+    - target: {fileID: 606640420913972726, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 699962125}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17866,10 +17882,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Samplepumpkin (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 606640420913972726, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 699962125}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17927,6 +17947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodMagician
       objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17979,6 +18003,7 @@ Transform:
   - {fileID: 1582106129}
   - {fileID: 242771174}
   - {fileID: 623218957}
+  - {fileID: 129271303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1194328839
@@ -17992,6 +18017,10 @@ PrefabInstance:
     - target: {fileID: 233502753870037063, guid: b55e5e71b3a65df4d89b5025172e7673, type: 3}
       propertyPath: m_Name
       value: Ghost_whiteEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 233502753870037063, guid: b55e5e71b3a65df4d89b5025172e7673, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7818869944427665783, guid: b55e5e71b3a65df4d89b5025172e7673, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18089,6 +18118,10 @@ PrefabInstance:
     - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_Name
       value: FoodMagician (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18428,10 +18461,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Samplepumpkin (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 606640420913972726, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 699962125}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18488,6 +18525,10 @@ PrefabInstance:
     - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_Name
       value: FoodMagician (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18546,104 +18587,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Samplepumpkin (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 606640420913972726, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1977475266187740272, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 699962125}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4abd69212262a304e884f2313674d3ec, type: 3}
---- !u!1001 &1743495442
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4525528411359297077, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4525528411359297077, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5192020624068777353, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: statusPanelLayerMask.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6584981639772103014, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
 --- !u!1 &1956741050
 GameObject:
   m_ObjectHideFlags: 0
@@ -18804,6 +18760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost_purpleEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: bc51b67e3700fec4b841ae7910bca1af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18861,6 +18821,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost_purpleEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4432510880787011360, guid: bc51b67e3700fec4b841ae7910bca1af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18873,7 +18837,6 @@ SceneRoots:
   - {fileID: 1956741053}
   - {fileID: 1174426153}
   - {fileID: 610224676}
-  - {fileID: 129271303}
   - {fileID: 192855756}
   - {fileID: 1711989611}
   - {fileID: 731583973}
@@ -18882,7 +18845,6 @@ SceneRoots:
   - {fileID: 2094279024}
   - {fileID: 1715966857}
   - {fileID: 389575242}
-  - {fileID: 1743495442}
   - {fileID: 809318018}
   - {fileID: 1673397008}
   - {fileID: 926110183}
