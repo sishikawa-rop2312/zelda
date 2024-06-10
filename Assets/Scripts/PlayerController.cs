@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
             //このインスタンスをinstanceに登録
             instance = this;
             DontDestroyOnLoad(gameObject);
+
         }
         else
         {
