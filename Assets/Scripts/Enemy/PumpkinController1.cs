@@ -279,11 +279,19 @@ public class EnemyController : MonoBehaviour
 
         // 現在の向きを設定
         currentDirection = direction;
+        string animation;
+        if (currentDirection == Vector3.up) { animation = "WalkUp"; }
+        else if (currentDirection == Vector3.left) { animation = "WalkLeft"; }
+        else if (currentDirection == Vector3.right) { animation = "WalkRight"; }
+        else { animation = "WalkDown"; }
+        WalkAnimation(animation);
+        yield return new WaitForSeconds(moveSpeed);
+        ResetAnimation();
 
         // 目的地に敵が居るか判定
         Collider2D hit = Physics2D.OverlapPoint(transform.position + currentDirection, PlayerMask);
 
-        if (hit != null) // 何か居たら
+        if (hit != null && isMoving == false) // 何か居たら
         {
             if (hit.CompareTag("Player")) // プレイヤーならば
             {

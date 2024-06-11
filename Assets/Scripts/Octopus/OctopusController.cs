@@ -56,7 +56,7 @@ public class OctopusController : MonoBehaviour
             //Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
 
             //　距離が5マス以内かつ自分よりもyの値が小さければ攻撃
-            if (distanceToPlayer <= 5f && !isMoving && transform.position.y > playerTransform.position.y)
+            if (distanceToPlayer <= 10f && !isMoving && transform.position.y > playerTransform.position.y)
             {
                 Debug.Log(gameObject.name + "はプレイヤーを発見しました");
                 ResetAnimation();

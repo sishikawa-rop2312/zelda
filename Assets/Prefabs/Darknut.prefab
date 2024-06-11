@@ -194,8 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
-  maxHp: 5
+  hp: 1
+  maxHp: 1
   defense: 1
   isDead: 0
   stunTime: 1
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c201b6563e61242aa082ad607f8ebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 1.5
+  attackPower: 1
   moveSpeed: 1
   searchRange: 10
   attackCoolTime: 3
