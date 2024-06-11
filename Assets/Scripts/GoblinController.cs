@@ -53,13 +53,10 @@ public class GoblinController : MonoBehaviour
             // moveSpeedに合わせて索敵する
             StartCoroutine(SearchPlayer(moveSpeed));
 
-            Debug.Log("isPlayerNearby:" + isPlayerNearby + ",isMoving:" + isMoving);
-
             //　距離が1マス以内(隣マス)なら攻撃
             if (distanceToPlayer <= 1f && !isMoving)
             {
                 ResetAnimation();
-                Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
                 StartCoroutine(Attack());
             }
             // 索敵範囲内だが2マス以上離れている場合は追跡
@@ -67,21 +64,18 @@ public class GoblinController : MonoBehaviour
             {
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-                Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
                 MoveDirection(directionToPlayer);
             }
             // 索敵範囲内に見つからなければランダム
             else if (!isMoving)
             {
                 // ランダムな方向に移動
-                Vector3 randomDirection = Random.insideUnitCircle.normalized;
-                Debug.Log(gameObject.name + "はランダムに移動します");
-                MoveDirection(randomDirection);
+                //Vector3 randomDirection = Random.insideUnitCircle.normalized;
+                //MoveDirection(randomDirection);
             }
             // 万が一、何にも当てはまらなければ何もしない
             else
             {
-                Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
             }
         }
 
@@ -279,11 +273,19 @@ public class GoblinController : MonoBehaviour
 
         // 現在の向きを設定
         currentDirection = direction;
+        string animation;
+        if (currentDirection == Vector3.up) { animation = "WalkUp"; }
+        else if (currentDirection == Vector3.left) { animation = "WalkLeft"; }
+        else if (currentDirection == Vector3.right) { animation = "WalkRight"; }
+        else { animation = "WalkDown"; }
+        WalkAnimation(animation);
+        yield return new WaitForSeconds(moveSpeed);
+        ResetAnimation();
 
         // 目的地に敵が居るか判定
         Collider2D hit = Physics2D.OverlapPoint(transform.position + currentDirection, PlayerMask);
 
-        if (hit != null) // 何か居たら
+        if (hit != null && isMoving == false) // 何か居たら
         {
             if (hit.CompareTag("Player")) // プレイヤーならば
             {
@@ -297,7 +299,6 @@ public class GoblinController : MonoBehaviour
                 if (dealDamage != null)
                 {
                     dealDamage.Damage(attackPower);
-                    Debug.Log("dealDamage呼び出し");
                 }
 
                 // エフェクトを再生
@@ -317,7 +318,6 @@ public class GoblinController : MonoBehaviour
         }
         else
         {
-            Debug.Log("攻撃対象が見つかりませんでした");
         }
     }
 

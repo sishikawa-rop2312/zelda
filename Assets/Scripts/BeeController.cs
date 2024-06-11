@@ -7,11 +7,11 @@ public class BeeController : MonoBehaviour
     // 基本攻撃力
     public float attackPower = 0.5f;
     // 1マス当たりの移動速度
-    public float moveSpeed = 0.2f;
+    public float moveSpeed = 0.1f;
     // 索敵範囲
     public float searchRange = 5f;
     // 攻撃時クールタイム
-    public float attackCoolTime = 1;
+    public float attackCoolTime = 3;
     // 障害物レイヤー
     public LayerMask detectionMask;
     // 敵レイヤー

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3852199326272301718}
   - component: {fileID: 5035894581942152067}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: yumi_ya
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5639551561740638020}
   - component: {fileID: 6888768015578927868}
   - component: {fileID: 6883176688216157945}
-  - component: {fileID: 2506107348742258061}
+  - component: {fileID: 14641527407885290}
   m_Layer: 6
   m_Name: Arrow
   m_TagString: Weapon
@@ -191,7 +191,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &2506107348742258061
+--- !u!114 &14641527407885290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7162646190035334698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33b33c3b042fbe948b98eae779307198, type: 3}
+  m_Script: {fileID: 11500000, guid: b20a19392780ea44eb731cdae071d409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 1

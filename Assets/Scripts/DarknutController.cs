@@ -5,9 +5,9 @@ using UnityEngine;
 public class DarknutController : MonoBehaviour
 {
     // 基本攻撃力
-    public float attackPower = 1.5f;
+    public float attackPower = 1f;
     // 1マス当たりの移動速度
-    public float moveSpeed = 0.2f;
+    public float moveSpeed = 1f;
     // 索敵範囲
     public float searchRange = 10f;
     // 攻撃時クールタイム
@@ -289,11 +289,19 @@ public class DarknutController : MonoBehaviour
 
         // 現在の向きを設定
         currentDirection = direction;
+        string animation;
+        if (currentDirection == Vector3.up) { animation = "WalkUp"; }
+        else if (currentDirection == Vector3.left) { animation = "WalkLeft"; }
+        else if (currentDirection == Vector3.right) { animation = "WalkRight"; }
+        else { animation = "WalkDown"; }
+        WalkAnimation(animation);
+        yield return new WaitForSeconds(moveSpeed);
+        ResetAnimation();
 
         // 目的地に敵が居るか判定
         Collider2D hit = Physics2D.OverlapPoint(transform.position + currentDirection, PlayerMask);
 
-        if (hit != null) // 何か居たら
+        if (hit != null && isMoving == false) // 何か居たら
         {
             if (hit.CompareTag("Player")) // プレイヤーならば
             {
