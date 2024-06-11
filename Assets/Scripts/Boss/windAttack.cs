@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class windAttack : MonoBehaviour
 {
-    public float lifetime = 3f;
+    public float lifetime = 1.1f;
     public LayerMask obstacleLayer;
     public int damage = 1;
 

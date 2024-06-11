@@ -5,7 +5,7 @@ using UnityEngine;
 public class DarknessAttack : MonoBehaviour
 {
 
-    public float lifetime = 3f;
+    public float lifetime = 1.15f;
     public LayerMask obstacleLayer;
     public int damage = 1;
 
