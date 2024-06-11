@@ -12,6 +12,7 @@ public class ItemManager : MonoBehaviour
     void Start()
     {
         dealDamage = GetComponent<DealDamage>();
+        healthPotionDisplay.UpdateHealthPotionCount(healthPotionCount);
     }
 
     void Update()
