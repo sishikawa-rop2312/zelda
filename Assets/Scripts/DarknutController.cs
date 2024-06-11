@@ -5,9 +5,9 @@ using UnityEngine;
 public class DarknutController : MonoBehaviour
 {
     // 基本攻撃力
-    public float attackPower = 1.5f;
+    public float attackPower = 1f;
     // 1マス当たりの移動速度
-    public float moveSpeed = 0.2f;
+    public float moveSpeed = 1f;
     // 索敵範囲
     public float searchRange = 10f;
     // 攻撃時クールタイム

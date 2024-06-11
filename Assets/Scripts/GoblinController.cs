@@ -70,8 +70,8 @@ public class GoblinController : MonoBehaviour
             else if (!isMoving)
             {
                 // ランダムな方向に移動
-                Vector3 randomDirection = Random.insideUnitCircle.normalized;
-                MoveDirection(randomDirection);
+                //Vector3 randomDirection = Random.insideUnitCircle.normalized;
+                //MoveDirection(randomDirection);
             }
             // 万が一、何にも当てはまらなければ何もしない
             else

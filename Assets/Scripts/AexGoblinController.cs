@@ -5,7 +5,7 @@ using UnityEngine;
 public class AexGoblinController : MonoBehaviour
 {
     // 基本攻撃力
-    public float attackPower = 2.5f;
+    public float attackPower = 2f;
     // 1マス当たりの移動速度
     public float moveSpeed = 0.4f;
     // 索敵範囲
@@ -70,8 +70,8 @@ public class AexGoblinController : MonoBehaviour
             else if (!isMoving)
             {
                 // ランダムな方向に移動
-                Vector3 randomDirection = Random.insideUnitCircle.normalized;
-                MoveDirection(randomDirection);
+                //Vector3 randomDirection = Random.insideUnitCircle.normalized;
+                //MoveDirection(randomDirection);
             }
             // 万が一、何にも当てはまらなければ何もしない
             else
