@@ -7,6 +7,25 @@ public class HelpManager : MonoBehaviour
     public GameObject helpPanel;
     bool isHelpActive = false;
 
+    // HelpManager型のインスタンスを保持
+    public static HelpManager instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            //このインスタンスをinstanceに登録
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else
+        {
+            // 2回目以降重複して作成してしまったgameObjectを削除
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         helpPanel.SetActive(false);
