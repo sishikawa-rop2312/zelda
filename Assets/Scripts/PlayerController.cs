@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     Vector3 targetDirection;
 
     // 向き
-    public Vector3 currentDirection = Vector3.zero;
+    public Vector3 currentDirection = Vector3.up;
 
     SpriteRenderer spriteRenderer;
     DealDamage dealDamage;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
             //このインスタンスをinstanceに登録
             instance = this;
             DontDestroyOnLoad(gameObject);
+
         }
         else
         {
@@ -102,23 +104,16 @@ public class PlayerController : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 {
-                    animator.SetTrigger("WalkStop");
-                    Debug.Log("Attack呼び出し");
-                    StartCoroutine(Attack());
-                }
-
-                if (Input.GetKeyDown(KeyCode.Return))
-                {
-                    // 進行方向にオブジェクトがないかチェック
-                    GameObject search = Physics2D.OverlapPoint(transform.position + targetDirection, detectionMask).gameObject;
-
-                    if (search != null)
+                    if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
                     {
-                        Debug.Log(search.name + "を見つけた！");
+                        Debug.Log("遠距離攻撃呼び出し");
+                        StartCoroutine(Arrow());
                     }
                     else
                     {
-                        Debug.Log("そこには何もない");
+                        animator.SetTrigger("WalkStop");
+                        Debug.Log("Attack呼び出し");
+                        StartCoroutine(Attack());
                     }
                 }
             }
@@ -327,6 +322,46 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("攻撃対象が見つかりませんでした");
         }
+    }
+
+    public GameObject arrowObject;
+
+    IEnumerator Arrow()
+    {
+        // 行動中フラグオン
+        isMoving = true;
+
+        Debug.Log("弓を放つ");
+
+        // 矢を飛ばす向きを取得
+        float arrowRotate;
+        if (currentDirection == Vector3.up)
+        {
+            arrowRotate = 180;
+        }
+        else if (currentDirection == Vector3.left)
+        {
+            arrowRotate = -90;
+        }
+        else if (currentDirection == Vector3.right)
+        {
+            arrowRotate = 90;
+        }
+        else
+        {
+            arrowRotate = 0;
+        }
+
+        // 矢インスタンスを生成
+        GameObject Arrow = Instantiate(arrowObject, transform.position + (currentDirection * 2 / 3), Quaternion.Euler(0, 0, arrowRotate));
+
+        // クールタイム
+        yield return new WaitForSeconds(attackCoolTime);
+
+        // 行動中フラグを戻す
+        isMoving = false;
+
+        yield return null;
     }
 
 }

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GrasslandMap.unity
     guid: aafcb75c2f5b7184cbfa12ea3062f361
+  - enabled: 1
+    path: Assets/Scenes/PrologueScene.unity
+    guid: 9a0ab2cfca34909408ddcbf779a382d8
   m_configObjects: {}

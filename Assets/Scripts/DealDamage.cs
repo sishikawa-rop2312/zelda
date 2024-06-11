@@ -46,11 +46,16 @@ public class DealDamage : MonoBehaviour
 
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         if (!isNoDamage && !isDead) // 無敵じゃないときかつ死亡していないとき
         {
-            int actualDamage = Mathf.RoundToInt(damage * defense);
+            float actualDamage = damage * defense;
+            if (actualDamage <= 0)
+            {
+                Debug.Log("0ダメージ");
+                return;
+            }
             hp -= actualDamage;
             Debug.Log(this.gameObject.name + "のHPが" + actualDamage + "減った");
             if (hp <= 0)
@@ -136,5 +141,21 @@ public class DealDamage : MonoBehaviour
     {
         yield return StartCoroutine(FadeOutAndDestroy());
         SceneManager.LoadScene("Scenes/GameOverScene");
+    }
+
+    // HP回復
+    public void Heal(float amount)
+    {
+        hp = Mathf.Min(hp + amount, maxHp);
+
+        healthDisplay.SetHealth(hp, maxHp);
+    }
+
+    // HP上限アップ
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHp += amount;
+
+        healthDisplay.SetHealth(hp, maxHp);
     }
 }
