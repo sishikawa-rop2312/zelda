@@ -12,6 +12,7 @@ public class GameOverDirector : MonoBehaviour
     {
         PlayerController player = FindObjectOfType<PlayerController>();
         StatusController statusBar = FindObjectOfType<StatusController>();
+        HelpManager helpManager = FindObjectOfType<HelpManager>();
         if (player != null)
         {
             // プレイヤーオブジェクトを削除
@@ -22,6 +23,12 @@ public class GameOverDirector : MonoBehaviour
         {
             // ステータスバーオブジェクトを削除
             Destroy(statusBar.gameObject);
+        }
+
+        if (helpManager != null)
+        {
+            // ヘルプオブジェクトを削除
+            Destroy(helpManager.gameObject);
         }
     }
 
