@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AexGoblinController : MonoBehaviour
+public class YamaotokoController : MonoBehaviour
 {
     // 基本攻撃力
-    public float attackPower = 2f;
+    public int attackPower = 2;
     // 1マス当たりの移動速度
-    public float moveSpeed = 0.4f;
+    public float moveSpeed = 1f;
     // 索敵範囲
     public float searchRange = 10f;
     // 攻撃時クールタイム
@@ -59,19 +59,24 @@ public class AexGoblinController : MonoBehaviour
                 ResetAnimation();
                 StartCoroutine(Attack());
             }
-            // 索敵範囲内だが2マス以上離れている場合は追跡
+            // 索敵範囲内だが2マス以上5マス以内離れている場合は斧を投げる
+            else if (distanceToPlayer <= 5f && !isMoving)
+            {
+                ResetAnimation();
+                StartCoroutine(ThrowAex());
+            }
+            // 索敵範囲内だが5マス以上離れている場合は追跡
             else if (isPlayerNearby && !isMoving)
             {
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
                 MoveDirection(directionToPlayer);
             }
-            // 索敵範囲内に見つからなければランダム
             else if (!isMoving)
             {
                 // ランダムな方向に移動
-                //Vector3 randomDirection = Random.insideUnitCircle.normalized;
-                //MoveDirection(randomDirection);
+                Vector3 randomDirection = Random.insideUnitCircle.normalized;
+                MoveDirection(randomDirection);
             }
             // 万が一、何にも当てはまらなければ何もしない
             else
@@ -321,6 +326,97 @@ public class AexGoblinController : MonoBehaviour
         }
     }
 
+    public GameObject aexObject;
+
+    IEnumerator ThrowAex()
+    {
+
+        // 敵の位置を取得
+        Vector3 direction = (playerTransform.position - transform.position).normalized;
+
+        // 敵の方を向く
+        if (direction.x != 0 || direction.y != 0)
+        {
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                direction.y = 0;
+
+                if (direction.x > 0)
+                {
+                    direction = Vector3.right;
+                }
+                else
+                {
+                    direction = Vector3.left;
+                }
+            }
+            else
+            {
+                direction.x = 0;
+
+                if (direction.y > 0)
+                {
+                    direction = Vector3.up;
+                }
+                else
+                {
+                    direction = Vector3.down;
+                }
+            }
+        }
+
+        // 現在の向きを設定
+        currentDirection = direction;
+        string animation;
+        if (currentDirection == Vector3.up) { animation = "WalkUp"; }
+        else if (currentDirection == Vector3.left) { animation = "WalkLeft"; }
+        else if (currentDirection == Vector3.right) { animation = "WalkRight"; }
+        else { animation = "WalkDown"; }
+        WalkAnimation(animation);
+        yield return new WaitForSeconds(moveSpeed);
+        ResetAnimation();
+
+        if (!isMoving)
+        {
+
+            // 行動中フラグオン
+            isMoving = true;
+
+            Debug.Log("墨を放つ");
+
+            // オブジェクトを飛ばす向きを取得
+            // 矢を飛ばす向きを取得
+            float aexRotate;
+            if (currentDirection == Vector3.up)
+            {
+                aexRotate = 180;
+            }
+            else if (currentDirection == Vector3.left)
+            {
+                aexRotate = -90;
+            }
+            else if (currentDirection == Vector3.right)
+            {
+                aexRotate = 90;
+            }
+            else
+            {
+                aexRotate = 0;
+            }
+
+            // 矢インスタンスを生成
+            GameObject Arrow = Instantiate(aexObject, transform.position + currentDirection, Quaternion.Euler(0, 0, aexRotate));
+
+            // クールタイム
+            yield return new WaitForSeconds(attackCoolTime);
+
+            // 行動中フラグを戻す
+            isMoving = false;
+
+            yield return null;
+        }
+    }
+
     void ResetAnimation()
     {
         animator.SetBool("WalkDown", false);
@@ -328,5 +424,4 @@ public class AexGoblinController : MonoBehaviour
         animator.SetBool("WalkLeft", false);
         animator.SetBool("WalkRight", false);
     }
-
 }
