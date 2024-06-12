@@ -6,6 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: 83c2028d26b353d4c862407819d733c5
+  - enabled: 1
     path: Assets/Scenes/CharacterScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/BoneyardMap.unity
+    guid: 3b5070baf1e485d4a8f28a991b653985
+  - enabled: 1
+    path: Assets/Scenes/BossMapScene.unity
+    guid: e5eca64a3a15a234c833cf7cf7e32bfe
+  - enabled: 1
+    path: Assets/Scenes/EnemyScene.unity
+    guid: 4162f307229bbec4cacf21b0ad2acf36
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 026438a26f3b0b942b6633aeade4b0fa
+  - enabled: 1
+    path: Assets/Scenes/GrasslandMap.unity
+    guid: aafcb75c2f5b7184cbfa12ea3062f361
+  - enabled: 1
+    path: Assets/Scenes/SandStoneMap.unity
+    guid: c7c55ceeeab17a44ea727032c11107e1
+  - enabled: 1
+    path: Assets/Scenes/PrologueScene.unity
+    guid: 9a0ab2cfca34909408ddcbf779a382d8
   m_configObjects: {}
