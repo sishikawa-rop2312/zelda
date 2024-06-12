@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DarknessBossController : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class DarknessBossController : MonoBehaviour
     public float attackSpeed = 1f; // 攻撃の速度
     public float attackCooldown = 5f; // 攻撃のクールダウン（5秒）
     public float attackDamage = 0.5f; // 攻撃のダメージ量
-    public LayerMask obstacleLayerMask; // 障害物とプレイヤーのレイヤーマスク
+    public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間

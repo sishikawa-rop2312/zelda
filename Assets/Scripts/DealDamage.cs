@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +23,6 @@ public class DealDamage : MonoBehaviour
     //プレイヤーがダメージを受けた時の音
     public AudioClip playerDamageSound;
     private AudioSource audioSource;
-
 
     void Start()
     {
@@ -73,14 +71,6 @@ public class DealDamage : MonoBehaviour
             {
                 Die();
             }
-            else
-            {
-                // 特定の敵キャラクターのみテレポートする
-                if (CompareTag("DarknessBoss"))
-                {
-                    Teleport();
-                }
-            }
 
             StartCoroutine(DamageFlash());
 
@@ -106,37 +96,6 @@ public class DealDamage : MonoBehaviour
             Debug.Log(this.gameObject.name + "は倒れた");
         }
     }
-
-    //ボス用特殊行動（テレポート）
-    void Teleport()
-    {
-        Vector3 newPosition;
-        bool validPosition = false;
-
-        // 有効な位置が見つかるまでループ
-        do
-        {
-            // 画面内のランダムな位置を選択
-            newPosition = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), transform.position.z);
-
-            // 障害物やプレイヤーと重ならない位置かをチェック
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, 1f);
-            validPosition = true;
-            foreach (var collider in colliders)
-            {
-                if (collider.CompareTag("Obstacle") || collider.CompareTag("Player"))
-                {
-                    validPosition = false;
-                    break;
-                }
-            }
-        } while (!validPosition);
-
-        // 新しい位置にテレポート
-        transform.position = newPosition;
-    }
-
-
 
     IEnumerator FadeOutAndDestroy()
     {

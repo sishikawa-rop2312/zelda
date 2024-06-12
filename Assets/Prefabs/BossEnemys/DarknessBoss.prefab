@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227943c344c497b4fa5be1b06e70d2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 0
   attackRange: 15
   darknessAttackPrefab: {fileID: 1035946225708441661, guid: 0a0b21d5ec562e148b0f24568f4ff54e, type: 3}
-  attackSpeed: 1.5
+  attackSpeed: 2
   attackCooldown: 5
-  attackDamage: 0.5
+  attackDamage: 1
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -220,3 +220,4 @@ MonoBehaviour:
   defense: 1
   isDead: 0
   stunTime: 1
+  playerDamageSound: {fileID: 0}
