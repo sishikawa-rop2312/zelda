@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +23,6 @@ public class DealDamage : MonoBehaviour
     //プレイヤーがダメージを受けた時の音
     public AudioClip playerDamageSound;
     private AudioSource audioSource;
-
 
     void Start()
     {
