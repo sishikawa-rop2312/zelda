@@ -116,7 +116,7 @@ public class DealDamage : MonoBehaviour
         do
         {
             // 画面内のランダムな位置を選択
-            newPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), transform.position.z);
+            newPosition = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), transform.position.z);
 
             // 障害物やプレイヤーと重ならない位置かをチェック
             Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, 1f);
