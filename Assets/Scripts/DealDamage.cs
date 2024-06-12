@@ -20,6 +20,10 @@ public class DealDamage : MonoBehaviour
     SpriteRenderer spriteRenderer;
     // ダメージを受けた時のスタン時間
     public float stunTime = 1.0f;
+    //プレイヤーがダメージを受けた時の音
+    public AudioClip playerDamageSound;
+    private AudioSource audioSource;
+
 
     void Start()
     {
@@ -39,6 +43,7 @@ public class DealDamage : MonoBehaviour
         {
             Debug.Log(gameObject.name + "のspriteRendererを取得しました");
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,6 +53,11 @@ public class DealDamage : MonoBehaviour
 
     public void Damage(float damage)
     {
+        //プレイヤーがダメージを受けたら音を鳴らす
+        if (this.gameObject.name == "Player")
+        {
+            PlayerDamageSound();
+        }
         if (!isNoDamage && !isDead) // 無敵じゃないときかつ死亡していないとき
         {
             float actualDamage = damage * defense;
@@ -157,5 +167,10 @@ public class DealDamage : MonoBehaviour
         maxHp += amount;
 
         healthDisplay.SetHealth(hp, maxHp);
+    }
+
+    public void PlayerDamageSound()
+    {
+        audioSource.PlayOneShot(playerDamageSound);
     }
 }

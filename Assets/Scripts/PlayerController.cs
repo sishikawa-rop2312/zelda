@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
     // 2マス分進むかどうか
     bool isTwiceMove = false;
 
+    //攻撃音
+    public AudioClip swordSound;
+    public AudioClip arrowSound;
+    private AudioSource audioSource;
+
     void Awake()
     {
         if (instance == null)
@@ -48,6 +53,8 @@ public class PlayerController : MonoBehaviour
             // 2回目以降重複して作成してしまったgameObjectを削除
             Destroy(gameObject);
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -302,7 +309,8 @@ public class PlayerController : MonoBehaviour
                 {
                     dealDamage.Damage(attackPower);
                 }
-
+                //音を再生
+                SwordSound();
                 // エフェクトを再生
                 ParticleSystem attackParticle = Instantiate(attackEffect, transform.position + (currentDirection * 2 / 3), Quaternion.identity);
                 attackParticle.Play();
@@ -352,6 +360,9 @@ public class PlayerController : MonoBehaviour
             arrowRotate = 0;
         }
 
+        //音を再生
+        ArrowSound();
+
         // 矢インスタンスを生成
         GameObject Arrow = Instantiate(arrowObject, transform.position + (currentDirection * 2 / 3), Quaternion.Euler(0, 0, arrowRotate));
 
@@ -362,6 +373,16 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
 
         yield return null;
+    }
+    //剣の音声
+    public void SwordSound()
+    {
+        audioSource.PlayOneShot(swordSound);
+    }
+    //弓の音声
+    public void ArrowSound()
+    {
+        audioSource.PlayOneShot(arrowSound);
     }
 
 }
