@@ -11,6 +11,9 @@ public class SceneChanger : MonoBehaviour
     // プレイヤーの出現位置
     public Vector3 spawnPosition;
 
+    // カメラの設定位置
+    public Vector3 cameraPosition = new Vector3(0, 0, -10);
+
     // ワープ機能が有効かどうかを示すフラグ
     bool canWarp = false;
 
@@ -117,6 +120,13 @@ public class SceneChanger : MonoBehaviour
 
             // ワープ機能を再度無効にする
             canWarp = false;
+        }
+
+        // カメラオブジェクトを探して位置を更新
+        Camera mainCamera = Camera.main;
+        if (mainCamera != null)
+        {
+            mainCamera.transform.position = cameraPosition;
         }
 
         // イベントからこの関数を削除
