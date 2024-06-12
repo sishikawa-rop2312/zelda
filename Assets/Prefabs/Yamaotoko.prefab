@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 1
   moveSpeed: 1
-  searchRange: 5
+  searchRange: 10
   attackCoolTime: 2
   detectionMask:
     serializedVersion: 2

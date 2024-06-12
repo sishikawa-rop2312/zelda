@@ -30,14 +30,15 @@ public class EnemyAexController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("OnTriggerEnterが呼び出された");
+        Debug.Log(other.gameObject.name + "に当たった");
+
         if (other.gameObject.CompareTag("Player"))
         {
             DealDamage enemyDealDamage = other.gameObject.GetComponent<DealDamage>();
             enemyDealDamage.Damage(attackPower);
             Destroy(gameObject);
         }
-        else
+        else if (!other.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
         }
