@@ -11,6 +11,9 @@ public class SceneChanger : MonoBehaviour
     // プレイヤーの出現位置
     public Vector3 spawnPosition;
 
+    // カメラの設定位置
+    public Vector3 cameraPosition = new Vector3(0, 0, -10);
+
     // ワープ機能が有効かどうかを示すフラグ
     bool canWarp = false;
 
@@ -62,7 +65,9 @@ public class SceneChanger : MonoBehaviour
                 //音を鳴らす
                 audioSource.PlayOneShot(sound);
                 // 音の再生終了を待ってからシーンを変更する
+                Debug.Log("おとをさいせい中");
                 StartCoroutine(WaitForSoundAndChangeScene());
+                Debug.Log("移動完了");
             }
             else
             {
@@ -79,6 +84,7 @@ public class SceneChanger : MonoBehaviour
             yield return null; // 次のフレームまで待機
         }
         // シーン変更を行う
+        Debug.Log("おと終了");
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(targetScene);
     }
@@ -114,6 +120,13 @@ public class SceneChanger : MonoBehaviour
 
             // ワープ機能を再度無効にする
             canWarp = false;
+        }
+
+        // カメラオブジェクトを探して位置を更新
+        Camera mainCamera = Camera.main;
+        if (mainCamera != null)
+        {
+            mainCamera.transform.position = cameraPosition;
         }
 
         // イベントからこの関数を削除
