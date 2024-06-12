@@ -265,6 +265,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &872112633
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872112624}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &1250513841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -336,6 +363,10 @@ PrefabInstance:
     - target: {fileID: 7356616341385086906, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: maxHp
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7962910717165590211, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8271265404795423722, guid: 070147204f317734d8f3a9a0d045bcfa, type: 3}
       propertyPath: m_Sprite
@@ -426,6 +457,10 @@ PrefabInstance:
     - target: {fileID: 4233462884812238873, guid: 0d90a0915a0bd884aa3aafb8e7de2349, type: 3}
       propertyPath: m_Name
       value: Darknut
+      objectReference: {fileID: 0}
+    - target: {fileID: 4233462884812238873, guid: 0d90a0915a0bd884aa3aafb8e7de2349, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7066566506240803785, guid: 0d90a0915a0bd884aa3aafb8e7de2349, type: 3}
       propertyPath: m_LocalPosition.x
@@ -555,7 +590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5218296980766283410, guid: 8e2068b1c0039af48a411721ab3065fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5218296980766283410, guid: 8e2068b1c0039af48a411721ab3065fd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -597,6 +632,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3258879230711569351, guid: 8e2068b1c0039af48a411721ab3065fd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 872112629}
+    - targetCorrespondingSourceObject: {fileID: 3258879230711569351, guid: 8e2068b1c0039af48a411721ab3065fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 872112633}
   m_SourcePrefab: {fileID: 100100000, guid: 8e2068b1c0039af48a411721ab3065fd, type: 3}
 --- !u!1001 &9103175002474777883
 PrefabInstance:
@@ -616,11 +654,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3258127760126943239, guid: 36227e7925f078c40a21a45ea0c0b8e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3258127760126943239, guid: 36227e7925f078c40a21a45ea0c0b8e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3258127760126943239, guid: 36227e7925f078c40a21a45ea0c0b8e2, type: 3}
       propertyPath: m_LocalPosition.z
