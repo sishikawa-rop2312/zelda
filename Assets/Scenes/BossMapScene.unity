@@ -4487,7 +4487,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 77fd1241677e6f54e8bd5ee93469c8b1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4584,6 +4584,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: HelpCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1061106819219613044, guid: aa8fb3d820fa62f4c986e629ff5295f6, type: 3}
+      propertyPath: m_text
+      value: "- Sword attack / Search : Space\n- Bow attack : Space + Ctrl\n- Use
+        HP potion : Shift\n- Move up : \u2191\n- Move right : \u2192\n- Move left
+        : \u2190\n- Move down : \u2193"
+      objectReference: {fileID: 0}
     - target: {fileID: 1770591994908686786, guid: aa8fb3d820fa62f4c986e629ff5295f6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4662,6 +4668,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1770591994908686786, guid: aa8fb3d820fa62f4c986e629ff5295f6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1826052324600531376, guid: aa8fb3d820fa62f4c986e629ff5295f6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
