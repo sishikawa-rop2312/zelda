@@ -49,12 +49,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e3aa36fedd7c144ad89f3c9212051e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 0.8
   attackRange: 15
   windAttackPrefab: {fileID: 8807799208992892894, guid: 415cf7ca535d171478ff6b324875fded, type: 3}
-  attackSpeed: 1
-  attackCooldown: 5
-  attackDamage: 1
+  attackSpeed: 1.3
+  attackCooldown: 3.5
+  attackDamage: 1.5
+  pauseAfterAttackDuration: 2.5
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  hp: 3
   maxHp: 3
   defense: 1
   isDead: 0

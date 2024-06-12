@@ -64,7 +64,11 @@ public class DealDamage : MonoBehaviour
             }
             else
             {
-                Teleport();
+                // 特定の敵キャラクターのみテレポートする
+                if (CompareTag("DarknessBoss"))
+                {
+                    Teleport();
+                }
             }
 
             StartCoroutine(DamageFlash());
