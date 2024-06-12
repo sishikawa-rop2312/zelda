@@ -62,7 +62,9 @@ public class SceneChanger : MonoBehaviour
                 //音を鳴らす
                 audioSource.PlayOneShot(sound);
                 // 音の再生終了を待ってからシーンを変更する
+                Debug.Log("おとをさいせい中");
                 StartCoroutine(WaitForSoundAndChangeScene());
+                Debug.Log("移動完了");
             }
             else
             {
@@ -79,6 +81,7 @@ public class SceneChanger : MonoBehaviour
             yield return null; // 次のフレームまで待機
         }
         // シーン変更を行う
+        Debug.Log("おと終了");
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(targetScene);
     }
