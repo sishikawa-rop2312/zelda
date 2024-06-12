@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1867086508840751915}
   - component: {fileID: 8093848937828562334}
   - component: {fileID: 289071745688915800}
+  - component: {fileID: -5576356173207981661}
   m_Layer: 6
   m_Name: Aex
   m_TagString: Weapon
@@ -95,6 +96,33 @@ MonoBehaviour:
   speed: 3
   direction: {x: 0, y: -1, z: 0}
   rotationSpeed: 720
+--- !u!50 &-5576356173207981661
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7773485504140348704}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8456742526556595445
 GameObject:
   m_ObjectHideFlags: 0
