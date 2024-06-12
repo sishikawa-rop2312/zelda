@@ -52,7 +52,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
-  damage: 0
+  damage: 0.5
 --- !u!212 &5922497795607789338
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -164,9 +164,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.033492446, y: 0}
+  m_Offset: {x: -0.007478714, y: 0}
   serializedVersion: 2
-  m_Radius: 0.39381737
+  m_Radius: 0.30368072
 --- !u!95 &7323514048893860733
 Animator:
   serializedVersion: 5

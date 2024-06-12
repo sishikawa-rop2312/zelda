@@ -7,7 +7,7 @@ public class DarknessAttack : MonoBehaviour
 
     public float lifetime = 1.15f;
     public LayerMask obstacleLayer;
-    public int damage = 1;
+    public float damage = 0.5f;
 
     void Start()
     {

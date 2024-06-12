@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class windAttack : MonoBehaviour
+public class WindAttack : MonoBehaviour
 {
     public float lifetime = 1.1f;
     public LayerMask obstacleLayer;
-    public int damage = 1;
+    public float damage = 0.5f;
 
     void Start()
     {
         Destroy(gameObject, lifetime);
     }
-
 
     void OnTriggerEnter2D(Collider2D other)
     {

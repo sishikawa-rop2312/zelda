@@ -463,6 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Scenes/BoneyardMap
   spawnPosition: {x: 0.5, y: 0.5, z: 0}
+  sound: {fileID: 0}
 --- !u!61 &178901227
 BoxCollider2D:
   m_ObjectHideFlags: 0

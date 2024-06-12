@@ -62,6 +62,10 @@ public class DealDamage : MonoBehaviour
             {
                 Die();
             }
+            else
+            {
+                Teleport();
+            }
 
             StartCoroutine(DamageFlash());
 
@@ -87,6 +91,37 @@ public class DealDamage : MonoBehaviour
             Debug.Log(this.gameObject.name + "は倒れた");
         }
     }
+
+    //ボス用特殊行動（テレポート）
+    void Teleport()
+    {
+        Vector3 newPosition;
+        bool validPosition = false;
+
+        // 有効な位置が見つかるまでループ
+        do
+        {
+            // 画面内のランダムな位置を選択
+            newPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), transform.position.z);
+
+            // 障害物やプレイヤーと重ならない位置かをチェック
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, 1f);
+            validPosition = true;
+            foreach (var collider in colliders)
+            {
+                if (collider.CompareTag("Obstacle") || collider.CompareTag("Player"))
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+        } while (!validPosition);
+
+        // 新しい位置にテレポート
+        transform.position = newPosition;
+    }
+
+
 
     IEnumerator FadeOutAndDestroy()
     {
