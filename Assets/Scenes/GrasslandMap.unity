@@ -20151,6 +20151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Scenes/SandStoneMap
   spawnPosition: {x: 1.5, y: 12.5, z: 0}
+  cameraPosition: {x: 0, y: 10.05, z: -10}
   sound: {fileID: 8300000, guid: 1642e84ad6478404fab916be3875f460, type: 3}
 --- !u!82 &546827183
 AudioSource:
@@ -20263,7 +20264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &555680111
 Transform:
   m_ObjectHideFlags: 0

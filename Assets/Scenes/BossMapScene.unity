@@ -4430,6 +4430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Scenes/BoneyardMap
   spawnPosition: {x: -17.5, y: -9.5, z: 0}
+  cameraPosition: {x: -18.09, y: -10.02, z: -10}
   sound: {fileID: 8300000, guid: 77fd1241677e6f54e8bd5ee93469c8b1, type: 3}
 --- !u!61 &2043624502
 BoxCollider2D:
