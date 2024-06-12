@@ -11,7 +11,7 @@ public class Treasurebox : MonoBehaviour
 
     public LayerMask detectionMask;
     public GameObject itemPrefab; // 出現させるアイテムのプレハブ
-    public float fadeDuration = 1f; // フェードアウトの時間
+    public float fadeDuration = 1.0f; // フェードアウトの時間
 
     void Start()
     {
@@ -46,32 +46,24 @@ public class Treasurebox : MonoBehaviour
         return false;
     }
 
+    // 宝箱を破棄してアイテムを出現させる
     IEnumerator FadeOutAndSpawnItem()
     {
-        float startAlpha = spriteRenderer.color.a;
-        float rate = 1.0f / fadeDuration;
-        float progress = 0.0f;
-
-        while (progress < 1.0f)
+        // フェードアウト
+        Color color = spriteRenderer.color;
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
-            Color tmpColor = spriteRenderer.color;
-            tmpColor.a = Mathf.Lerp(startAlpha, 0, progress);
-            spriteRenderer.color = tmpColor;
-            progress += rate * Time.deltaTime;
-
+            color.a = Mathf.Lerp(1, 0, t / fadeDuration);
+            spriteRenderer.color = color;
             yield return null;
         }
-
-        // 最終的に完全に透明にする
-        Color finalColor = spriteRenderer.color;
-        finalColor.a = 0;
-        spriteRenderer.color = finalColor;
+        color.a = 0;
+        spriteRenderer.color = color;
 
         // アイテムを出現させる
         Instantiate(itemPrefab, transform.position, Quaternion.identity);
 
-        // 宝箱オブジェクトを非アクティブにするか破棄する
-        gameObject.SetActive(false);
-        // またはDestroy(gameObject); // 完全に破棄する場合
+        // 完全に破棄する場合
+        Destroy(gameObject);
     }
 }
