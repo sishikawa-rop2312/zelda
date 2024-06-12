@@ -868,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Scenes/SandStoneMap
   spawnPosition: {x: 7.5, y: -8.5, z: 0}
+  cameraPosition: {x: 0, y: -9.9, z: -10}
   sound: {fileID: 0}
 --- !u!1001 &127798289
 PrefabInstance:
@@ -1188,6 +1189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Scenes/BossMapScene
   spawnPosition: {x: -0.5, y: -3.5, z: 0}
+  cameraPosition: {x: 0, y: 0, z: -10}
   sound: {fileID: 8300000, guid: 77fd1241677e6f54e8bd5ee93469c8b1, type: 3}
 --- !u!82 &228088966
 AudioSource:
