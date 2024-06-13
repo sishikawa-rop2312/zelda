@@ -15,6 +15,7 @@ public class MagicianController : MonoBehaviour
     private float nextAttackTime = 0f; // 次の攻撃可能時間
     private Animator animator;
     private DealDamage dealDamage;
+    private Camera mainCamera;//メインカメラ
 
     void Start()
     {
@@ -22,13 +23,21 @@ public class MagicianController : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.Play("MagicianWalk");
         dealDamage = GetComponent<DealDamage>();
+        mainCamera = Camera.main;//メインカメラの取得
     }
 
     void Update()
     {
-        if (dealDamage.isDead) return;//死亡している場合、行動停止
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || IsVisible()) return;
         MoveTowardsPlayer();
         AttackPlayer();
+    }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
     }
 
     void MoveTowardsPlayer()
