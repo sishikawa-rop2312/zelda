@@ -10,6 +10,9 @@ public class DealDamage : MonoBehaviour
     public float defense = 1f;
     public bool isDead = false; // 行動停止フラグ
 
+    // 死亡時にドロップするアイテム
+    public GameObject dropItem;
+
     // 詰み防止用無敵フラグ
     bool isNoDamage = false;
 
@@ -94,6 +97,10 @@ public class DealDamage : MonoBehaviour
         {
             StartCoroutine(FadeOutAndDestroy());
             Debug.Log(this.gameObject.name + "は倒れた");
+            if (dropItem != null)
+            {
+                Instantiate(dropItem, transform.position, Quaternion.identity);
+            }
         }
     }
 

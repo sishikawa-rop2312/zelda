@@ -21272,6 +21272,7 @@ MonoBehaviour:
   maxHp: 3
   defense: 1
   isDead: 0
+  dropItem: {fileID: 0}
   stunTime: 1
   playerDamageSound: {fileID: 0}
 --- !u!61 &1147244774
@@ -21454,6 +21455,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5041103014320645510, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 1632753841732518501, guid: 8b5cb9a167d11ea49a93563d81e64e81, type: 3}
     - target: {fileID: 5697291338271255219, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28.655172

@@ -63,8 +63,13 @@ public class EnemyController : MonoBehaviour
             if (distanceToPlayer <= 1f && !isMoving)
             {
                 ResetAnimation();
-                Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
-                StartCoroutine(Attack());
+
+                // 一度ダメージを受けるまで攻撃しない
+                if (dealDamage.hp == dealDamage.maxHp)
+                {
+                    Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
+                    StartCoroutine(Attack());
+                }
             }
             // 索敵範囲内だが2マス以上離れている場合は追跡
             else if (isPlayerNearby && !isMoving)
