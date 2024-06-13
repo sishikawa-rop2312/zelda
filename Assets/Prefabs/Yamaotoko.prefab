@@ -160,7 +160,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!114 &4606836851061013041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,10 +174,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
-  maxHp: 3
+  maxHp: 1
   defense: 1
   isDead: 0
+  dropItem: {fileID: 0}
   stunTime: 1
+  playerDamageSound: {fileID: 0}
 --- !u!114 &3642106084164845461
 MonoBehaviour:
   m_ObjectHideFlags: 0
