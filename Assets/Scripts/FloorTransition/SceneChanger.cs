@@ -23,6 +23,8 @@ public class SceneChanger : MonoBehaviour
     // プレイヤーオブジェクト
     GameObject player;
 
+    DealDamage dealDamage;
+
     //音源
     public AudioClip sound;
     AudioSource audioSource;
@@ -34,6 +36,7 @@ public class SceneChanger : MonoBehaviour
         if (player != null)
         {
             playerInitialPosition = player.transform.position;
+            dealDamage = player.GetComponent<DealDamage>();
         }
         audioSource = GetComponent<AudioSource>();
     }
@@ -53,10 +56,12 @@ public class SceneChanger : MonoBehaviour
     // トリガーに触れた際に呼び出される関数
     void OnTriggerEnter2D(Collider2D other)
     {
-
         // キャラクターがトリガーゾーンに入ったかを確認
         if (canWarp && other.CompareTag("Player"))
         {
+            // プレイヤーがシーン切り替わり後に移動しないよう死亡フラグをたてる
+            dealDamage.isDead = true;
+
             //音源がある場合
             if (sound != null)
             {
@@ -120,6 +125,9 @@ public class SceneChanger : MonoBehaviour
 
             // ワープ機能を再度無効にする
             canWarp = false;
+
+            // 死亡フラグ解除
+            dealDamage.isDead = false;
         }
 
         // カメラオブジェクトを探して位置を更新
