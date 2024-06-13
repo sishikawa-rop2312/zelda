@@ -269,6 +269,7 @@ public class PlayerController : MonoBehaviour
         // 移動中フラグを戻す
         isMoving = false;
 
+        // 死んでなければ
         if (!dealDamage.isDead)
         {
             // 移動が入力され続けてれば引き続き移動する
