@@ -65,7 +65,7 @@ public class EnemyController : MonoBehaviour
                 ResetAnimation();
 
                 // 一度ダメージを受けるまで攻撃しない
-                if (dealDamage.hp == 1)
+                if (dealDamage.hp == dealDamage.maxHp)
                 {
                     Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
                     StartCoroutine(Attack());
