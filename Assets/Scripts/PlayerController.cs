@@ -60,6 +60,9 @@ public class PlayerController : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+
+        // ステータスバーに矢の所持数をセット
+        arrowCounterText.text = "x " + arrow.ToString();
     }
 
     // Start is called before the first frame update
@@ -72,9 +75,6 @@ public class PlayerController : MonoBehaviour
 
         // 戦闘処理用にコンポーネントを取得
         dealDamage = GetComponent<DealDamage>();
-
-        // ステータスバーに矢の所持数をセット
-        arrowCounterText.text = "x " + arrow.ToString();
     }
 
     // Update is called once per frame
