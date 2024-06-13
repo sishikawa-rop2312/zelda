@@ -56,7 +56,7 @@ MonoBehaviour:
   fireballSpeed: 1.5
   attackCooldown: 5
   fireballDamage: 1
-  meleeDamage: 2
+  meleeDamage: 3
   meleeAttackCooldown: 5
   obstacleLayerMask:
     serializedVersion: 2

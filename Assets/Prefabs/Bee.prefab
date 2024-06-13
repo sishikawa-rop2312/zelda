@@ -178,6 +178,7 @@ MonoBehaviour:
   defense: 1
   isDead: 0
   stunTime: 1
+  playerDamageSound: {fileID: 0}
 --- !u!114 &1331810907296809991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 0.5
   moveSpeed: 0.1
-  searchRange: 5
+  searchRange: 1
   attackCoolTime: 3
   detectionMask:
     serializedVersion: 2
