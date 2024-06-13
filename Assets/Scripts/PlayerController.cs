@@ -62,7 +62,10 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         // ステータスバーに矢の所持数をセット
-        arrowCounterText.text = "x " + arrow.ToString();
+        if (arrowCounterText != null)
+        {
+            arrowCounterText.text = "x " + arrow.ToString();
+        }
     }
 
     // Start is called before the first frame update

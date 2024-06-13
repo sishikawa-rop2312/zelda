@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BeeController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class BeeController : MonoBehaviour
     public LayerMask PlayerMask;
     // 攻撃エフェクト
     public ParticleSystem attackEffect;
+    // ドロップアイテム
+    public GameObject dropItem;
 
     // プレイヤーとの距離
     float distanceToPlayer;
@@ -49,6 +52,7 @@ public class BeeController : MonoBehaviour
         if (dealDamage.isDead)
         {
             // 何も行動しない
+
         }
         else
         {
