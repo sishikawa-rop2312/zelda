@@ -19,6 +19,7 @@ public class WindBossController : MonoBehaviour
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
     private bool isPaused = false;
+    private Camera mainCamera;//メインカメラ
 
     void Start()
     {
@@ -27,14 +28,23 @@ public class WindBossController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator.Play("WindBossWalk");
         dealDamage = GetComponent<DealDamage>();
+        mainCamera = Camera.main;//メインカメラの取得
     }
 
     void Update()
     {
-        if (dealDamage.isDead || isPaused) return; // 死亡しているか攻撃後の停止中は行動停止
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible()) return;
         MoveAwayFromPlayer();
         AttackPlayer();
     }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
+
 
     void MoveAwayFromPlayer()
     {
