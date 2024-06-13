@@ -31,7 +31,8 @@ public class PrologueDirector : MonoBehaviour
             }
         }
 
-        if (pressSpaceText.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        // if (pressSpaceText.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             // Spaceキーが押された時の処理
             Debug.Log("Space Key Pressed");
