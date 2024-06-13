@@ -400,7 +400,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void GetArrow(int getArrow)
+    public void ObtainArrow(int getArrow)
     {
         arrow += getArrow;
         // ステータスバーを更新
