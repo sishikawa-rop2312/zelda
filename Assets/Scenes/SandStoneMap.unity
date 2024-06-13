@@ -561,6 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Scenes/BoneyardMap
   spawnPosition: {x: 0.5, y: 2.5, z: 0}
+  cameraPosition: {x: 0, y: 0, z: -10}
   sound: {fileID: 8300000, guid: ef8ffb27aa46ff24b96c304a7bdd4849, type: 3}
 --- !u!61 &178901227
 BoxCollider2D:
@@ -7354,7 +7355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1594234414
 Transform:
   m_ObjectHideFlags: 0
