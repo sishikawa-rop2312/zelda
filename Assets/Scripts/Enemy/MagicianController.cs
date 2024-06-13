@@ -29,15 +29,16 @@ public class MagicianController : MonoBehaviour
     void Update()
     {
         // 死亡している場合、またはカメラに映っていなければ行動を停止
-        if (dealDamage.isDead || IsVisible()) return;
+        if (dealDamage.isDead || !IsVisible()) return;
         MoveTowardsPlayer();
         AttackPlayer();
     }
 
+
     bool IsVisible()
     {
         Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
-        return screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
     void MoveTowardsPlayer()
@@ -108,7 +109,7 @@ public class MagicianController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // プレイヤーに当たった時の処理
-            Debug.Log("敵の攻撃が当たった！");
+            Debug.Log("魔術師の攻撃！");
         }
     }
 

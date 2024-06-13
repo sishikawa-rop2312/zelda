@@ -18,6 +18,7 @@ public class DarknessBossController : MonoBehaviour
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
     private bool isTeleporting = false;
+    private Camera mainCamera;//メインカメラ
 
     void Start()
     {
@@ -26,14 +27,23 @@ public class DarknessBossController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator.Play("DarknessBossWalk");
         dealDamage = GetComponent<DealDamage>();
+        mainCamera = Camera.main;//メインカメラの取得
     }
 
     void Update()
     {
-        if (dealDamage.isDead || isTeleporting) return; // 死亡しているかテレポート中は行動停止
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible()) return;
         MoveAwayFromPlayer();
         AttackPlayer();
     }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
+
 
     void MoveAwayFromPlayer()
     {
