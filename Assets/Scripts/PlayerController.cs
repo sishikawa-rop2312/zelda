@@ -72,6 +72,9 @@ public class PlayerController : MonoBehaviour
 
         // 戦闘処理用にコンポーネントを取得
         dealDamage = GetComponent<DealDamage>();
+
+        // ステータスバーに矢の所持数をセット
+        arrowCounterText.text = "x " + arrow.ToString();
     }
 
     // Update is called once per frame
@@ -377,9 +380,10 @@ public class PlayerController : MonoBehaviour
             // 矢インスタンスを生成
             GameObject Arrow = Instantiate(arrowObject, transform.position + (currentDirection * 2 / 3), Quaternion.Euler(0, 0, arrowRotate));
 
-            // 矢の残り本数を減少し、ステータスバーを更新
+            // 矢の残り本数を減少
             arrow -= 1;
-            arrowCounterText.text = "x" + arrow.ToString();
+            // ステータスバーを更新
+            arrowCounterText.text = "x " + arrow.ToString();
 
             // クールタイム
             yield return new WaitForSeconds(attackCoolTime);
@@ -391,14 +395,16 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            arrow = 0;
             yield return null;
         }
     }
 
-    public void GetArrow(int getArrow)
+    public void ObtainArrow(int getArrow)
     {
         arrow += getArrow;
-        // 矢の
+        // ステータスバーを更新
+        arrowCounterText.text = "x " + arrow.ToString();
     }
 
     //剣の音声
