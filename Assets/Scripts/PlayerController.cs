@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    // 攻撃力
     public int attackPower = 1;
+    // 矢の残り本数
+    public int arrow = 10;
 
     // 移動中かどうか
     public bool isMoving = false;
@@ -22,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
     DealDamage dealDamage;
+    public TextMeshProUGUI arrowCounterText;
 
     Animator animator;
 
@@ -264,26 +269,29 @@ public class PlayerController : MonoBehaviour
         // 移動中フラグを戻す
         isMoving = false;
 
-        // 移動が入力され続けてれば引き続き移動する
-        if (Input.GetKey("up"))
+        if (!dealDamage.isDead)
         {
-            MoveDirection(Vector3.up, "WalkUp");
-            currentDirection = Vector3.up;
-        }
-        else if (Input.GetKey("down"))
-        {
-            MoveDirection(Vector3.down, "WalkDown");
-            currentDirection = Vector3.down;
-        }
-        else if (Input.GetKey("left"))
-        {
-            MoveDirection(Vector3.left, "WalkLeft");
-            currentDirection = Vector3.left;
-        }
-        else if (Input.GetKey("right"))
-        {
-            MoveDirection(Vector3.right, "WalkRight");
-            currentDirection = Vector3.right;
+            // 移動が入力され続けてれば引き続き移動する
+            if (Input.GetKey("up"))
+            {
+                MoveDirection(Vector3.up, "WalkUp");
+                currentDirection = Vector3.up;
+            }
+            else if (Input.GetKey("down"))
+            {
+                MoveDirection(Vector3.down, "WalkDown");
+                currentDirection = Vector3.down;
+            }
+            else if (Input.GetKey("left"))
+            {
+                MoveDirection(Vector3.left, "WalkLeft");
+                currentDirection = Vector3.left;
+            }
+            else if (Input.GetKey("right"))
+            {
+                MoveDirection(Vector3.right, "WalkRight");
+                currentDirection = Vector3.right;
+            }
         }
     }
 
@@ -336,44 +344,62 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Arrow()
     {
-        // 行動中フラグオン
-        isMoving = true;
+        if (arrow >= 1)
+        {
+            // 行動中フラグオン
+            isMoving = true;
 
-        Debug.Log("弓を放つ");
+            Debug.Log("弓を放つ");
 
-        // 矢を飛ばす向きを取得
-        float arrowRotate;
-        if (currentDirection == Vector3.up)
-        {
-            arrowRotate = 180;
-        }
-        else if (currentDirection == Vector3.left)
-        {
-            arrowRotate = -90;
-        }
-        else if (currentDirection == Vector3.right)
-        {
-            arrowRotate = 90;
+            // 矢を飛ばす向きを取得
+            float arrowRotate;
+            if (currentDirection == Vector3.up)
+            {
+                arrowRotate = 180;
+            }
+            else if (currentDirection == Vector3.left)
+            {
+                arrowRotate = -90;
+            }
+            else if (currentDirection == Vector3.right)
+            {
+                arrowRotate = 90;
+            }
+            else
+            {
+                arrowRotate = 0;
+            }
+
+            //音を再生
+            ArrowSound();
+
+            // 矢インスタンスを生成
+            GameObject Arrow = Instantiate(arrowObject, transform.position + (currentDirection * 2 / 3), Quaternion.Euler(0, 0, arrowRotate));
+
+            // 矢の残り本数を減少し、ステータスバーを更新
+            arrow -= 1;
+            arrowCounterText.text = "x" + arrow.ToString();
+
+            // クールタイム
+            yield return new WaitForSeconds(attackCoolTime);
+
+            // 行動中フラグを戻す
+            isMoving = false;
+
+            yield return null;
         }
         else
         {
-            arrowRotate = 0;
+            yield return null;
         }
-
-        //音を再生
-        ArrowSound();
-
-        // 矢インスタンスを生成
-        GameObject Arrow = Instantiate(arrowObject, transform.position + (currentDirection * 2 / 3), Quaternion.Euler(0, 0, arrowRotate));
-
-        // クールタイム
-        yield return new WaitForSeconds(attackCoolTime);
-
-        // 行動中フラグを戻す
-        isMoving = false;
-
-        yield return null;
     }
+
+    public void GetArrow(int getArrow)
+    {
+        arrow += getArrow;
+        // 矢の
+    }
+
     //剣の音声
     public void SwordSound()
     {
