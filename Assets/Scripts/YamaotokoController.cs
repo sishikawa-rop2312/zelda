@@ -382,7 +382,7 @@ public class YamaotokoController : MonoBehaviour
             // 行動中フラグオン
             isMoving = true;
 
-            Debug.Log("墨を放つ");
+            Debug.Log("斧を投げる");
 
             // オブジェクトを飛ばす向きを取得
             // 矢を飛ばす向きを取得
