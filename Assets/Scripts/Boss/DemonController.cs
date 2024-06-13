@@ -22,6 +22,7 @@ public class DemonController : MonoBehaviour
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
     private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理するフラグ
+    private Camera mainCamera;//メインカメラ
 
     void Start()
     {
@@ -32,15 +33,23 @@ public class DemonController : MonoBehaviour
         animator.Play("DemonWalk");
         // ダメージ処理コンポーネントを取得
         dealDamage = GetComponent<DealDamage>();
+        mainCamera = Camera.main;//メインカメラの取得
     }
 
     void Update()
     {
-        // 死亡している場合、行動を停止する
-        if (dealDamage.isDead) return;
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible()) return;
         MoveTowardsPlayer();
         AttackPlayer();
     }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
+
 
     void MoveTowardsPlayer()
     {
