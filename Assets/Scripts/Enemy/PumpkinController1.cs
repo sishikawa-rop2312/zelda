@@ -64,8 +64,8 @@ public class EnemyController : MonoBehaviour
             {
                 ResetAnimation();
 
-                // 一度ダメージを受けるまで攻撃しない
-                if (dealDamage.hp == dealDamage.maxHp)
+                // 残りHPが1になったら攻撃しない
+                if (dealDamage.hp != 1)
                 {
                     Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
                     StartCoroutine(Attack());
@@ -76,8 +76,8 @@ public class EnemyController : MonoBehaviour
             {
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
-                // ダメージを追っていたらプレイヤーから逃げる
-                if (dealDamage.hp < dealDamage.maxHp) { directionToPlayer = -directionToPlayer; }
+                // 残りHPが1になったらプレイヤーから逃げる
+                if (dealDamage.hp == 1) { directionToPlayer = -directionToPlayer; }
                 Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
                 MoveDirection(directionToPlayer);
             }
