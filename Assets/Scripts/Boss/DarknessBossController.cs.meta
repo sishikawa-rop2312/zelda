@@ -3,7 +3,8 @@ guid: 227943c344c497b4fa5be1b06e70d2c5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - darknessAttackPrefab: {fileID: 1035946225708441661, guid: 0a0b21d5ec562e148b0f24568f4ff54e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

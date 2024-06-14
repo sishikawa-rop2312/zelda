@@ -6,11 +6,11 @@ public class DemonController : MonoBehaviour
 {
     public float moveSpeed = 1f; // 移動速度
     public float attackRange = 15f; // 攻撃範囲（マス数）
-    public GameObject fireballPrefab; // ファイアボールのプレハブ
+    public GameObject demonFlamePrefab; // DemonFlameのプレハブ
     public GameObject meleeAttackPrefab; // 近接攻撃のプレハブ
-    public float fireballSpeed = 1f; // ファイアボールの速度
+    public float demonFlameSpeed = 1f; // DemonFlameの速度
     public float attackCooldown = 5f; // 攻撃のクールダウン（5秒）
-    public int fireballDamage = 1; // ファイアボールのダメージ量
+    public int demonFlameDamage = 1; // DemonFlameのダメージ量
     public int meleeDamage = 2; // 近接攻撃のダメージ量
     public float meleeAttackCooldown = 2f; // 近接攻撃のクールダウンタイム（2秒）
     public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
@@ -22,7 +22,7 @@ public class DemonController : MonoBehaviour
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
     private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理するフラグ
-    private Camera mainCamera;//メインカメラ
+    private Camera mainCamera; // メインカメラ
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class DemonController : MonoBehaviour
         animator.Play("DemonWalk");
         // ダメージ処理コンポーネントを取得
         dealDamage = GetComponent<DealDamage>();
-        mainCamera = Camera.main;//メインカメラの取得
+        mainCamera = Camera.main; // メインカメラの取得
     }
 
     void Update()
@@ -49,7 +49,6 @@ public class DemonController : MonoBehaviour
         Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
         return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
-
 
     void MoveTowardsPlayer()
     {
@@ -112,11 +111,11 @@ public class DemonController : MonoBehaviour
             // プレイヤーとの距離を計算
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            // ファイアボール攻撃が可能な距離
-            //クールダウンが終了している場合に攻撃
+            // DemonFlame攻撃が可能な距離
+            // クールダウンが終了している場合に攻撃
             if (distanceToPlayer <= attackRange * 32f && Time.time >= nextAttackTime)
             {
-                FireballAttack();
+                DemonFlameAttack();
                 // 次の攻撃可能時間を設定
                 nextAttackTime = Time.time + attackCooldown;
             }
@@ -162,9 +161,9 @@ public class DemonController : MonoBehaviour
         }
     }
 
-    void FireballAttack()
+    void DemonFlameAttack()
     {
-        // ファイアボールを扇形に3方向発射
+        // DemonFlameを扇形に3方向発射
         Vector3[] directions = new Vector3[]
         {
             (player.position - transform.position).normalized,
@@ -174,14 +173,14 @@ public class DemonController : MonoBehaviour
 
         foreach (var direction in directions)
         {
-            GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.identity);
-            fireball.GetComponent<Rigidbody2D>().velocity = direction * fireballSpeed;
+            GameObject demonFlame = Instantiate(demonFlamePrefab, transform.position, Quaternion.identity);
+            demonFlame.GetComponent<Rigidbody2D>().velocity = direction * demonFlameSpeed;
 
-            // ファイアボールのダメージ量を設定
-            Fireball fireballScript = fireball.GetComponent<Fireball>();
-            if (fireballScript != null)
+            // DemonFlameのダメージ量を設定
+            DemonFlame demonFlameScript = demonFlame.GetComponent<DemonFlame>();
+            if (demonFlameScript != null)
             {
-                fireballScript.damage = fireballDamage;
+                demonFlameScript.damage = demonFlameDamage;
             }
         }
     }

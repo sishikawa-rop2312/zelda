@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: f0e3aa36fedd7c144ad89f3c9212051e
+guid: ce929235c9b05954cbad6a27d8ed0d11
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - windAttackPrefab: {fileID: 8807799208992892894, guid: 415cf7ca535d171478ff6b324875fded, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

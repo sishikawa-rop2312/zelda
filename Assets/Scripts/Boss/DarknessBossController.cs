@@ -18,7 +18,6 @@ public class DarknessBossController : MonoBehaviour
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
     private bool isTeleporting = false;
-    private Camera mainCamera;//メインカメラ
 
     void Start()
     {
@@ -27,23 +26,24 @@ public class DarknessBossController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator.Play("DarknessBossWalk");
         dealDamage = GetComponent<DealDamage>();
-        mainCamera = Camera.main;//メインカメラの取得
+
+        // ダメージイベントをフック
+        dealDamage.OnDamageTaken += HandleDamageTaken;
+    }
+
+    void OnDestroy()
+    {
+        // ダメージイベントのフックを解除
+        dealDamage.OnDamageTaken -= HandleDamageTaken;
     }
 
     void Update()
     {
-        // 死亡している場合、またはカメラに映っていなければ行動を停止
-        if (dealDamage.isDead || !IsVisible()) return;
+        // 死亡している場合、またはテレポート中は行動を停止
+        if (dealDamage.isDead || isTeleporting) return;
         MoveAwayFromPlayer();
         AttackPlayer();
     }
-
-    bool IsVisible()
-    {
-        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
-        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
-    }
-
 
     void MoveAwayFromPlayer()
     {
@@ -117,9 +117,8 @@ public class DarknessBossController : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    void HandleDamageTaken(float damage)
     {
-        dealDamage.Damage(damage);
         if (!dealDamage.isDead)
         {
             StartCoroutine(Teleport());
@@ -130,39 +129,57 @@ public class DarknessBossController : MonoBehaviour
     {
         isTeleporting = true;
 
-        // テレポート前にフェードアウト効果を無効にする
-        Color color = spriteRenderer.color;
-        color.a = 0;
-        spriteRenderer.color = color;
-
-        yield return new WaitForSeconds(0.5f); // 少し待ってからテレポート
-
         Vector3 newPosition = GetRandomPosition();
         while (IsPositionBlocked(newPosition))
         {
             newPosition = GetRandomPosition();
         }
 
-        Debug.Log("テレポート先の新しい位置: " + newPosition);
         transform.position = newPosition;
 
-        // テレポート後にフェードイン効果を無効にする
-        color.a = 1;
-        spriteRenderer.color = color;
-
         isTeleporting = false;
+        yield return null;
     }
 
     Vector3 GetRandomPosition()
     {
-        float x = Random.Range(-10f, 10f);
-        float y = Random.Range(-10f, 10f);
-        return new Vector3(x, y, 0);
+        Vector3 newPosition = Vector3.zero;
+        bool validPosition = false;
+
+        while (!validPosition)
+        {
+            // テレポート可能範囲内のランダムな位置を選択
+            float x = Random.Range(-6.5f, 6.5f);
+            float y = Random.Range(-12.5f, -8.5f);
+            newPosition = new Vector3(x, y, 0);
+
+            // 左上、右上、右下の制限
+            if ((x == -6.5f && (y >= -12.5f && y <= -8.5f)) ||
+                (x == 3.5f && y == -8.5f) ||
+                (x == 6.5f && (y == -9.5f || y == -12.5f)))
+            {
+                continue;
+            }
+
+            // 障害物やプレイヤー、敵と重ならない位置かをチェック
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, 1f);
+            validPosition = true;
+            foreach (var collider in colliders)
+            {
+                if (collider.CompareTag("Obstacle") || collider.CompareTag("Player") || collider.CompareTag("Enemy"))
+                {
+                    validPosition = false;
+                    break;
+                }
+            }
+        }
+
+        return newPosition;
     }
 
     bool IsPositionBlocked(Vector3 position)
     {
-        Collider2D hit = Physics2D.OverlapCircle(position, 1f, obstacleLayerMask);
+        Collider2D hit = Physics2D.OverlapCircle(position, 1f, obstacleLayerMask | LayerMask.GetMask("Player") | LayerMask.GetMask("Enemy"));
         return hit != null;
     }
 }
