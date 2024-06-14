@@ -20281,7 +20281,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.83, y: 0.97}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!212 &546827180
 SpriteRenderer:
@@ -20364,7 +20364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Scenes/SandStoneMap
   spawnPosition: {x: 1.5, y: 12.5, z: 0}
-  cameraPosition: {x: 0, y: 10.05, z: -10}
+  cameraPosition: {x: 0, y: 10, z: -10}
   sound: {fileID: 8300000, guid: 1642e84ad6478404fab916be3875f460, type: 3}
 --- !u!82 &546827183
 AudioSource:
