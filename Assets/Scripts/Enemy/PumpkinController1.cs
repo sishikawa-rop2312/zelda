@@ -76,6 +76,8 @@ public class EnemyController : MonoBehaviour
             {
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                // ダメージを追っていたらプレイヤーから逃げる
+                if (dealDamage.hp < dealDamage.maxHp) { directionToPlayer = -directionToPlayer; }
                 Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
                 MoveDirection(directionToPlayer);
             }
