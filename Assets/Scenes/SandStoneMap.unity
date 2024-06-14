@@ -9028,6 +9028,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 972532351387806539, guid: 33922199103058845980582ce36b29ad, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 8023388975508640239, guid: a1092a3bc17504f49846fee5d7723868, type: 3}
     - target: {fileID: 2901582444587584739, guid: 33922199103058845980582ce36b29ad, type: 3}
       propertyPath: m_Name
       value: KingPumpkin
