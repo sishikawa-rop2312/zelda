@@ -17,6 +17,9 @@ public class BoneGimmickController : MonoBehaviour
 
     //敵２
     public GameObject enemy2;
+    //敵3
+    public GameObject enemy3;
+
 
     //壊すオブジェクト
     public GameObject destroyObject;
@@ -64,7 +67,7 @@ public class BoneGimmickController : MonoBehaviour
             Debug.Log("敵のHPを調査中");
 
 
-            if (enemy1 == null && enemy2 == null)
+            if (enemy1 == null && enemy2 == null && enemy3 == null)
             {
                 Debug.Log("敵は全員死にました");
 
