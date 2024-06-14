@@ -11,6 +11,7 @@ public class DarknessBossController : MonoBehaviour
     public float attackCooldown = 5f; // 攻撃のクールダウン（5秒）
     public float attackDamage = 0.5f; // 攻撃のダメージ量
     public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
+    public GameObject demonPrefab; // デーモンのプレハブ
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
@@ -18,6 +19,7 @@ public class DarknessBossController : MonoBehaviour
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
     private bool isTeleporting = false;
+    private Camera mainCamera; // メインカメラ
 
     void Start()
     {
@@ -26,23 +28,32 @@ public class DarknessBossController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator.Play("DarknessBossWalk");
         dealDamage = GetComponent<DealDamage>();
+        mainCamera = Camera.main; // メインカメラの取得
 
         // ダメージイベントをフック
         dealDamage.OnDamageTaken += HandleDamageTaken;
+        dealDamage.OnDeath += Die; // 死亡イベントをフック
     }
 
     void OnDestroy()
     {
         // ダメージイベントのフックを解除
         dealDamage.OnDamageTaken -= HandleDamageTaken;
+        dealDamage.OnDeath -= Die; // 死亡イベントのフックを解除
     }
 
     void Update()
     {
-        // 死亡している場合、またはテレポート中は行動を停止
-        if (dealDamage.isDead || isTeleporting) return;
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible() || isTeleporting) return;
         MoveAwayFromPlayer();
         AttackPlayer();
+    }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
     void MoveAwayFromPlayer()
@@ -135,6 +146,7 @@ public class DarknessBossController : MonoBehaviour
             newPosition = GetRandomPosition();
         }
 
+        Debug.Log("テレポート先の新しい位置: " + newPosition);
         transform.position = newPosition;
 
         isTeleporting = false;
@@ -148,20 +160,12 @@ public class DarknessBossController : MonoBehaviour
 
         while (!validPosition)
         {
-            // テレポート可能範囲内のランダムな位置を選択
-            float x = Random.Range(-6.5f, 6.5f);
-            float y = Random.Range(-12.5f, -8.5f);
-            newPosition = new Vector3(x, y, 0);
+            newPosition = new Vector3(
+                Random.Range(-4.5f, 6.5f),
+                Random.Range(8.5f, 11.5f),
+                0
+            );
 
-            // 左上、右上、右下の制限
-            if ((x == -6.5f && (y >= -12.5f && y <= -8.5f)) ||
-                (x == 3.5f && y == -8.5f) ||
-                (x == 6.5f && (y == -9.5f || y == -12.5f)))
-            {
-                continue;
-            }
-
-            // 障害物やプレイヤー、敵と重ならない位置かをチェック
             Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, 1f);
             validPosition = true;
             foreach (var collider in colliders)
@@ -181,5 +185,14 @@ public class DarknessBossController : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(position, 1f, obstacleLayerMask | LayerMask.GetMask("Player") | LayerMask.GetMask("Enemy"));
         return hit != null;
+    }
+
+    void Die()
+    {
+        if (demonPrefab != null)
+        {
+            Instantiate(demonPrefab, transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 }
