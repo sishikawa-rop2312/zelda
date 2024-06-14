@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e3aa36fedd7c144ad89f3c9212051e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.8
+  moveSpeed: 0
   attackRange: 5
   windAttackPrefab: {fileID: 8807799208992892894, guid: 415cf7ca535d171478ff6b324875fded, type: 3}
   attackSpeed: 3
@@ -202,7 +202,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!114 &8401053308553326880
 MonoBehaviour:
