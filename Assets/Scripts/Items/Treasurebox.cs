@@ -38,8 +38,8 @@ public class Treasurebox : MonoBehaviour
     // プレイヤーの向いてる1マス前に宝箱存在するか
     bool IsPlayerOpenTreasurebox()
     {
-        Collider2D hit = Physics2D.Raycast(playerController.transform.position, playerController.currentDirection, 1f, detectionMask).collider;
-        if (hit != null && hit.CompareTag("Treasurebox"))
+        RaycastHit2D hit = Physics2D.Raycast(playerController.transform.position, playerController.currentDirection, 1f, detectionMask);
+        if (hit.collider != null && hit.collider.gameObject == gameObject)
         {
             return true;
         }
