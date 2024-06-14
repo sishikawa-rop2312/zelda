@@ -20845,6 +20845,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5041103014320645510, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 9055653333566439936, guid: e4895df6e4602ac49a01dc25ee930aa1, type: 3}
     - target: {fileID: 5697291338271255219, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.655172
@@ -20902,6 +20906,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime1
       objectReference: {fileID: 0}
+    - target: {fileID: 5041103014320645510, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 9055653333566439936, guid: e4895df6e4602ac49a01dc25ee930aa1, type: 3}
     - target: {fileID: 5697291338271255219, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.5
@@ -21602,6 +21610,10 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5041103014320645510, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5697291338271255219, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.655172
@@ -21670,7 +21682,7 @@ PrefabInstance:
     - target: {fileID: 5041103014320645510, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: dropItem
       value: 
-      objectReference: {fileID: 1632753841732518501, guid: 8b5cb9a167d11ea49a93563d81e64e81, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5697291338271255219, guid: 670a8e54925e5fd46b96040387289fc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -28.655172
@@ -23399,6 +23411,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6762176143139765139, guid: a3e0528ebe68b8549a0fecbf9cc6cc17, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 9055653333566439936, guid: e4895df6e4602ac49a01dc25ee930aa1, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
