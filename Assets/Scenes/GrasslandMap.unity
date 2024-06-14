@@ -20363,7 +20363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScene: Scenes/SandStoneMap
-  spawnPosition: {x: 1.5, y: 12.5, z: 0}
+  spawnPosition: {x: -7.5, y: 11.5, z: 0}
   cameraPosition: {x: 0, y: 10, z: -10}
   sound: {fileID: 8300000, guid: 1642e84ad6478404fab916be3875f460, type: 3}
 --- !u!82 &546827183
