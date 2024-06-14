@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8272516382104201373}
   - component: {fileID: 515097652770074424}
+  - component: {fileID: 5003911005110992626}
   - component: {fileID: 1486685677309540854}
   - component: {fileID: 57318883110918838}
   - component: {fileID: 7539356051978962185}
   - component: {fileID: 894666555660316527}
-  - component: {fileID: 5003911005110992626}
   m_Layer: 6
   m_Name: Boss_Demon
   m_TagString: Enemy
@@ -51,16 +51,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.8
   attackRange: 15
-  fireballPrefab: {fileID: 5041774989670566021, guid: 5880f05f5f6b52d42914cd08fb74da95, type: 3}
+  demonFlamePrefab: {fileID: 3440556465925047896, guid: 260db8ca246cfea49aa96709ecfaa2e7, type: 3}
   meleeAttackPrefab: {fileID: 1799951992037777305, guid: 5e4f4d650ea90b4438c8c4e6f7aaef7b, type: 3}
-  fireballSpeed: 1.5
-  attackCooldown: 5
-  fireballDamage: 1
+  demonFlameSpeed: 2
+  attackCooldown: 3.5
+  demonFlameDamage: 1
   meleeDamage: 3
-  meleeAttackCooldown: 5
+  meleeAttackCooldown: 10
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &5003911005110992626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494705605963165087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 10
+  maxHp: 10
+  defense: 1
+  isDead: 0
+  stunTime: 1
+  playerDamageSound: {fileID: 0}
 --- !u!212 &1486685677309540854
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -206,20 +224,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
---- !u!114 &5003911005110992626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494705605963165087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f519886487f0fbb49aa3696c9ffad214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 3
-  maxHp: 3
-  defense: 0.5
-  isDead: 0
-  stunTime: 1
