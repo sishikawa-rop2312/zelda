@@ -18,6 +18,8 @@ public class ItemArrow : MonoBehaviour
 
     }
 
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other != null && other.gameObject.CompareTag("Player"))
