@@ -16,7 +16,7 @@ public class GimmickButtonController : MonoBehaviour
     AudioSource audioSource;
 
     //押したかおしていないか
-    bool buttonPush = false;
+    public bool buttonPush = false;
 
     // //動く墓
     // public GameObject moveGrave;
