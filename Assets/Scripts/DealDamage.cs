@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class DealDamage : MonoBehaviour
     public float maxHp = 3;
     public float defense = 1f;
     public bool isDead = false; // 行動停止フラグ
+
+    // ダメージを受けたときのイベント
+    public event Action<float> OnDamageTaken;
 
     // 死亡時にドロップするアイテム
     public GameObject dropItem;
@@ -70,6 +74,13 @@ public class DealDamage : MonoBehaviour
             }
             hp -= actualDamage;
             Debug.Log(this.gameObject.name + "のHPが" + actualDamage + "減った");
+
+            if (hp > 0)
+            {
+                // ダメージを受けたことを通知する
+                OnDamageTaken?.Invoke(damage);
+            }
+
             if (hp <= 0)
             {
                 Die();
