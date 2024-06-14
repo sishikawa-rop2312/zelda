@@ -7,14 +7,16 @@ public class MoveGrave : MonoBehaviour
     //bottunを設定
     public GameObject gimmickButton;
 
+    //音源
+    public AudioClip sound;
+    AudioSource audioSource;
 
 
     void Start()
     {
-        // //ボタンのコンポーネント取得
-        // GimmickButtonController buttonController = gimmickButton.GetComponent<GimmickButtonController>();
-        StartCoroutine(CheckButton());
 
+        StartCoroutine(CheckButton());
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,8 +39,10 @@ public class MoveGrave : MonoBehaviour
             {
                 Debug.Log("ボタンが押されました。これから墓の移動を開始します");
 
-                //動く処理を入れる
+                //音を鳴らす
+                audioSource.PlayOneShot(sound);
 
+                //動く処理を入れる
                 transform.position = new Vector3(-15.5f, -8.5f, 0);
 
 
