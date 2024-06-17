@@ -12,6 +12,8 @@ public class DarknessBossController : MonoBehaviour
     public float attackDamage = 0.5f; // 攻撃のダメージ量
     public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
     public GameObject demonPrefab; // デーモンのプレハブ
+    public AudioClip summonSound; // デーモン召喚時の音
+    private AudioSource audioSource; // AudioSource
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
@@ -29,6 +31,7 @@ public class DarknessBossController : MonoBehaviour
         animator.Play("DarknessBossWalk");
         dealDamage = GetComponent<DealDamage>();
         mainCamera = Camera.main; // メインカメラの取得
+        audioSource = gameObject.AddComponent<AudioSource>(); // AudioSourceを追加
 
         // ダメージイベントをフック
         dealDamage.OnDamageTaken += HandleDamageTaken;
@@ -206,7 +209,11 @@ public class DarknessBossController : MonoBehaviour
         {
             GameObject demon = Instantiate(demonPrefab, position, Quaternion.identity);
             demon.SetActive(true); // デーモンをアクティブにする
-            StartCoroutine(DelayedEnableDemon(demon));
+            if (summonSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(summonSound); // デーモン召喚音を再生
+            }
+            demon.GetComponent<DemonController>().enabled = true;
         }
 
         Destroy(gameObject);
@@ -226,11 +233,5 @@ public class DarknessBossController : MonoBehaviour
 
         color.a = 0;
         spriteRenderer.color = color;
-    }
-
-    IEnumerator DelayedEnableDemon(GameObject demon)
-    {
-        yield return new WaitForSeconds(2f); // 2秒間行動を停止する
-        demon.GetComponent<DemonController>().enabled = true;
     }
 }
