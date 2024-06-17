@@ -220,6 +220,6 @@ MonoBehaviour:
   maxHp: 3
   defense: 0.5
   isDead: 0
-  dropItem: {fileID: 0}
+  dropItem: {fileID: 5708774422301016286, guid: ea637507d6a8a54419e4b8963ed9cc67, type: 3}
   stunTime: 1
   playerDamageSound: {fileID: 0}

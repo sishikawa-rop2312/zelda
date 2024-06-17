@@ -70,7 +70,10 @@ MonoBehaviour:
   hp: 1
   maxHp: 3
   defense: 1
+  isDead: 0
+  dropItem: {fileID: 1632753841732518501, guid: 8b5cb9a167d11ea49a93563d81e64e81, type: 3}
   stunTime: 1
+  playerDamageSound: {fileID: 0}
 --- !u!212 &5620812736405293456
 SpriteRenderer:
   m_ObjectHideFlags: 0
