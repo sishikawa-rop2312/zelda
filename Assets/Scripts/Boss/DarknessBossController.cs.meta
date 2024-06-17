@@ -6,6 +6,7 @@ MonoImporter:
   defaultReferences:
   - darknessAttackPrefab: {fileID: 1035946225708441661, guid: 0a0b21d5ec562e148b0f24568f4ff54e, type: 3}
   - demonPrefab: {fileID: 1494705605963165087, guid: 56852254c101dd042aefa967a81aaf92, type: 3}
+  - summonSound: {fileID: 8300000, guid: e9e356c9bb2f3e843825a5e743ae4849, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
