@@ -10,8 +10,8 @@ public class DemonController : MonoBehaviour
     public GameObject meleeAttackPrefab; // 近接攻撃のプレハブ
     public float demonFlameSpeed = 1f; // DemonFlameの速度
     public float attackCooldown = 5f; // 攻撃のクールダウン（5秒）
-    public int demonFlameDamage = 1; // DemonFlameのダメージ量
-    public int meleeDamage = 2; // 近接攻撃のダメージ量
+    public float demonFlameDamage = 1; // DemonFlameのダメージ量
+    public float meleeDamage = 2; // 近接攻撃のダメージ量
     public float meleeAttackCooldown = 2f; // 近接攻撃のクールダウンタイム（2秒）
     public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
 
@@ -23,6 +23,7 @@ public class DemonController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理するフラグ
     private Camera mainCamera; // メインカメラ
+    private bool isSpawning = true; // スポーン状態を管理するフラグ
 
     void Start()
     {
@@ -34,14 +35,21 @@ public class DemonController : MonoBehaviour
         // ダメージ処理コンポーネントを取得
         dealDamage = GetComponent<DealDamage>();
         mainCamera = Camera.main; // メインカメラの取得
+        StartCoroutine(SpawnDelay());
     }
 
     void Update()
     {
-        // 死亡している場合、またはカメラに映っていなければ行動を停止
-        if (dealDamage.isDead || !IsVisible()) return;
+        // スポーン中または死亡している場合、またはカメラに映っていなければ行動を停止
+        if (isSpawning || dealDamage.isDead || !IsVisible()) return;
         MoveTowardsPlayer();
         AttackPlayer();
+    }
+
+    IEnumerator SpawnDelay()
+    {
+        yield return new WaitForSeconds(2f);
+        isSpawning = false;
     }
 
     bool IsVisible()

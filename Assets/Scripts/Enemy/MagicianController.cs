@@ -108,8 +108,6 @@ public class MagicianController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // プレイヤーに当たった時の処理
-            Debug.Log("魔術師の攻撃！");
         }
     }
 
@@ -120,7 +118,6 @@ public class MagicianController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("魔術師が倒された！");
         Destroy(gameObject); // 敵キャラクターを消滅させる
     }
 }
