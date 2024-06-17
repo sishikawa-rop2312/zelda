@@ -13,11 +13,15 @@ public class Treasurebox : MonoBehaviour
     public GameObject itemPrefab; // 出現させるアイテムのプレハブ
     public float fadeDuration = 1.0f; // フェードアウトの時間
 
+    public AudioClip sound;
+    private AudioSource audioSource;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         playerController = FindObjectOfType<PlayerController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -33,6 +37,7 @@ public class Treasurebox : MonoBehaviour
         animator.SetTrigger("OpenTrigger");
         isOpen = true;
         StartCoroutine(FadeOutAndSpawnItem());
+
     }
 
     // プレイヤーの向いてる1マス前に宝箱存在するか
@@ -49,6 +54,8 @@ public class Treasurebox : MonoBehaviour
     // 宝箱を破棄してアイテムを出現させる
     IEnumerator FadeOutAndSpawnItem()
     {
+        Debug.Log("宝箱あけました");
+        audioSource.PlayOneShot(sound);
         // フェードアウト
         Color color = spriteRenderer.color;
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
