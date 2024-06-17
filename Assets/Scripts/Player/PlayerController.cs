@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     //攻撃音
     public AudioClip swordSound;
     public AudioClip arrowSound;
+    public AudioClip obtainarrowSound;
     private AudioSource audioSource;
 
     void Awake()
@@ -408,6 +409,8 @@ public class PlayerController : MonoBehaviour
         arrow += getArrow;
         // ステータスバーを更新
         arrowCounterText.text = "x " + arrow.ToString();
+        //音を鳴らす
+        audioSource.PlayOneShot(obtainarrowSound);
     }
 
     //剣の音声
@@ -419,6 +422,10 @@ public class PlayerController : MonoBehaviour
     public void ArrowSound()
     {
         audioSource.PlayOneShot(arrowSound);
+    }
+    public void ObtainArrowSound()
+    {
+        audioSource.PlayOneShot(obtainarrowSound);
     }
 
 }
