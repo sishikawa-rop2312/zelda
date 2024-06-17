@@ -703,6 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 1546237340721601503, guid: edd061fc488496244bb05cf8369aa00b, type: 3}
+  halfHeartPrefab: {fileID: 7864767105447013060, guid: 314e06b56d4444d498bfd5445659f4d0, type: 3}
+  noHeartPrefab: {fileID: 8656913275987183644, guid: cb2e0558602f61f47b3e4497e610ecb5, type: 3}
 --- !u!1 &7378935380672720926
 GameObject:
   m_ObjectHideFlags: 0

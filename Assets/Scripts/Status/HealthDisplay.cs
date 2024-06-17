@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class HealthDisplay : MonoBehaviour
 {
     public Image heartPrefab;
+    public Image halfHeartPrefab;
+    public Image noHeartPrefab;
     List<Image> hearts = new List<Image>();
 
     public void SetHealth(float currentHP, float maxHP)
@@ -23,28 +25,23 @@ public class HealthDisplay : MonoBehaviour
         // ハートの数を調整して再生成
         for (int i = 0; i < maxHearts; i++)
         {
-            Image newHeart = Instantiate(heartPrefab, transform);
-            hearts.Add(newHeart);
-        }
-
-        // ハートの表示を更新
-        for (int i = 0; i < hearts.Count; i++)
-        {
+            Image newHeart;
             if (i < currentHP)
             {
                 if (i + 0.5f == currentHP)
                 {
-                    hearts[i].fillAmount = 0.5f;
+                    newHeart = Instantiate(halfHeartPrefab, transform);
                 }
                 else
                 {
-                    hearts[i].fillAmount = 1f;
+                    newHeart = Instantiate(heartPrefab, transform);
                 }
             }
             else
             {
-                hearts[i].fillAmount = 0f;
+                newHeart = Instantiate(noHeartPrefab, transform);
             }
+            hearts.Add(newHeart);
         }
     }
 }
