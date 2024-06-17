@@ -14,6 +14,7 @@ public class DemonController : MonoBehaviour
     public float meleeDamage = 2; // 近接攻撃のダメージ量
     public float meleeAttackCooldown = 2f; // 近接攻撃のクールダウンタイム（2秒）
     public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
+    public AudioClip spawnSound; // スポーン時のサウンドクリップ
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
@@ -24,6 +25,7 @@ public class DemonController : MonoBehaviour
     private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理するフラグ
     private Camera mainCamera; // メインカメラ
     private bool isSpawning = true; // スポーン状態を管理するフラグ
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -35,6 +37,7 @@ public class DemonController : MonoBehaviour
         // ダメージ処理コンポーネントを取得
         dealDamage = GetComponent<DealDamage>();
         mainCamera = Camera.main; // メインカメラの取得
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(SpawnDelay());
     }
 
@@ -48,7 +51,11 @@ public class DemonController : MonoBehaviour
 
     IEnumerator SpawnDelay()
     {
-        yield return new WaitForSeconds(2f);
+        audioSource.PlayOneShot(spawnSound);
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
         isSpawning = false;
     }
 
