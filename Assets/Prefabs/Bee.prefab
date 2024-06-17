@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 0.5
-  moveSpeed: 0.1
+  moveSpeed: 0.15
   searchRange: 1
   attackCoolTime: 3
   detectionMask:

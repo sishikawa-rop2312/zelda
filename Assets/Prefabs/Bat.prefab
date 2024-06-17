@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 0.5
-  moveSpeed: 0.1
+  moveSpeed: 0.15
   searchRange: 1
   attackCoolTime: 3
   detectionMask:
@@ -112,6 +112,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackEffect: {fileID: 6803925751511817757, guid: 15065a358fb2d6041bda3e01588959e4, type: 3}
+  dropItem: {fileID: 0}
   playerTransform: {fileID: 0}
 --- !u!61 &9171225592745549227
 BoxCollider2D:
@@ -222,5 +223,6 @@ MonoBehaviour:
   maxHp: 3
   defense: 1
   isDead: 0
+  dropItem: {fileID: 0}
   stunTime: 1
   playerDamageSound: {fileID: 0}
