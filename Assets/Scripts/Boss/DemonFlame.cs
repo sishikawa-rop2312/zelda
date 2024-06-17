@@ -6,7 +6,7 @@ public class DemonFlame : MonoBehaviour
 {
     public float lifetime = 3f;  // DemonFlameが存在する時間
     public LayerMask obstacleLayer;  // 障害物レイヤー
-    public int damage = 1;  // DemonFlameのダメージ量
+    public float damage = 1;  // DemonFlameのダメージ量
 
     void Start()
     {

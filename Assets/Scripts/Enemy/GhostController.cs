@@ -108,8 +108,6 @@ public class GhostController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // プレイヤーに当たった時の処理
-            Debug.Log("敵の攻撃が当たった！");
         }
     }
 
@@ -120,7 +118,6 @@ public class GhostController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("魔術師が倒された！");
         Destroy(gameObject); // 敵キャラクターを消滅させる
     }
 }
