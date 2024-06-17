@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DealDamage : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class DealDamage : MonoBehaviour
 
     // ダメージを受けたときのイベント
     public event Action<float> OnDamageTaken;
+    // 死亡時のイベント
+    public event Action OnDeath;
 
     // 死亡時にドロップするアイテム
     public GameObject dropItem;
@@ -75,11 +78,8 @@ public class DealDamage : MonoBehaviour
             hp -= actualDamage;
             Debug.Log(this.gameObject.name + "のHPが" + actualDamage + "減った");
 
-            if (hp > 0)
-            {
-                // ダメージを受けたことを通知する
-                OnDamageTaken?.Invoke(damage);
-            }
+            // ダメージを受けたことを通知する
+            OnDamageTaken?.Invoke(damage);
 
             if (hp <= 0)
             {
@@ -99,6 +99,7 @@ public class DealDamage : MonoBehaviour
     void Die()
     {
         isDead = true; // 行動停止フラグを設定
+        OnDeath?.Invoke(); // 死亡イベントを通知
         if (this.gameObject.name == "Player")
         {
             Debug.Log("ゲームオーバー！");

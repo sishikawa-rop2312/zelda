@@ -52,10 +52,10 @@ MonoBehaviour:
   moveSpeed: 0
   attackRange: 5
   windAttackPrefab: {fileID: 8807799208992892894, guid: 415cf7ca535d171478ff6b324875fded, type: 3}
-  attackSpeed: 3
+  attackSpeed: 2
   attackCooldown: 5
   attackDamage: 1.5
-  pauseAfterAttackDuration: 5
+  pauseAfterAttackDuration: 7.5
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -220,6 +220,6 @@ MonoBehaviour:
   maxHp: 3
   defense: 0.5
   isDead: 0
-  dropItem: {fileID: 0}
+  dropItem: {fileID: 5708774422301016286, guid: ea637507d6a8a54419e4b8963ed9cc67, type: 3}
   stunTime: 1
   playerDamageSound: {fileID: 0}

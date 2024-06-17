@@ -11,6 +11,7 @@ public class DarknessBossController : MonoBehaviour
     public float attackCooldown = 5f; // 攻撃のクールダウン（5秒）
     public float attackDamage = 0.5f; // 攻撃のダメージ量
     public LayerMask obstacleLayerMask; // 障害物のレイヤーマスク
+    public GameObject demonPrefab; // デーモンのプレハブ
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
@@ -18,6 +19,7 @@ public class DarknessBossController : MonoBehaviour
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
     private bool isTeleporting = false;
+    private Camera mainCamera; // メインカメラ
 
     void Start()
     {
@@ -26,23 +28,32 @@ public class DarknessBossController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator.Play("DarknessBossWalk");
         dealDamage = GetComponent<DealDamage>();
+        mainCamera = Camera.main; // メインカメラの取得
 
         // ダメージイベントをフック
         dealDamage.OnDamageTaken += HandleDamageTaken;
+        dealDamage.OnDeath += Die; // 死亡イベントをフック
     }
 
     void OnDestroy()
     {
         // ダメージイベントのフックを解除
         dealDamage.OnDamageTaken -= HandleDamageTaken;
+        dealDamage.OnDeath -= Die; // 死亡イベントのフックを解除
     }
 
     void Update()
     {
-        // 死亡している場合、またはテレポート中は行動を停止
-        if (dealDamage.isDead || isTeleporting) return;
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible() || isTeleporting) return;
         MoveAwayFromPlayer();
         AttackPlayer();
+    }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
     void MoveAwayFromPlayer()
@@ -148,20 +159,19 @@ public class DarknessBossController : MonoBehaviour
 
         while (!validPosition)
         {
-            // テレポート可能範囲内のランダムな位置を選択
-            float x = Random.Range(-6.5f, 6.5f);
-            float y = Random.Range(-12.5f, -8.5f);
-            newPosition = new Vector3(x, y, 0);
+            newPosition = new Vector3(
+                Mathf.Round(Random.Range(-6.5f, 6.5f)) + 0.5f,
+                Mathf.Round(Random.Range(8.5f, 11.5f)) + 0.5f,
+                0
+            );
 
-            // 左上、右上、右下の制限
-            if ((x == -6.5f && (y >= -12.5f && y <= -8.5f)) ||
-                (x == 3.5f && y == -8.5f) ||
-                (x == 6.5f && (y == -9.5f || y == -12.5f)))
+            // カメラの端から3マス上、1マス左右を除外する
+            if (newPosition.x < -6.5f || newPosition.x > 6.5f || newPosition.y < 8.5f || newPosition.y > 11.5f)
             {
+                validPosition = false;
                 continue;
             }
 
-            // 障害物やプレイヤー、敵と重ならない位置かをチェック
             Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, 1f);
             validPosition = true;
             foreach (var collider in colliders)
@@ -181,5 +191,46 @@ public class DarknessBossController : MonoBehaviour
     {
         Collider2D hit = Physics2D.OverlapCircle(position, 1f, obstacleLayerMask | LayerMask.GetMask("Player") | LayerMask.GetMask("Enemy"));
         return hit != null;
+    }
+
+    void Die()
+    {
+        StartCoroutine(SpawnDemonAfterDelay(transform.position));
+    }
+
+    IEnumerator SpawnDemonAfterDelay(Vector3 position)
+    {
+        yield return StartCoroutine(FadeOut());
+
+        if (demonPrefab != null)
+        {
+            GameObject demon = Instantiate(demonPrefab, position, Quaternion.identity);
+            demon.SetActive(true); // デーモンをアクティブにする
+            StartCoroutine(DelayedEnableDemon(demon));
+        }
+
+        Destroy(gameObject);
+    }
+
+    IEnumerator FadeOut()
+    {
+        float fadeDuration = 1f;
+        Color color = spriteRenderer.color;
+
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        {
+            color.a = Mathf.Lerp(1, 0, t / fadeDuration);
+            spriteRenderer.color = color;
+            yield return null;
+        }
+
+        color.a = 0;
+        spriteRenderer.color = color;
+    }
+
+    IEnumerator DelayedEnableDemon(GameObject demon)
+    {
+        yield return new WaitForSeconds(2f); // 2秒間行動を停止する
+        demon.GetComponent<DemonController>().enabled = true;
     }
 }
