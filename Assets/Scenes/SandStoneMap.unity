@@ -8625,7 +8625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 922654552}
   - component: {fileID: 922654553}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SafetyArea2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9375,7 +9375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1834565973}
   - component: {fileID: 1834565974}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SafetyArea3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
