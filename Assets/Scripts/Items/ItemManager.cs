@@ -39,7 +39,7 @@ public class ItemManager : MonoBehaviour
 
     public void UseHealthPotion()
     {
-        if (healthPotionCount > 0)
+        if (healthPotionCount > 0 && dealDamage.hp != dealDamage.maxHp)
         {
             dealDamage.Heal(1.0f);
             healthPotionCount--;
