@@ -4760,9 +4760,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f04cd3400142c04a8e62063dacfdc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Scenes/BoneyardMap
-  spawnPosition: {x: -17.5, y: -9.5, z: 0}
-  cameraPosition: {x: -18.09, y: -10.02, z: -10}
+  targetScene: Scenes/CaveMap
+  spawnPosition: {x: 18.5, y: -20.5, z: 0}
+  cameraPosition: {x: 18.1, y: -19.86, z: -10}
   sound: {fileID: 8300000, guid: 77fd1241677e6f54e8bd5ee93469c8b1, type: 3}
 --- !u!61 &2043624502
 BoxCollider2D:
