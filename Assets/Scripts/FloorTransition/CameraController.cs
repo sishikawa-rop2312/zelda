@@ -23,18 +23,28 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        // プレイヤーがカメラの外に出た場合にカメラを移動
-        if (IsPlayerOutOfCameraBounds())
+        // playerControllerがnullであれば再取得を試みる
+        if (playerController == null)
         {
-            if (playerDealDamage != null)
+            playerController = FindObjectOfType<PlayerController>();
+        }
+
+        // playerControllerが存在する場合のみ処理を行う
+        if (playerController != null)
+        {
+            // プレイヤーがカメラの外に出た場合にカメラを移動
+            if (IsPlayerOutOfCameraBounds())
             {
-                // プレイヤーの移動を制限
-                playerDealDamage.isDead = true;
+                if (playerDealDamage != null)
+                {
+                    // プレイヤーの移動を制限
+                    playerDealDamage.isDead = true;
+                }
+                // 新しいカメラの位置を計算
+                Vector3 newCameraPosition = GetNewCameraPosition();
+                // カメラをスムーズに移動
+                StartCoroutine(SmoothMoveCamera(newCameraPosition));
             }
-            // 新しいカメラの位置を計算
-            Vector3 newCameraPosition = GetNewCameraPosition();
-            // カメラをスムーズに移動
-            StartCoroutine(SmoothMoveCamera(newCameraPosition));
         }
     }
 
@@ -92,7 +102,6 @@ public class CameraController : MonoBehaviour
 
         // 最終的に正確な新しい位置にカメラを設定
         transform.position = newCameraPosition;
-
 
         // 移動し終わったらプレイヤーの移動制限を解除
         if (playerDealDamage != null)
