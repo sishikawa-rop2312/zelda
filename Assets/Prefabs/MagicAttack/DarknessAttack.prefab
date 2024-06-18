@@ -53,6 +53,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   damage: 0.5
+  ignoreTag: Enemy
 --- !u!212 &5922497795607789338
 SpriteRenderer:
   m_ObjectHideFlags: 0
