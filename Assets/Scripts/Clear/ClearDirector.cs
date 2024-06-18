@@ -49,6 +49,7 @@ public class ClearDirector : MonoBehaviour
             {
                 isScrolling = false;
                 creditsContent.gameObject.SetActive(true);
+                scrollingText.gameObject.SetActive(false);
             }
         }
 
