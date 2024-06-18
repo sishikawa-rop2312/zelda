@@ -1188,9 +1188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f04cd3400142c04a8e62063dacfdc9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Scenes/BossMapScene
-  spawnPosition: {x: -0.5, y: -3.5, z: 0}
-  cameraPosition: {x: 0, y: 0, z: -10}
+  targetScene: Scenes/CaveMap
+  spawnPosition: {x: -4.5, y: -1.5, z: 0}
+  cameraPosition: {x: -0.1, y: 0.03, z: -10}
   sound: {fileID: 8300000, guid: 77fd1241677e6f54e8bd5ee93469c8b1, type: 3}
 --- !u!82 &228088966
 AudioSource:
