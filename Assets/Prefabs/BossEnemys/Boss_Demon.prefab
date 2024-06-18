@@ -58,7 +58,7 @@ MonoBehaviour:
   attackCooldown: 3.5
   demonFlameDamage: 1.5
   meleeDamage: 3
-  meleeAttackCooldown: 30
+  meleeAttackCooldown: 25
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
