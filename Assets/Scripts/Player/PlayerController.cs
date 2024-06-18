@@ -387,7 +387,10 @@ public class PlayerController : MonoBehaviour
             // 矢の残り本数を減少
             arrow -= 1;
             // ステータスバーを更新
-            arrowCounterText.text = "x " + arrow.ToString();
+            if (arrowCounterText != null)
+            {
+                arrowCounterText.text = "x " + arrow.ToString();
+            }
 
             // クールタイム
             yield return new WaitForSeconds(attackCoolTime);
