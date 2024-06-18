@@ -22,9 +22,9 @@ public class DemonController : MonoBehaviour
     private Animator animator;
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
-    private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理するフラグ
+    private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理
     private Camera mainCamera; // メインカメラ
-    private bool isSpawning = true; // スポーン状態を管理するフラグ
+    private bool isSpawning = true; // スポーン（フェードイン）状態を管理する
     private AudioSource audioSource;
 
     void Start()
@@ -34,7 +34,6 @@ public class DemonController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator.Play("DemonWalk");
-        // ダメージ処理コンポーネントを取得
         dealDamage = GetComponent<DealDamage>();
         mainCamera = Camera.main; // メインカメラの取得
         audioSource = GetComponent<AudioSource>();
@@ -43,7 +42,7 @@ public class DemonController : MonoBehaviour
 
     void Update()
     {
-        // スポーン中または死亡している場合、またはカメラに映っていなければ行動を停止
+        // フェードイン中または死亡している場合、またはカメラに映っていなければ行動を停止
         if (isSpawning || dealDamage.isDead || !IsVisible()) return;
         MoveTowardsPlayer();
         AttackPlayer();
@@ -146,7 +145,7 @@ public class DemonController : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
             // DemonFlame攻撃が可能な距離
-            // クールダウンが終了している場合に攻撃
+            // クールダウンが終了していれば攻撃
             if (distanceToPlayer <= attackRange * 32f && Time.time >= nextAttackTime)
             {
                 DemonFlameAttack();
@@ -158,10 +157,10 @@ public class DemonController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // プレイヤーと接触した場合、進行を停止し、近接攻撃のクールダウンが終了している場合、攻撃
+        // プレイヤーと接触した場合、行動を停止し、近接攻撃のクールダウンが終了している場合、攻撃
         if (other.CompareTag("Player"))
         {
-            if (!isSpawning) // スポーン中でないときのみ近接攻撃
+            if (!isSpawning) // フェードイン中でないときのみ近接攻撃
             {
                 isPlayerInContact = true;
                 if (Time.time >= nextMeleeAttackTime)

@@ -324,6 +324,10 @@ PrefabInstance:
       propertyPath: maxHp
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2225710452565394992, guid: 3cfe6cdfd4f0cf5419d0e2630ee7789f, type: 3}
+      propertyPath: obstacleLayerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 4338904426012658854, guid: 3cfe6cdfd4f0cf5419d0e2630ee7789f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
