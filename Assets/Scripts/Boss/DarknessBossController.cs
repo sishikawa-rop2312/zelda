@@ -109,7 +109,7 @@ public class DarknessBossController : MonoBehaviour
 
     void AttackPlayer()
     {
-        if (player != null)
+        if (player != null && dealDamage.hp < dealDamage.maxHp) // HPが最大でない場合のみ攻撃
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 

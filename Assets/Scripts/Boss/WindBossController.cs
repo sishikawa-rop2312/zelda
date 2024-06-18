@@ -37,7 +37,7 @@ public class WindBossController : MonoBehaviour
         if (dealDamage.isDead || !IsVisible()) return;
         if (!isPaused) // 移動停止状態ではない場合にのみ移動と攻撃を行う
         {
-            MoveAwayFromPlayer();
+            MoveTowardsPlayer();
             AttackPlayer();
         }
     }
@@ -48,11 +48,11 @@ public class WindBossController : MonoBehaviour
         return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
-    void MoveAwayFromPlayer()
+    void MoveTowardsPlayer()
     {
         if (player != null)
         {
-            Vector3 direction = transform.position - player.position;
+            Vector3 direction = player.position - transform.position;
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
             if (distanceToPlayer < attackRange * 32f)
