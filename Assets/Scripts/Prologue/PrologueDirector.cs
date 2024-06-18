@@ -28,6 +28,7 @@ public class PrologueDirector : MonoBehaviour
             {
                 isScrolling = false;
                 pressSpaceText.gameObject.SetActive(true);
+                scrollingText.gameObject.SetActive(false);
             }
         }
 

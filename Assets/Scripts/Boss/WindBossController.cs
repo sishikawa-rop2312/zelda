@@ -136,7 +136,7 @@ public class WindBossController : MonoBehaviour
     IEnumerator PauseAfterAttack()
     {
         isPaused = true;
-        yield return new WaitForSeconds(pauseAfterAttackDuration); // インスペクターで設定可能な移動停止時間
+        yield return new WaitForSeconds(pauseAfterAttackDuration); //移動停止時間
         isPaused = false;
     }
 
