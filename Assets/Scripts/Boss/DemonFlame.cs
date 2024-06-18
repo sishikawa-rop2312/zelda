@@ -10,7 +10,6 @@ public class DemonFlame : MonoBehaviour
 
     void Start()
     {
-        // 一定時間後にDemonFlameを破壊
         Destroy(gameObject, lifetime);
     }
 
