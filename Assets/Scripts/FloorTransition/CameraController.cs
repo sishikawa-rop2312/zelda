@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     public float transitionTime = 1.0f; // カメラの移動にかける時間
     public float cameraMoveYDistance = 10.0f; // カメラがY軸に移動する距離
     public float cameraMoveXDistance = 18.0f; // カメラがX軸に移動する距離
+    DealDamage playerDealDamage;
     PlayerController playerController; // プレイヤーコントローラーへの参照
     Camera mainCamera; // メインカメラへの参照
 
@@ -14,6 +15,8 @@ public class CameraController : MonoBehaviour
     {
         // メインカメラを取得
         mainCamera = Camera.main;
+        // プレイヤーの行動を制限するためにdealDamageを取得
+        playerDealDamage = GameObject.Find("Player").GetComponent<DealDamage>();
         // シーン内のプレイヤーコントローラーを取得
         playerController = FindObjectOfType<PlayerController>();
     }
@@ -23,6 +26,11 @@ public class CameraController : MonoBehaviour
         // プレイヤーがカメラの外に出た場合にカメラを移動
         if (IsPlayerOutOfCameraBounds())
         {
+            if (playerDealDamage != null)
+            {
+                // プレイヤーの移動を制限
+                playerDealDamage.isDead = true;
+            }
             // 新しいカメラの位置を計算
             Vector3 newCameraPosition = GetNewCameraPosition();
             // カメラをスムーズに移動
@@ -84,5 +92,12 @@ public class CameraController : MonoBehaviour
 
         // 最終的に正確な新しい位置にカメラを設定
         transform.position = newCameraPosition;
+
+
+        // 移動し終わったらプレイヤーの移動制限を解除
+        if (playerDealDamage != null)
+        {
+            playerDealDamage.isDead = false;
+        }
     }
 }
