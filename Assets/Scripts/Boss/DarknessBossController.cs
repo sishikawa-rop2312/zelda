@@ -28,7 +28,7 @@ public class DarknessBossController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator.Play("DarknessBossWalk");
+        animator.Play("DarknessBoss_Down"); // 正しいアニメーションステート名を指定
         dealDamage = GetComponent<DealDamage>();
         mainCamera = Camera.main; // メインカメラの取得
         audioSource = gameObject.AddComponent<AudioSource>(); // AudioSourceを追加
@@ -109,7 +109,7 @@ public class DarknessBossController : MonoBehaviour
 
     void AttackPlayer()
     {
-        if (player != null)
+        if (player != null && dealDamage.hp < dealDamage.maxHp) // HPが最大でない場合のみ攻撃
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 

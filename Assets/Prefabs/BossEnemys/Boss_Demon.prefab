@@ -80,7 +80,7 @@ MonoBehaviour:
   defense: 1
   isDead: 0
   dropItem: {fileID: 0}
-  stunTime: 1
+  stunTime: 1.5
   playerDamageSound: {fileID: 0}
 --- !u!212 &1486685677309540854
 SpriteRenderer:
