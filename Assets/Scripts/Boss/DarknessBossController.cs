@@ -124,6 +124,7 @@ public class DarknessBossController : MonoBehaviour
                 if (darknessAttackScript != null)
                 {
                     darknessAttackScript.damage = attackDamage;
+                    darknessAttackScript.ignoreTag = "Enemy"; // 闇ボスのタグを設定
                 }
 
                 nextAttackTime = Time.time + attackCooldown;
