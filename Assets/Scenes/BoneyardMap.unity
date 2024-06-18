@@ -20856,7 +20856,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084411885}
   - component: {fileID: 1084411886}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SafetyArea3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20989,7 +20989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166072981}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SafetyArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21618,7 +21618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1597306469}
   - component: {fileID: 1597306470}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SafetyArea1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22117,7 +22117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1867753908}
   - component: {fileID: 1867753909}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SafetyArea2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
