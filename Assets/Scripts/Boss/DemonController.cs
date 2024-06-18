@@ -51,12 +51,31 @@ public class DemonController : MonoBehaviour
 
     IEnumerator SpawnDelay()
     {
+        yield return StartCoroutine(FadeIn());
         audioSource.PlayOneShot(spawnSound);
         while (audioSource.isPlaying)
         {
             yield return null;
         }
         isSpawning = false;
+    }
+
+    IEnumerator FadeIn()
+    {
+        float fadeDuration = 1f;
+        Color color = spriteRenderer.color;
+        color.a = 0;
+        spriteRenderer.color = color;
+
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        {
+            color.a = Mathf.Lerp(0, 1, t / fadeDuration);
+            spriteRenderer.color = color;
+            yield return null;
+        }
+
+        color.a = 1;
+        spriteRenderer.color = color;
     }
 
     bool IsVisible()
@@ -142,12 +161,15 @@ public class DemonController : MonoBehaviour
         // プレイヤーと接触した場合、進行を停止し、近接攻撃のクールダウンが終了している場合、攻撃
         if (other.CompareTag("Player"))
         {
-            isPlayerInContact = true;
-            if (Time.time >= nextMeleeAttackTime)
+            if (!isSpawning) // スポーン中でないときのみ近接攻撃
             {
-                MeleeAttack(other.gameObject);
-                // 次の近接攻撃可能時間を設定
-                nextMeleeAttackTime = Time.time + meleeAttackCooldown;
+                isPlayerInContact = true;
+                if (Time.time >= nextMeleeAttackTime)
+                {
+                    MeleeAttack(other.gameObject);
+                    // 次の近接攻撃可能時間を設定
+                    nextMeleeAttackTime = Time.time + meleeAttackCooldown;
+                }
             }
         }
     }
