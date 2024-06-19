@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5003911005110992626}
   - component: {fileID: 1486685677309540854}
   - component: {fileID: 57318883110918838}
-  - component: {fileID: -2016178728461103355}
   - component: {fileID: 7539356051978962185}
   - component: {fileID: 894666555660316527}
   - component: {fileID: -3699779704977968607}
@@ -83,6 +82,7 @@ MonoBehaviour:
   dropItem: {fileID: 0}
   stunTime: 1.5
   playerDamageSound: {fileID: 0}
+  breakObject: {fileID: 0}
 --- !u!212 &1486685677309540854
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -156,18 +156,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-2016178728461103355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494705605963165087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6858188735216d84291efcac5660df55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &7539356051978962185
 Rigidbody2D:
   serializedVersion: 4

@@ -224,3 +224,4 @@ MonoBehaviour:
   dropItem: {fileID: 0}
   stunTime: 1
   playerDamageSound: {fileID: 0}
+  breakObject: {fileID: 0}

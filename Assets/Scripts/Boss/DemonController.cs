@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DemonController : MonoBehaviour
 {
@@ -22,9 +23,9 @@ public class DemonController : MonoBehaviour
     private Animator animator;
     private DealDamage dealDamage;
     private SpriteRenderer spriteRenderer;
-    private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理
+    private bool isPlayerInContact = false; // プレイヤーとの接触状態を管理するフラグ
     private Camera mainCamera; // メインカメラ
-    private bool isSpawning = true; // スポーン（フェードイン）状態を管理する
+    private bool isSpawning = true; // スポーン（フェードイン）状態を管理するフラグ
     private AudioSource audioSource;
 
     void Start()
@@ -38,6 +39,9 @@ public class DemonController : MonoBehaviour
         mainCamera = Camera.main; // メインカメラの取得
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(SpawnDelay());
+
+        // デーモンが死亡したときの処理を設定
+        dealDamage.OnDeath += OnDemonDeath;
     }
 
     void Update()
@@ -46,6 +50,17 @@ public class DemonController : MonoBehaviour
         if (isSpawning || dealDamage.isDead || !IsVisible()) return;
         MoveTowardsPlayer();
         AttackPlayer();
+    }
+
+    void OnDestroy()
+    {
+        dealDamage.OnDeath -= OnDemonDeath; // イベントの解除
+    }
+
+    void OnDemonDeath()
+    {
+        // デーモンが倒されたときにシーンを変更する
+        SceneManager.LoadScene("ClearScene");
     }
 
     IEnumerator SpawnDelay()

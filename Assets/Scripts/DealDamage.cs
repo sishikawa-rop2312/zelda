@@ -108,6 +108,10 @@ public class DealDamage : MonoBehaviour
             Debug.Log("ゲームオーバー！");
             StartCoroutine(PlayerDie());
         }
+        else if (this.gameObject.name == "Boss_Demon(Clone)")
+        {
+            StartCoroutine(DemonDie());
+        }
         else
         {
             if (breakObject != null)
@@ -176,6 +180,12 @@ public class DealDamage : MonoBehaviour
     {
         yield return StartCoroutine(FadeOutAndDestroy());
         SceneManager.LoadScene("Scenes/GameOverScene");
+    }
+
+    IEnumerator DemonDie()
+    {
+        yield return StartCoroutine(FadeOutAndDestroy());
+        SceneManager.LoadScene("ClearScene");
     }
 
     // HP回復
