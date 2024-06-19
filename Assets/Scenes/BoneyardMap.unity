@@ -21286,7 +21286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6622979610655187230, guid: 48281933c3e68074abd2d8822a6e2069, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22338,7 +22338,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3d8f8184f649d8143b7949314ddf4e59, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0

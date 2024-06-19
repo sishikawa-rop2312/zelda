@@ -53,7 +53,7 @@ MonoBehaviour:
   attackRange: 15
   darknessAttackPrefab: {fileID: 1035946225708441661, guid: 0a0b21d5ec562e148b0f24568f4ff54e, type: 3}
   attackSpeed: 2
-  attackCooldown: 5
+  attackCooldown: 3.5
   attackDamage: 2.5
   obstacleLayerMask:
     serializedVersion: 2

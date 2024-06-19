@@ -939,7 +939,8 @@ MonoBehaviour:
   isDead: 0
   dropItem: {fileID: 0}
   stunTime: 1
-  playerDamageSound: {fileID: 8300000, guid: 52f20e44e89272147addfc0324fd8607, type: 3}
+  playerDamageSound: {fileID: 0}
+  breakObject: {fileID: 8300000, guid: 52f20e44e89272147addfc0324fd8607, type: 3}
 --- !u!4 &226817699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8834007971045997213, guid: 65e0de830ccb33b4792798726fa00302, type: 3}
@@ -13918,7 +13919,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cea92ac8a65824a42a46498be90ab271, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0

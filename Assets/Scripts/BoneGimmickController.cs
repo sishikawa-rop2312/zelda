@@ -28,6 +28,8 @@ public class BoneGimmickController : MonoBehaviour
     //音源
     public AudioClip sound;
     AudioSource audioSource;
+    //音源を一回鳴らしたか
+    bool firstSound = false;
 
 
     void Start()
@@ -73,8 +75,9 @@ public class BoneGimmickController : MonoBehaviour
                 Debug.Log("敵は全員死にました");
 
                 //音源がある場合
-                if (sound != null)
+                if (sound != null && !firstSound)
                 {
+                    firstSound = true;
                     Debug.Log("おとをさいせい");
                     //音を鳴らす
                     audioSource.PlayOneShot(sound);

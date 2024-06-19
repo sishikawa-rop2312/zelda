@@ -34,6 +34,9 @@ public class DealDamage : MonoBehaviour
     public AudioClip playerDamageSound;
     private AudioSource audioSource;
 
+    //ものが壊れる音
+    public AudioClip breakObject;
+
     void Start()
     {
         // プレイヤーのHP GUI表示
@@ -107,6 +110,10 @@ public class DealDamage : MonoBehaviour
         }
         else
         {
+            if (breakObject != null)
+            {
+                audioSource.PlayOneShot(breakObject);
+            }
             StartCoroutine(FadeOutAndDestroy());
             Debug.Log(this.gameObject.name + "は倒れた");
             if (dropItem != null)
