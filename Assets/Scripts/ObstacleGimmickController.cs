@@ -24,8 +24,11 @@ public class ObstacleGimmickController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            obstacleObject.SetActive(true);
-            audioSource.PlayOneShot(se);
+            if (obstacleObject != null)
+            {
+                obstacleObject.SetActive(true);
+                audioSource.PlayOneShot(se);
+            }
         }
     }
 }
