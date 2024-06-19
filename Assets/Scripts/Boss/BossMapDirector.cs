@@ -13,6 +13,12 @@ public class BossMapDirector : MonoBehaviour
     PlayerController playerController;
     bool isOpen;
 
+    //音源
+    public AudioClip sound;
+    AudioSource audioSource;
+    //音源を一回鳴らしたか
+    bool firstSound = false;
+
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
@@ -25,6 +31,8 @@ public class BossMapDirector : MonoBehaviour
         // 初期状態でコライダーを無効に設定
         DoorLeftCollider.enabled = false;
         DoorRightCollider.enabled = false;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -32,6 +40,16 @@ public class BossMapDirector : MonoBehaviour
         // プレイヤーが部屋に入ったら扉を閉める
         if (playerController.transform.position.y >= 7.5f && !isOpen)
         {
+            //音源がある場合
+            if (sound != null && !firstSound)
+            {
+                firstSound = true;
+                Debug.Log("おとをさいせい");
+                //音を鳴らす
+                audioSource.PlayOneShot(sound);
+
+
+            }
             DoorLeftAnimator.SetTrigger("CloseTrigger");
             DoorRightAnimator.SetTrigger("CloseTrigger");
 
