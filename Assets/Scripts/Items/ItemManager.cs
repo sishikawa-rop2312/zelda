@@ -12,6 +12,7 @@ public class ItemManager : MonoBehaviour
     //音源
     public AudioClip useHealthPotion;
     public AudioClip addHealthPotion;
+    public AudioClip MaxHealth;
     AudioSource audioSource;
 
     void Start()
@@ -51,6 +52,8 @@ public class ItemManager : MonoBehaviour
 
     public void IncreaseMaxHealth()
     {
+        //音を鳴らす
+        audioSource.PlayOneShot(useHealthPotion);
         dealDamage.IncreaseMaxHealth(1.0f);
     }
 }
