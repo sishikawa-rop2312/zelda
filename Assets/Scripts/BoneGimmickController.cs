@@ -23,6 +23,7 @@ public class BoneGimmickController : MonoBehaviour
 
     //壊すオブジェクト
     public GameObject destroyObject;
+    public GameObject destroyObject2;
 
     //音源
     public AudioClip sound;
@@ -94,6 +95,7 @@ public class BoneGimmickController : MonoBehaviour
     {
         Debug.Log("オブジェクトを壊します");
         Destroy(destroyObject);
+        Destroy(destroyObject2);
     }
 
 }
