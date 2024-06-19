@@ -28,6 +28,7 @@ public class ObstacleGimmickController : MonoBehaviour
             {
                 obstacleObject.SetActive(true);
                 audioSource.PlayOneShot(se);
+                Destroy(gameObject);
             }
         }
     }
