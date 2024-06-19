@@ -27,6 +27,7 @@ public class CaveGimmickController : MonoBehaviour
 
     //壊すオブジェクト
     public GameObject destroyObject;
+    public GameObject destroyObject2;
 
     //音源
     public AudioClip sound;
@@ -95,5 +96,6 @@ public class CaveGimmickController : MonoBehaviour
     {
         Debug.Log("オブジェクトを壊します");
         Destroy(destroyObject);
+        Destroy(destroyObject2);
     }
 }
