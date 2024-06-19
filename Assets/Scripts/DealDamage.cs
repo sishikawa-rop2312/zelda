@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DealDamage : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class DealDamage : MonoBehaviour
     public float maxHp = 3;
     public float defense = 1f;
     public bool isDead = false; // 行動停止フラグ
+
+    // ダメージを受けたときのイベント
+    public event Action<float> OnDamageTaken;
+    // 死亡時のイベント
+    public event Action OnDeath;
+
+    // 死亡時にドロップするアイテム
+    public GameObject dropItem;
 
     // 詰み防止用無敵フラグ
     bool isNoDamage = false;
@@ -25,6 +34,8 @@ public class DealDamage : MonoBehaviour
     public AudioClip playerDamageSound;
     private AudioSource audioSource;
 
+    //ものが壊れる音
+    public AudioClip breakObject;
 
     void Start()
     {
@@ -69,6 +80,10 @@ public class DealDamage : MonoBehaviour
             }
             hp -= actualDamage;
             Debug.Log(this.gameObject.name + "のHPが" + actualDamage + "減った");
+
+            // ダメージを受けたことを通知する
+            OnDamageTaken?.Invoke(damage);
+
             if (hp <= 0)
             {
                 Die();
@@ -87,15 +102,28 @@ public class DealDamage : MonoBehaviour
     void Die()
     {
         isDead = true; // 行動停止フラグを設定
+        OnDeath?.Invoke(); // 死亡イベントを通知
         if (this.gameObject.name == "Player")
         {
             Debug.Log("ゲームオーバー！");
             StartCoroutine(PlayerDie());
         }
+        else if (this.gameObject.name == "Boss_Demon(Clone)")
+        {
+            StartCoroutine(DemonDie());
+        }
         else
         {
+            if (breakObject != null)
+            {
+                audioSource.PlayOneShot(breakObject);
+            }
             StartCoroutine(FadeOutAndDestroy());
             Debug.Log(this.gameObject.name + "は倒れた");
+            if (dropItem != null)
+            {
+                Instantiate(dropItem, transform.position, Quaternion.identity);
+            }
         }
     }
 
@@ -152,6 +180,12 @@ public class DealDamage : MonoBehaviour
     {
         yield return StartCoroutine(FadeOutAndDestroy());
         SceneManager.LoadScene("Scenes/GameOverScene");
+    }
+
+    IEnumerator DemonDie()
+    {
+        yield return StartCoroutine(FadeOutAndDestroy());
+        SceneManager.LoadScene("ClearScene");
     }
 
     // HP回復

@@ -31,6 +31,7 @@ public class SlimeController : MonoBehaviour
     Vector3 currentDirection = Vector3.zero;
     bool isMoving = false;
     public Transform playerTransform;
+    private Camera mainCamera;//メインカメラ
 
     void Start()
     {
@@ -38,10 +39,13 @@ public class SlimeController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         dealDamage = GetComponent<DealDamage>();
         playerTransform = GameObject.Find("Player").transform;
+        mainCamera = Camera.main;//メインカメラの取得
     }
 
     void Update()
     {
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible()) return;
         SetSprite();
 
         if (dealDamage.isDead)
@@ -84,8 +88,14 @@ public class SlimeController : MonoBehaviour
                 Debug.Log(gameObject.name + "は何もすることがありません(" + isMoving + ", " + isPlayerNearby + ")");
             }
         }
-
     }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+    }
+
 
     IEnumerator SearchPlayer(float interval)
     {

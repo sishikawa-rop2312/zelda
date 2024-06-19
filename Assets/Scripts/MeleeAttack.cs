@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeleeAttack : MonoBehaviour
 {
-    public int damage = 2; // 近接攻撃のダメージ量
+    public float damage = 2; // 近接攻撃のダメージ量
     public float lifetime = 0.5f; // 攻撃エフェクトが存在する時間
 
     void Start()
@@ -22,7 +22,6 @@ public class MeleeAttack : MonoBehaviour
             if (playerDamage != null)
             {
                 playerDamage.Damage(damage);
-                Debug.Log("プレイヤーに" + damage + "のダメージを与えた！");
             }
         }
     }

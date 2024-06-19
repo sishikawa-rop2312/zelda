@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     Vector3 currentDirection = Vector3.zero;
     bool isMoving = false;
     public Transform playerTransform;
+    private Camera mainCamera;//メインカメラ
 
     void Start()
     {
@@ -38,10 +39,13 @@ public class EnemyController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         dealDamage = GetComponent<DealDamage>();
         playerTransform = GameObject.Find("Player").transform;
+        mainCamera = Camera.main;//メインカメラの取得
     }
 
     void Update()
     {
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible()) return;
         SetSprite();
 
         if (dealDamage.isDead)
@@ -59,14 +63,21 @@ public class EnemyController : MonoBehaviour
             if (distanceToPlayer <= 1f && !isMoving)
             {
                 ResetAnimation();
-                Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
-                StartCoroutine(Attack());
+
+                // 残りHPが1になったら攻撃しない
+                if (dealDamage.hp != 1)
+                {
+                    Debug.Log(gameObject.name + "は攻撃メソッドを呼び出します(" + distanceToPlayer + ")");
+                    StartCoroutine(Attack());
+                }
             }
             // 索敵範囲内だが2マス以上離れている場合は追跡
             else if (isPlayerNearby && !isMoving)
             {
                 // プレイヤーに向かって移動
                 Vector3 directionToPlayer = (playerTransform.position - transform.position).normalized;
+                // 残りHPが1になったらプレイヤーから逃げる
+                if (dealDamage.hp == 1) { directionToPlayer = -directionToPlayer; }
                 Debug.Log(gameObject.name + "はプレイヤーに向かって移動します");
                 MoveDirection(directionToPlayer);
             }
@@ -85,6 +96,13 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+
+    }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
     IEnumerator SearchPlayer(float interval)

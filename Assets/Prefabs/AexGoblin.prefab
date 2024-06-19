@@ -105,7 +105,9 @@ MonoBehaviour:
   maxHp: 1
   defense: 1
   isDead: 0
+  dropItem: {fileID: 1632753841732518501, guid: 8b5cb9a167d11ea49a93563d81e64e81, type: 3}
   stunTime: 1
+  playerDamageSound: {fileID: 0}
 --- !u!114 &5565844173513345946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4ad37980f1128419f94881221f1ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 2
+  attackPower: 1.5
   moveSpeed: 0.4
   searchRange: 10
   attackCoolTime: 5

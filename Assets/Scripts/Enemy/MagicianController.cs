@@ -10,11 +10,14 @@ public class MagicianController : MonoBehaviour
     public float fireballSpeed = 1f; // ファイアボールの速度
     public float attackCooldown = 5f; // 攻撃のクールダウンタイム（5秒）
     public int fireballDamage = 1; // ファイアボールのダメージ量
+    public LayerMask detectionMask; // 障害物レイヤー
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
     private Animator animator;
     private DealDamage dealDamage;
+    private Camera mainCamera;//メインカメラ
+    private Rigidbody2D rb;
 
     void Start()
     {
@@ -22,13 +25,22 @@ public class MagicianController : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.Play("MagicianWalk");
         dealDamage = GetComponent<DealDamage>();
+        mainCamera = Camera.main;//メインカメラの取得
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (dealDamage.isDead) return;//死亡している場合、行動停止
+        // 死亡している場合、またはカメラに映っていなければ行動を停止
+        if (dealDamage.isDead || !IsVisible()) return;
         MoveTowardsPlayer();
         AttackPlayer();
+    }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
     void MoveTowardsPlayer()
@@ -63,8 +75,18 @@ public class MagicianController : MonoBehaviour
                 }
             }
 
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            // 移動先に障害物があるか確認
+            if (!IsObstacleInDirection(direction))
+            {
+                rb.MovePosition(rb.position + (Vector2)direction * moveSpeed * Time.deltaTime);
+            }
         }
+    }
+
+    bool IsObstacleInDirection(Vector3 direction)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, detectionMask);
+        return hit.collider != null;
     }
 
     void AttackPlayer()
@@ -98,8 +120,7 @@ public class MagicianController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // プレイヤーに当たった時の処理
-            Debug.Log("敵の攻撃が当たった！");
+            // プレイヤーと接触した場合の処理
         }
     }
 
@@ -110,7 +131,6 @@ public class MagicianController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("魔術師が倒された！");
         Destroy(gameObject); // 敵キャラクターを消滅させる
     }
 }

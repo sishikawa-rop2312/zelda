@@ -177,7 +177,9 @@ MonoBehaviour:
   maxHp: 1
   defense: 1
   isDead: 0
+  dropItem: {fileID: 0}
   stunTime: 1
+  playerDamageSound: {fileID: 0}
 --- !u!114 &1331810907296809991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,8 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 0.5
-  moveSpeed: 0.1
-  searchRange: 5
+  moveSpeed: 0.15
+  searchRange: 1
   attackCoolTime: 3
   detectionMask:
     serializedVersion: 2
@@ -201,6 +203,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   attackEffect: {fileID: 3521153888432770879, guid: 2cab9369e5ac2ab4b9946f01997b0c5b, type: 3}
+  dropItem: {fileID: 0}
   playerTransform: {fileID: 0}
 --- !u!95 &6392144018021365368
 Animator:

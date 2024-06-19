@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 3cc5c360efa9c2141b6d6a3bacc47355
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - demonFlamePrefab: {fileID: 3440556465925047896, guid: 260db8ca246cfea49aa96709ecfaa2e7, type: 3}
+  - meleeAttackPrefab: {fileID: 1799951992037777305, guid: 5e4f4d650ea90b4438c8c4e6f7aaef7b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

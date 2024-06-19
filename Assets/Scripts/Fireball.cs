@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fireball : MonoBehaviour
@@ -14,12 +15,12 @@ public class Fireball : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         // プレイヤーに当たったときの処理
-        if (other.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
-            DealDamage dealDamage = other.GetComponent<DealDamage>();
+            DealDamage dealDamage = collision.collider.GetComponent<DealDamage>();
             if (dealDamage != null)
             {
                 dealDamage.Damage(damage);
@@ -27,7 +28,7 @@ public class Fireball : MonoBehaviour
             Destroy(gameObject);
         }
         // 障害物に当たったときの処理
-        else if (((1 << other.gameObject.layer) & obstacleLayer) != 0)
+        else if (((1 << collision.gameObject.layer) & obstacleLayer) != 0)
         {
             Destroy(gameObject);
         }

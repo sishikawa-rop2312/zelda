@@ -68,7 +68,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 1
+  maxHp: 3
   defense: 1
+  isDead: 0
+  dropItem: {fileID: 0}
+  stunTime: 1
+  playerDamageSound: {fileID: 0}
 --- !u!212 &5620812736405293456
 SpriteRenderer:
   m_ObjectHideFlags: 0

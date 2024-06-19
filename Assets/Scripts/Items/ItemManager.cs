@@ -9,10 +9,17 @@ public class ItemManager : MonoBehaviour
 
     DealDamage dealDamage;
 
+    //音源
+    public AudioClip useHealthPotion;
+    public AudioClip addHealthPotion;
+    public AudioClip MaxHealth;
+    AudioSource audioSource;
+
     void Start()
     {
         dealDamage = GetComponent<DealDamage>();
         healthPotionDisplay.UpdateHealthPotionCount(healthPotionCount);
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -27,20 +34,26 @@ public class ItemManager : MonoBehaviour
     {
         healthPotionCount++;
         healthPotionDisplay.UpdateHealthPotionCount(healthPotionCount);
+        //音を鳴らす
+        audioSource.PlayOneShot(addHealthPotion);
     }
 
     public void UseHealthPotion()
     {
-        if (healthPotionCount > 0)
+        if (healthPotionCount > 0 && dealDamage.hp != dealDamage.maxHp)
         {
             dealDamage.Heal(1.0f);
             healthPotionCount--;
             healthPotionDisplay.UpdateHealthPotionCount(healthPotionCount);
+            //音を鳴らす
+            audioSource.PlayOneShot(useHealthPotion);
         }
     }
 
     public void IncreaseMaxHealth()
     {
+        //音を鳴らす
+        audioSource.PlayOneShot(useHealthPotion);
         dealDamage.IncreaseMaxHealth(1.0f);
     }
 }

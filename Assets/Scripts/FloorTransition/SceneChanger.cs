@@ -14,14 +14,13 @@ public class SceneChanger : MonoBehaviour
     // カメラの設定位置
     public Vector3 cameraPosition = new Vector3(0, 0, -10);
 
-    // ワープ機能が有効かどうかを示すフラグ
-    bool canWarp = false;
-
     // プレイヤーの初期位置
     Vector3 playerInitialPosition;
 
     // プレイヤーオブジェクト
     GameObject player;
+
+    DealDamage dealDamage;
 
     //音源
     public AudioClip sound;
@@ -34,29 +33,25 @@ public class SceneChanger : MonoBehaviour
         if (player != null)
         {
             playerInitialPosition = player.transform.position;
+            dealDamage = player.GetComponent<DealDamage>();
         }
         audioSource = GetComponent<AudioSource>();
-    }
-
-    void Update()
-    {
-        if (player != null)
-        {
-            // プレイヤーが初期位置から1f以上離れているか確認
-            if (Vector3.Distance(player.transform.position, playerInitialPosition) >= 1f)
-            {
-                canWarp = true;
-            }
-        }
     }
 
     // トリガーに触れた際に呼び出される関数
     void OnTriggerEnter2D(Collider2D other)
     {
-
         // キャラクターがトリガーゾーンに入ったかを確認
-        if (canWarp && other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
+            // 遷移後に移動していなければ何も起きない
+            if (Vector3.Distance(player.transform.position, playerInitialPosition) == 0f)
+            {
+                return;
+            }
+            // プレイヤーがシーン切り替わり後に移動しないよう死亡フラグをたてる
+            dealDamage.isDead = true;
+
             //音源がある場合
             if (sound != null)
             {
@@ -118,8 +113,8 @@ public class SceneChanger : MonoBehaviour
             // プレイヤーの初期位置を更新
             playerInitialPosition = player.transform.position;
 
-            // ワープ機能を再度無効にする
-            canWarp = false;
+            // 死亡フラグ解除
+            dealDamage.isDead = false;
         }
 
         // カメラオブジェクトを探して位置を更新

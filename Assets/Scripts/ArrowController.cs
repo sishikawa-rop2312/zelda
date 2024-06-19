@@ -14,6 +14,8 @@ public class ArrowController : MonoBehaviour
     // 矢の向き
     public Vector3 direction = Vector3.down;
 
+    private Camera mainCamera;//メインカメラ
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +29,27 @@ public class ArrowController : MonoBehaviour
         //     Debug.Log(direction);
         //     Debug.Break();
         // }
+
+
+        mainCamera = Camera.main;//メインカメラの取得
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!IsVisible())
+        {
+            Destroy(gameObject);
+        }
         // 指定された方向に移動する
         Vector3 velocity = direction * speed * Time.deltaTime;
         transform.Translate(velocity, Space.Self);
+    }
+
+    bool IsVisible()
+    {
+        Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
+        return screenPoint.z > 0 && screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -48,8 +63,9 @@ public class ArrowController : MonoBehaviour
         }
         else if (!other.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
+
 
 }
