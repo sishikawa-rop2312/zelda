@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0e3aa36fedd7c144ad89f3c9212051e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
+  moveSpeed: 0.3
   attackRange: 5
   windAttackPrefab: {fileID: 8807799208992892894, guid: 415cf7ca535d171478ff6b324875fded, type: 3}
   attackSpeed: 2

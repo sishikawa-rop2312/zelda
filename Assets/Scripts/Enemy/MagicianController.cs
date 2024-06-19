@@ -10,12 +10,14 @@ public class MagicianController : MonoBehaviour
     public float fireballSpeed = 1f; // ファイアボールの速度
     public float attackCooldown = 5f; // 攻撃のクールダウンタイム（5秒）
     public int fireballDamage = 1; // ファイアボールのダメージ量
+    public LayerMask detectionMask; // 障害物レイヤー
 
     private Transform player; // プレイヤーのTransform
     private float nextAttackTime = 0f; // 次の攻撃可能時間
     private Animator animator;
     private DealDamage dealDamage;
     private Camera mainCamera;//メインカメラ
+    private Rigidbody2D rb;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class MagicianController : MonoBehaviour
         animator.Play("MagicianWalk");
         dealDamage = GetComponent<DealDamage>();
         mainCamera = Camera.main;//メインカメラの取得
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -33,7 +36,6 @@ public class MagicianController : MonoBehaviour
         MoveTowardsPlayer();
         AttackPlayer();
     }
-
 
     bool IsVisible()
     {
@@ -73,8 +75,18 @@ public class MagicianController : MonoBehaviour
                 }
             }
 
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            // 移動先に障害物があるか確認
+            if (!IsObstacleInDirection(direction))
+            {
+                rb.MovePosition(rb.position + (Vector2)direction * moveSpeed * Time.deltaTime);
+            }
         }
+    }
+
+    bool IsObstacleInDirection(Vector3 direction)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1f, detectionMask);
+        return hit.collider != null;
     }
 
     void AttackPlayer()
@@ -108,6 +120,7 @@ public class MagicianController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // プレイヤーと接触した場合の処理
         }
     }
 

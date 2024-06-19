@@ -57,9 +57,9 @@ MonoBehaviour:
   meleeAttackPrefab: {fileID: 1799951992037777305, guid: 5e4f4d650ea90b4438c8c4e6f7aaef7b, type: 3}
   demonFlameSpeed: 2.5
   attackCooldown: 3.5
-  demonFlameDamage: 1.5
-  meleeDamage: 3
-  meleeAttackCooldown: 25
+  demonFlameDamage: 2.5
+  meleeDamage: 4
+  meleeAttackCooldown: 30
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 128
